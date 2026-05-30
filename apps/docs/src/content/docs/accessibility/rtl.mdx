@@ -1,0 +1,152 @@
+---
+title: RTL & Arabe
+description: Support de l'arabe et du RTL dans TDGS — configuration, polices, considérations de layout.
+sidebar:
+  order: 4
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+# RTL & Support de l'arabe
+
+L'arabe est la seconde langue officielle du Tchad. TDGS est conçu pour supporter
+les interfaces bilingues français/arabe avec une expérience de qualité pour les deux langues.
+
+<Aside type="note" title="Statut du support arabe">
+  Le support RTL est planifié comme une priorité de la prochaine version majeure de TDGS.
+  Les fondations sont en place (police, direction CSS) mais les composants n'ont pas encore
+  été testés exhaustivement en contexte RTL.
+</Aside>
+
+---
+
+## Configuration de base
+
+```html
+<!-- Page entièrement en arabe -->
+<html lang="ar" dir="rtl">
+
+<!-- Page en français avec blocs arabes -->
+<html lang="fr">
+  <body>
+    <p>Texte en français (LTR par défaut)</p>
+    <p lang="ar" dir="rtl">نص باللغة العربية</p>
+  </body>
+```
+
+---
+
+## Police arabe
+
+TDGS utilise **Noto Naskh Arabic** pour le texte arabe, activée automatiquement
+via la déclaration `lang="ar"`.
+
+```css
+/* Dans le CSS TDGS (tokens/typography.css) */
+html[lang="ar"],
+:lang(ar) {
+  direction: rtl;
+  font-family: var(--tdgs-font-family-arabic);
+  /* "Noto Naskh Arabic", "Noto Sans Arabic", system-ui, sans-serif */
+  line-height: 1.6; /* Ligne plus haute pour l'arabe */
+}
+```
+
+---
+
+## Layout RTL
+
+### Propriétés logiques CSS (recommandé)
+
+Les propriétés logiques CSS s'adaptent automatiquement au sens de lecture.
+Privilégiez-les aux propriétés physiques pour les interfaces bilingues.
+
+```css
+/* ✅ Propriétés logiques — s'adaptent à RTL automatiquement */
+.mon-composant {
+  margin-inline-start: var(--tdgs-spacing-4);   /* = margin-left en LTR, margin-right en RTL */
+  margin-inline-end: var(--tdgs-spacing-4);     /* = margin-right en LTR, margin-left en RTL */
+  padding-block-start: var(--tdgs-spacing-3);   /* = padding-top */
+  border-inline-start: 4px solid currentColor; /* = border-left en LTR */
+}
+
+/* ❌ Propriétés physiques — à éviter pour les éléments directionnels */
+.mon-composant {
+  margin-left: var(--tdgs-spacing-4);  /* Reste à gauche même en RTL */
+}
+```
+
+### Icônes directionnelles
+
+Certaines icônes ont un sens et doivent être retournées en RTL.
+
+```css
+/* Flèche "suivant" : → en LTR, ← en RTL */
+[dir="rtl"] .icon-arrow-right {
+  transform: scaleX(-1);
+}
+
+/* Icônes neutres (check, croix, info) : ne pas retourner */
+[dir="rtl"] .icon-check,
+[dir="rtl"] .icon-close {
+  transform: none;
+}
+```
+
+---
+
+## Exemple de formulaire bilingue
+
+```html
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+</head>
+<body>
+  <!-- Interface principale en français (LTR) -->
+  <main>
+    <h1>Demande de document</h1>
+    <form>
+      <div class="tdgs-field">
+        <label class="tdgs-field__label" for="nom-fr">Nom complet</label>
+        <input id="nom-fr" type="text" class="tdgs-input tdgs-input--md" lang="fr">
+      </div>
+
+      <!-- Champ en arabe (RTL) -->
+      <div class="tdgs-field" dir="rtl" lang="ar">
+        <label class="tdgs-field__label" for="nom-ar">الاسم الكامل</label>
+        <input
+          id="nom-ar"
+          type="text"
+          class="tdgs-input tdgs-input--md"
+          lang="ar"
+          dir="rtl"
+          style="font-family: var(--tdgs-font-family-arabic);"
+        >
+      </div>
+    </form>
+  </main>
+</body>
+</html>
+```
+
+---
+
+## Considérations typographiques
+
+| Aspect | Français | Arabe |
+|---|---|---|
+| Direction | LTR | RTL |
+| Police | Source Sans 3 | Noto Naskh Arabic |
+| Line-height recommandé | 1.5 | 1.6–1.8 |
+| Taille minimum lisible | 14px | 16px (l'arabe est plus petit visuellement) |
+| Alignement texte | Gauche | Droite |
+| Numéros | Européens (1234) | Arabes-indiens (١٢٣٤) ou européens |
+
+---
+
+## Ressources
+
+- [W3C — Internationalisation arabe](https://www.w3.org/TR/arabic-math/)
+- [CSS Logical Properties MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_logical_properties_and_values)
+- [Noto Naskh Arabic — Google Fonts](https://fonts.google.com/noto/specimen/Noto+Naskh+Arabic)

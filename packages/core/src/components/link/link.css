@@ -1,0 +1,67 @@
+/* TDGS Link component */
+.tdgs-link {
+  color: var(--tdgs-color-blue-500);
+  text-decoration: underline;
+  text-decoration-color: var(--tdgs-color-blue-200);
+  text-underline-offset: 2px;
+  cursor: pointer;
+  transition:
+    color var(--tdgs-motion-fast) var(--tdgs-easing-standard),
+    text-decoration-color var(--tdgs-motion-fast) var(--tdgs-easing-standard);
+}
+
+.tdgs-link:hover {
+  color: var(--tdgs-color-blue-700);
+  text-decoration-color: var(--tdgs-color-blue-500);
+}
+
+.tdgs-link:visited {
+  color: var(--tdgs-color-blue-700);
+}
+
+.tdgs-link:focus-visible {
+  outline: 2px solid var(--tdgs-color-blue-500);
+  outline-offset: 2px;
+  border-radius: var(--tdgs-radius-xs);
+  text-decoration: none;
+}
+
+/* Variantes */
+.tdgs-link--muted {
+  color: var(--tdgs-neutral-600);
+  text-decoration-color: var(--tdgs-neutral-300);
+}
+.tdgs-link--muted:hover { color: var(--tdgs-neutral-900); }
+
+.tdgs-link--danger {
+  color: var(--tdgs-color-red-600);
+  text-decoration-color: var(--tdgs-color-red-200);
+}
+.tdgs-link--danger:hover { color: var(--tdgs-color-red-800); }
+
+/* Lien externe */
+.tdgs-link--external::after {
+  content: '\00a0↗';
+  font-size: 0.8em;
+  vertical-align: super;
+}
+
+/* Lien sans soulignement (navigation) */
+.tdgs-link--nav {
+  text-decoration: none;
+  font-weight: var(--tdgs-font-weight-medium);
+}
+.tdgs-link--nav:hover { text-decoration: underline; }
+
+/* Lien standalone (avec flèche) */
+.tdgs-link--standalone {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--tdgs-spacing-1);
+  font-weight: var(--tdgs-font-weight-medium);
+}
+.tdgs-link--standalone::after {
+  content: '→';
+  transition: transform var(--tdgs-motion-fast) var(--tdgs-easing-standard);
+}
+.tdgs-link--standalone:hover::after { transform: translateX(3px); }

@@ -1,0 +1,54 @@
+---
+title: Ombres
+description: Système d'ombres TDGS — hiérarchie visuelle, élévation et règles d'usage.
+sidebar:
+  order: 5
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+# Ombres
+
+Les ombres TDGS servent uniquement à exprimer la **hiérarchie visuelle** entre les surfaces.
+Elles ne sont jamais décoratives.
+
+---
+
+## Échelle
+
+| Token | Variable CSS | Valeur | Usage |
+|---|---|---|---|
+| `none` | `--tdgs-shadow-none` | `none` | Surfaces plates, tables, sections formelles |
+| `xs` | `--tdgs-shadow-xs` | `0 1px 2px rgba(0,0,0,0.05)` | Menus légers, badges sur fond clair |
+| `sm` | `--tdgs-shadow-sm` | `0 1px 3px rgba(0,0,0,0.08)` | Cards simples, dropdowns, composants actifs |
+| **`md`** | **`--tdgs-shadow-md`** | **`0 4px 12px rgba(0,0,0,0.08)`** | **Modales, popovers, panels** |
+| `lg` | `--tdgs-shadow-lg` | `0 10px 30px rgba(0,0,0,0.12)` | Overlays, dialogues de niveau supérieur |
+| `xl` | `--tdgs-shadow-xl` | `0 20px 60px rgba(0,0,0,0.16)` | Tooltips, floating UI critiques |
+
+---
+
+## Règles d'usage
+
+- Utiliser `none` pour tables, listes de données et surfaces très formelles
+- Utiliser `xs` ou `sm` pour les dropdowns et boutons en hover
+- Réserver `md` à la profondeur des modales et panels
+- `lg` et `xl` uniquement pour overlays et éléments flottants critiques
+- Ne pas cumuler ombre et bordure colorée sur le même élément
+
+<Aside type="note" title="Mode sombre">
+  En mode sombre, réduire l'opacité des ombres de 30 à 50% pour conserver un effet discret.
+  Les ombres trop sombres sur fond foncé créent un effet brouillé non professionnel.
+</Aside>
+
+---
+
+## Variables CSS
+
+```css
+--tdgs-shadow-none: none;
+--tdgs-shadow-xs:   0 1px 2px rgba(0, 0, 0, 0.05);
+--tdgs-shadow-sm:   0 1px 3px rgba(0, 0, 0, 0.08);
+--tdgs-shadow-md:   0 4px 12px rgba(0, 0, 0, 0.08);
+--tdgs-shadow-lg:   0 10px 30px rgba(0, 0, 0, 0.12);
+--tdgs-shadow-xl:   0 20px 60px rgba(0, 0, 0, 0.16);
+```

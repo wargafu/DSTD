@@ -1,0 +1,234 @@
+---
+title: Typographie
+description: Système typographique TDGS — polices, échelle, poids, styles et règles multilingues.
+sidebar:
+  order: 2
+---
+
+import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
+
+# Typographie
+
+Le système typographique TDGS est conçu pour la lisibilité dans les interfaces gouvernementales :
+hiérarchie claire, tailles suffisantes pour l'accessibilité, polices adaptées au français et à l'arabe.
+
+---
+
+## Polices institutionnelles
+
+| Rôle | Police | Variable CSS | Usage |
+|---|---|---|---|
+| **Principale** | Source Sans 3 | `--tdgs-font-family-primary` | Tous les textes en français |
+| **Arabe** | Noto Naskh Arabic | `--tdgs-font-family-arabic` | Textes en arabe (RTL) |
+| **Monospace** | JetBrains Mono | `--tdgs-font-family-mono` | Code, références techniques |
+| **Secours** | Public Sans | (dans le stack primary) | Fallback institutionnel |
+
+```css
+body {
+  font-family: var(--tdgs-font-family-primary);
+}
+
+/* Passage automatique en arabe */
+html[lang="ar"], :lang(ar) {
+  direction: rtl;
+  font-family: var(--tdgs-font-family-arabic);
+}
+
+code, kbd, samp, pre {
+  font-family: var(--tdgs-font-family-mono);
+}
+```
+
+<Aside type="tip" title="Self-hosting en production">
+  Hébergez les fichiers WOFF2 localement pour garantir la disponibilité sur les réseaux
+  gouvernementaux potentiellement restrictifs. Utilisez `font-display: swap` pour éviter
+  le blocage du rendu.
+</Aside>
+
+---
+
+## Échelle de tailles
+
+L'échelle TDGS est basée sur une racine de 16px. Elle utilise `rem` pour respecter
+les préférences de zoom des utilisateurs.
+
+| Token | Variable CSS | Valeur | Équivalent px | Usage |
+|---|---|---|---|---|
+| `xs` | `--tdgs-font-size-xs` | `0.75rem` | 12px | Captions, légendes |
+| `sm` | `--tdgs-font-size-sm` | `0.875rem` | 14px | Labels, helper text |
+| **`md`** | **`--tdgs-font-size-md`** | **`1rem`** | **16px** | **Corps, formulaires (défaut)** |
+| `lg` | `--tdgs-font-size-lg` | `1.125rem` | 18px | Corps large, descriptions |
+| `xl` | `--tdgs-font-size-xl` | `1.25rem` | 20px | Sous-titres, intro |
+| `2xl` | `--tdgs-font-size-2xl` | `1.5rem` | 24px | H3, titres de carte |
+| `3xl` | `--tdgs-font-size-3xl` | `1.875rem` | 30px | H2, sous-pages |
+| `4xl` | `--tdgs-font-size-4xl` | `2.25rem` | 36px | Titre de page principal |
+| `5xl` | `--tdgs-font-size-5xl` | `3rem` | 48px | Display, héros |
+
+<Aside type="caution" title="Taille minimum">
+  Ne jamais utiliser une taille inférieure à `xs` (12px) pour du contenu lisible.
+  Les tailles `xs` et `sm` sont réservées aux contenus secondaires non critiques.
+</Aside>
+
+---
+
+## Hauteurs de ligne
+
+Chaque taille a une hauteur de ligne associée, optimisée pour sa taille.
+
+| Token | Variable CSS | Valeur | Principe |
+|---|---|---|---|
+| `xs` | `--tdgs-line-height-xs` | 1.2 | Serré pour les micro-labels |
+| `sm` | `--tdgs-line-height-sm` | 1.3 | Labels compacts |
+| `md` | `--tdgs-line-height-md` | 1.5 | Corps — confort de lecture optimal |
+| `lg` | `--tdgs-line-height-lg` | 1.5 | Corps large — même confort |
+| `xl` | `--tdgs-line-height-xl` | 1.35 | Sous-titres |
+| `2xl` | `--tdgs-line-height-2xl` | 1.3 | H3 |
+| `3xl` | `--tdgs-line-height-3xl` | 1.2 | H2 |
+| `4xl` | `--tdgs-line-height-4xl` | 1.15 | Titres de page |
+| `5xl` | `--tdgs-line-height-5xl` | 1.1 | Display — très serré acceptable |
+
+---
+
+## Poids typographiques
+
+| Token | Variable CSS | Valeur | Usage recommandé |
+|---|---|---|---|
+| `light` | `--tdgs-font-weight-light` | 300 | Display large uniquement |
+| `regular` | `--tdgs-font-weight-regular` | 400 | Texte de paragraphe par défaut |
+| `medium` | `--tdgs-font-weight-medium` | 500 | Liens, éléments UI modérés |
+| `semibold` | `--tdgs-font-weight-semibold` | 600 | Titres, boutons, labels |
+| `bold` | `--tdgs-font-weight-bold` | 700 | Emphase, alertes, titres courts |
+| `xbold` | `--tdgs-font-weight-xbold` | 800 | Cas rares / identitaires |
+
+---
+
+## Styles textuels officiels
+
+Ces styles combinent taille, hauteur de ligne, poids et espacement de lettres.
+Ils sont les **seules combinaisons validées** pour les interfaces TDGS.
+
+### Display
+```css
+font-size: var(--tdgs-font-size-5xl);       /* 48px */
+line-height: var(--tdgs-line-height-5xl);   /* 1.1 */
+font-weight: var(--tdgs-font-weight-semibold); /* 600 */
+letter-spacing: -0.02em;
+/* Usage : héros, bannières d'accueil — utiliser avec parcimonie */
+```
+
+### Page Title (H1)
+```css
+font-size: var(--tdgs-font-size-4xl);       /* 36px */
+line-height: var(--tdgs-line-height-4xl);   /* 1.15 */
+font-weight: var(--tdgs-font-weight-semibold); /* 600 */
+letter-spacing: -0.02em;
+/* Usage : titre principal de chaque page, unique par page */
+```
+
+### Section Title (H2)
+```css
+font-size: var(--tdgs-font-size-2xl);       /* 24px */
+line-height: var(--tdgs-line-height-2xl);   /* 1.3 */
+font-weight: var(--tdgs-font-weight-semibold); /* 600 */
+letter-spacing: -0.01em;
+```
+
+### Subsection Title (H3)
+```css
+font-size: var(--tdgs-font-size-xl);        /* 20px */
+line-height: var(--tdgs-line-height-xl);    /* 1.35 */
+font-weight: var(--tdgs-font-weight-medium); /* 500 */
+letter-spacing: 0;
+```
+
+### Body (défaut)
+```css
+font-size: var(--tdgs-font-size-md);        /* 16px */
+line-height: var(--tdgs-line-height-md);    /* 1.5 */
+font-weight: var(--tdgs-font-weight-regular); /* 400 */
+/* Usage : texte de paragraphe, formulaires, contenu principal */
+```
+
+### Label (champs de formulaire)
+```css
+font-size: var(--tdgs-font-size-sm);        /* 14px */
+line-height: var(--tdgs-line-height-sm);    /* 1.3 */
+font-weight: var(--tdgs-font-weight-semibold); /* 600 */
+/* Usage : labels de formulaire, titres de champ */
+```
+
+### Button
+```css
+font-size: var(--tdgs-font-size-md);        /* 16px */
+line-height: var(--tdgs-line-height-md);    /* 1.5 */
+font-weight: var(--tdgs-font-weight-semibold); /* 600 */
+letter-spacing: 0.01em;
+/* Usage : texte des boutons et CTA */
+```
+
+---
+
+## Typographie responsive
+
+TDGS recommande d'adapter les titres avec `clamp()` pour une hiérarchie fluide.
+
+```css
+/* H1 adaptatif */
+h1 {
+  font-size: clamp(
+    var(--tdgs-font-size-3xl),  /* min : 30px */
+    5vw,
+    var(--tdgs-font-size-4xl)   /* max : 36px */
+  );
+}
+
+/* Display pour les héros */
+.hero-title {
+  font-size: clamp(
+    var(--tdgs-font-size-4xl),  /* min : 36px */
+    6vw,
+    var(--tdgs-font-size-5xl)   /* max : 48px */
+  );
+}
+```
+
+---
+
+## Variables CSS — Référence
+
+```css
+/* Familles */
+--tdgs-font-family-primary: "Source Sans 3", "Public Sans", system-ui, ...;
+--tdgs-font-family-arabic: "Noto Naskh Arabic", "Noto Sans Arabic", ...;
+--tdgs-font-family-mono: "JetBrains Mono", ui-monospace, ...;
+
+/* Tailles */
+--tdgs-font-size-xs:  0.75rem;
+--tdgs-font-size-sm:  0.875rem;
+--tdgs-font-size-md:  1rem;
+--tdgs-font-size-lg:  1.125rem;
+--tdgs-font-size-xl:  1.25rem;
+--tdgs-font-size-2xl: 1.5rem;
+--tdgs-font-size-3xl: 1.875rem;
+--tdgs-font-size-4xl: 2.25rem;
+--tdgs-font-size-5xl: 3rem;
+
+/* Hauteurs de ligne */
+--tdgs-line-height-xs:  1.2;
+--tdgs-line-height-sm:  1.3;
+--tdgs-line-height-md:  1.5;
+--tdgs-line-height-lg:  1.5;
+--tdgs-line-height-xl:  1.35;
+--tdgs-line-height-2xl: 1.3;
+--tdgs-line-height-3xl: 1.2;
+--tdgs-line-height-4xl: 1.15;
+--tdgs-line-height-5xl: 1.1;
+
+/* Poids */
+--tdgs-font-weight-light:    300;
+--tdgs-font-weight-regular:  400;
+--tdgs-font-weight-medium:   500;
+--tdgs-font-weight-semibold: 600;
+--tdgs-font-weight-bold:     700;
+--tdgs-font-weight-xbold:    800;
+```

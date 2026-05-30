@@ -1,0 +1,331 @@
+---
+title: Button
+description: Composant Button TDGS — variantes, tailles, états, accessibilité et exemples HTML/React/Vue.
+sidebar:
+  order: 1
+---
+
+import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
+
+# Button
+
+Le bouton TDGS est conçu pour les parcours administratifs : lisible, contrasté, accessible au clavier
+et utilisable sans JavaScript.
+
+---
+
+## Importation
+
+```css
+/* CSS — requis pour les styles */
+@import "@tdgs/core/components/button/button.css";
+```
+
+```typescript
+/* TypeScript — tokens et types */
+import { button } from '@tdgs/core/components/button';
+import type { ButtonVariant, ButtonSize } from '@tdgs/core/components/button';
+```
+
+---
+
+## Variantes
+
+Cinq variantes couvrent tous les niveaux de hiérarchie d'action.
+
+| Variante | Usage | Quand l'utiliser |
+|---|---|---|
+| `primary` | Action principale | Valider un formulaire, soumettre une demande |
+| `secondary` | Action secondaire | Retour, annuler, action alternative |
+| `tertiary` | Action discrète | Voir plus, liens d'interface secondaires |
+| `danger` | Action destructive | Supprimer, révoquer, action irréversible |
+| `success` | Confirmation positive | Approuver, accepter, finaliser |
+
+<div class="tdgs-preview">
+  <div class="tdgs-preview__stage">
+    <button class="tdgs-button tdgs-button--primary tdgs-button--md" type="button">Valider</button>
+    <button class="tdgs-button tdgs-button--secondary tdgs-button--md" type="button">Retour</button>
+    <button class="tdgs-button tdgs-button--tertiary tdgs-button--md" type="button">Voir plus</button>
+    <button class="tdgs-button tdgs-button--danger tdgs-button--md" type="button">Supprimer</button>
+    <button class="tdgs-button tdgs-button--success tdgs-button--md" type="button">Approuver</button>
+  </div>
+  <div class="tdgs-preview__label">Aperçu des variantes (taille md)</div>
+</div>
+
+---
+
+## Tailles
+
+| Taille | Classe | Police | Padding | Min-height |
+|---|---|---|---|---|
+| `sm` | `tdgs-button--sm` | 14px | `0.375rem 0.75rem` | 44px |
+| **`md`** | **`tdgs-button--md`** | **16px** | **`0.75rem 1rem`** | **44px** |
+| `lg` | `tdgs-button--lg` | 18px | `0.875rem 1.25rem` | 44px |
+
+---
+
+## États
+
+| État | Classe / Attribut | Description |
+|---|---|---|
+| Normal | (aucun) | État par défaut |
+| Hover | `:hover` (CSS) | Survol souris |
+| Focus | `:focus-visible` (CSS) | Navigation clavier |
+| Active | `:active` (CSS) | Clic en cours |
+| Disabled | `disabled` + `aria-disabled="true"` | Bouton inactif |
+| Loading | `aria-busy="true"` + texte | Traitement en cours |
+
+---
+
+## Exemples de code
+
+<Tabs>
+  <TabItem label="HTML">
+
+    ### Bouton primary standard
+    ```html
+    <button type="submit" class="tdgs-button tdgs-button--primary tdgs-button--md">
+      Soumettre la demande
+    </button>
+    ```
+
+    ### Bouton avec icône
+    ```html
+    <button type="button" class="tdgs-button tdgs-button--primary tdgs-button--md">
+      <svg aria-hidden="true" focusable="false" width="16" height="16">
+        <use href="/icons/sprite.svg#icon-check" />
+      </svg>
+      Valider
+    </button>
+    ```
+
+    ### Bouton danger avec confirmation
+    ```html
+    <button
+      type="button"
+      class="tdgs-button tdgs-button--danger tdgs-button--md"
+      aria-describedby="delete-warning"
+    >
+      Supprimer le dossier
+    </button>
+    <p id="delete-warning" class="sr-only">
+      Cette action est irréversible. Le dossier sera définitivement supprimé.
+    </p>
+    ```
+
+    ### Bouton désactivé
+    ```html
+    <button
+      type="submit"
+      class="tdgs-button tdgs-button--primary tdgs-button--md"
+      disabled
+      aria-disabled="true"
+    >
+      Soumettre (formulaire incomplet)
+    </button>
+    ```
+
+    ### Bouton en état loading
+    ```html
+    <button
+      type="submit"
+      class="tdgs-button tdgs-button--primary tdgs-button--md"
+      aria-busy="true"
+      disabled
+    >
+      <span aria-hidden="true">Envoi en cours…</span>
+      <span class="sr-only">Envoi en cours, veuillez patienter.</span>
+    </button>
+    ```
+
+    ### Lien stylisé en bouton
+    ```html
+    <!-- Préférer <button> ; utiliser <a> uniquement pour la navigation -->
+    <a
+      href="/dossiers"
+      class="tdgs-button tdgs-button--secondary tdgs-button--md"
+      role="button"
+    >
+      Voir mes dossiers
+    </a>
+    ```
+
+  </TabItem>
+  <TabItem label="React">
+
+    ### Composant Button minimal
+    ```tsx
+    import '@tdgs/core/components/button/button.css';
+    import type { ButtonVariant, ButtonSize } from '@tdgs/core/components/button';
+
+    interface ButtonProps {
+      variant?: ButtonVariant;
+      size?: ButtonSize;
+      disabled?: boolean;
+      loading?: boolean;
+      type?: 'button' | 'submit' | 'reset';
+      onClick?: () => void;
+      children: React.ReactNode;
+    }
+
+    export function Button({
+      variant = 'primary',
+      size = 'md',
+      disabled = false,
+      loading = false,
+      type = 'button',
+      onClick,
+      children,
+    }: ButtonProps) {
+      const isDisabled = disabled || loading;
+
+      return (
+        <button
+          type={type}
+          className={`tdgs-button tdgs-button--${variant} tdgs-button--${size}`}
+          disabled={isDisabled}
+          aria-disabled={isDisabled || undefined}
+          aria-busy={loading || undefined}
+          onClick={onClick}
+        >
+          {children}
+        </button>
+      );
+    }
+    ```
+
+    ### Usage
+    ```tsx
+    // Formulaire de soumission
+    <Button type="submit" variant="primary" size="md">
+      Envoyer la demande
+    </Button>
+
+    // Action destructive
+    <Button variant="danger" onClick={handleDelete}>
+      Supprimer le compte
+    </Button>
+
+    // État loading
+    <Button variant="primary" loading={isSubmitting}>
+      {isSubmitting ? 'Envoi en cours…' : 'Soumettre'}
+    </Button>
+
+    // Désactivé
+    <Button variant="primary" disabled={!isFormValid}>
+      Valider (remplissez tous les champs)
+    </Button>
+    ```
+
+  </TabItem>
+  <TabItem label="Vue 3">
+
+    ### Composant Button
+    ```vue
+    <!-- components/TdgsButton.vue -->
+    <script setup lang="ts">
+    import '@tdgs/core/components/button/button.css';
+    import type { ButtonVariant, ButtonSize } from '@tdgs/core/components/button';
+
+    const props = withDefaults(
+      defineProps<{
+        variant?: ButtonVariant;
+        size?: ButtonSize;
+        disabled?: boolean;
+        loading?: boolean;
+        type?: 'button' | 'submit' | 'reset';
+      }>(),
+      {
+        variant: 'primary',
+        size: 'md',
+        disabled: false,
+        loading: false,
+        type: 'button',
+      }
+    );
+
+    const emit = defineEmits<{
+      click: [event: MouseEvent];
+    }>();
+
+    const isDisabled = computed(() => props.disabled || props.loading);
+    </script>
+
+    <template>
+      <button
+        :type="type"
+        :class="`tdgs-button tdgs-button--${variant} tdgs-button--${size}`"
+        :disabled="isDisabled"
+        :aria-disabled="isDisabled || undefined"
+        :aria-busy="loading || undefined"
+        @click="emit('click', $event)"
+      >
+        <slot />
+      </button>
+    </template>
+    ```
+
+    ### Usage
+    ```vue
+    <TdgsButton type="submit" variant="primary">
+      Envoyer
+    </TdgsButton>
+
+    <TdgsButton variant="danger" @click="handleDelete">
+      Supprimer
+    </TdgsButton>
+
+    <TdgsButton :loading="isSubmitting" variant="primary">
+      {{ isSubmitting ? 'Envoi…' : 'Soumettre' }}
+    </TdgsButton>
+    ```
+
+  </TabItem>
+</Tabs>
+
+---
+
+## Accessibilité
+
+<Aside type="tip" title="Règles critiques">
+  - Toujours utiliser `<button>` natif (jamais `<div role="button">` ou `<span>`)
+  - L'attribut `type` doit être explicite : `type="submit"` ou `type="button"`
+  - Un bouton désactivé doit avoir `disabled` ET `aria-disabled="true"`
+  - Le label du bouton doit être descriptif : "Supprimer le dossier 2024-001", pas juste "Supprimer"
+  - Le focus visible (contour bleu) ne doit jamais être retiré — c'est une exigence WCAG
+</Aside>
+
+### Contraste des variantes
+
+| Variante | Fond | Texte | Ratio |
+|---|---|---|---|
+| primary | `blue.500` (#0033A0) | blanc | 8.59:1 ✅ AAA |
+| secondary | blanc | `neutral.800` | 14.2:1 ✅ AAA |
+| tertiary | transparent | `neutral.800` | 14.2:1 ✅ AAA |
+| danger | `red.500` (#DA291C) | blanc | 5.1:1 ✅ AA |
+| success | `green.500` (#006B3C) | blanc | 7.2:1 ✅ AA |
+
+---
+
+## Do / Don't
+
+<div class="tdgs-do-dont">
+  <div class="tdgs-do-dont__card tdgs-do-dont__card--do">
+    <div class="tdgs-do-dont__heading">✓ Faire</div>
+    <ul>
+      <li>Un seul bouton primary par section d'action</li>
+      <li>Label verbe-actif : "Valider", "Envoyer", "Confirmer"</li>
+      <li>Utiliser <code>danger</code> uniquement pour les actions irréversibles</li>
+      <li>Respecter la hiérarchie : primary → secondary → tertiary</li>
+    </ul>
+  </div>
+  <div class="tdgs-do-dont__card tdgs-do-dont__card--dont">
+    <div class="tdgs-do-dont__heading">✗ Éviter</div>
+    <ul>
+      <li>Deux boutons primary côte à côte</li>
+      <li>Labels ambigus : "OK", "Cliquer ici", "Continuer"</li>
+      <li>Créer de nouvelles variantes colorées hors de la palette</li>
+      <li>Utiliser <code>danger</code> pour une action non destructive</li>
+    </ul>
+  </div>
+</div>

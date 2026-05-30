@@ -1,0 +1,67 @@
+---
+title: Arrondis
+description: Système de border-radius TDGS — sobre et institutionnel, avec règles par composant.
+sidebar:
+  order: 4
+---
+
+# Arrondis
+
+Les arrondis TDGS sont volontairement limités. Un Design System d'État doit rester sobre :
+les arrondis excessifs appartiennent aux interfaces startup, pas aux services publics.
+
+---
+
+## Échelle
+
+| Token | Variable CSS | Valeur | Usage principal |
+|---|---|---|---|
+| `none` | `--tdgs-radius-none` | `0` | Tables, sections formelles, containers de données |
+| `xs` | `--tdgs-radius-xs` | `2px` | Surfaces neutres, cards gouvernementales strictes |
+| **`sm`** | **`--tdgs-radius-sm`** | **`4px`** | **Boutons, inputs, tags — composants standard** |
+| `md` | `--tdgs-radius-md` | `8px` | Cards, modales, menus, sections de formulaire |
+| `lg` | `--tdgs-radius-lg` | `12px` | Dialogues, overlays, panels doux |
+| `xl` | `--tdgs-radius-xl` | `16px` | Sections majeures, encarts mis en avant |
+| `full` | `--tdgs-radius-full` | `9999px` | Badges, tags, pills, boutons full-round |
+
+---
+
+## Règles par composant
+
+| Composant | Radius recommandé |
+|---|---|
+| Bouton | `sm` (4px) |
+| Input, Textarea, Select | `sm` (4px) |
+| Card standard | `xs` (2px) ou `md` (8px) selon la formalité |
+| Modal, dialogue | `md` (8px) |
+| Tableau de données | `none` ou `xs` |
+| Badge, tag, pill | `full` (9999px) ou `sm` |
+| Menu déroulant | `sm` (4px) |
+| Notification, toast | `sm` (4px) |
+| Tooltip | `xs` (2px) |
+| Navigation / sidebar | `none` |
+
+---
+
+## Variables CSS
+
+```css
+--tdgs-radius-none: 0;
+--tdgs-radius-xs:   2px   /* 0.125rem */
+--tdgs-radius-sm:   4px   /* 0.25rem  */
+--tdgs-radius-md:   8px   /* 0.5rem   */
+--tdgs-radius-lg:   12px  /* 0.75rem  */
+--tdgs-radius-xl:   16px  /* 1rem     */
+--tdgs-radius-full: 9999px
+```
+
+```css
+/* Exemple d'usage */
+.ma-card {
+  border-radius: var(--tdgs-radius-md);
+}
+
+.mon-badge {
+  border-radius: var(--tdgs-radius-full);
+}
+```

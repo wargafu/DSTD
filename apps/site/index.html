@@ -1,0 +1,599 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TDGS — Documentation typographique</title>
+  <link rel="stylesheet" href="site.css">
+</head>
+<body>
+  <main>
+    <header>
+      <p>TDGS — Tchad Design System</p>
+      <h1>Système typographique officiel</h1>
+      <p>Documentation minimale et exemples visuels pour le système typographique TDGS. Ce guide couvre l’architecture des polices, l’échelle de taille, les styles textuels, le multilingue et les règles d’accessibilité.</p>
+    </header>
+
+    <section>
+      <h2>1. Architecture des polices</h2>
+      <p>TDGS utilise une architecture typographique claire et performante : Source Sans 3 pour le Latin, Noto Naskh Arabic pour l’Arabe, Public Sans comme secours institutionnel et JetBrains Mono pour les usages monospace.</p>
+      <div class="code-block">
+        <pre><code>html {
+  font-family: "Source Sans 3", "Public Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+html[lang="ar"], :lang(ar) {
+  direction: rtl;
+  font-family: "Noto Naskh Arabic", "Noto Sans Arabic", system-ui, sans-serif;
+}
+
+code, kbd, pre {
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Courier New", monospace;
+}
+</code></pre>
+      </div>
+      <p>Cette pile est conçue pour la production institutionnelle : elle est cohérente, compatible cross-browser et prête pour l’usage web. Le fallback inclut les polices système standard pour réduire les risques de rendu.</p>
+    </section>
+
+    <section>
+      <h2>2. Échelle typographique</h2>
+      <p>L’échelle TDGS est mobile-first et basée sur une racine de 16px. Elle évite les tailles marketing et reste stable pour les interfaces gouvernementales.</p>
+      <table class="token-table">
+        <thead>
+          <tr>
+            <th>Token</th>
+            <th>Taille</th>
+            <th>Line-height</th>
+            <th>Usage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>xs</td><td>12px / 0.75rem</td><td>1.2</td><td>Caption / microcopy</td></tr>
+          <tr><td>sm</td><td>14px / 0.875rem</td><td>1.3</td><td>Labels / aide</td></tr>
+          <tr><td>md</td><td>16px / 1rem</td><td>1.5</td><td>Body / formulaires</td></tr>
+          <tr><td>lg</td><td>18px / 1.125rem</td><td>1.5</td><td>Body large / descriptions</td></tr>
+          <tr><td>xl</td><td>20px / 1.25rem</td><td>1.35</td><td>Small headings / intro</td></tr>
+          <tr><td>2xl</td><td>24px / 1.5rem</td><td>1.3</td><td>H3 / titres de carte</td></tr>
+          <tr><td>3xl</td><td>30px / 1.875rem</td><td>1.2</td><td>H2 / sous-pages</td></tr>
+          <tr><td>4xl</td><td>36px / 2.25rem</td><td>1.15</td><td>Page title</td></tr>
+          <tr><td>5xl</td><td>48px / 3rem</td><td>1.1</td><td>Display / hero</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>2.1. Système d’espacement</h2>
+      <p>TDGS applique une grille modulaire de 4px rendue en rem pour un écosystème stable et accessible. Chaque token représente un multiple de 4px : par exemple <code>spacing-4</code> = 16px / 1rem et <code>spacing-16</code> = 64px / 4rem. Cette échelle simple est pensée pour les portails citoyens, les tableaux de bord administratifs, les formulaires complexes et les pages multi-modules.</p>
+      <table class="token-table">
+        <thead>
+          <tr>
+            <th>Token</th>
+            <th>Valeur</th>
+            <th>Usage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>spacing-0</td><td>0px / 0rem</td><td>Pas d’espace / alignement précis</td></tr>
+          <tr><td>spacing-1</td><td>4px / 0.25rem</td><td>Micro-spacing, séparateurs fins</td></tr>
+          <tr><td>spacing-2</td><td>8px / 0.5rem</td><td>Espaces entre icônes et labels</td></tr>
+          <tr><td>spacing-3</td><td>12px / 0.75rem</td><td>Petit padding, interlignes serrés</td></tr>
+          <tr><td>spacing-4</td><td>16px / 1rem</td><td>Padding de champ, marge standard</td></tr>
+          <tr><td>spacing-5</td><td>20px / 1.25rem</td><td>Formulaires, boutons, listes</td></tr>
+          <tr><td>spacing-6</td><td>24px / 1.5rem</td><td>Groupes de composants, cards</td></tr>
+          <tr><td>spacing-8</td><td>32px / 2rem</td><td>Espaces entre sections</td></tr>
+          <tr><td>spacing-10</td><td>40px / 2.5rem</td><td>Layout de page, barres d’actions</td></tr>
+          <tr><td>spacing-12</td><td>48px / 3rem</td><td>Espaces larges de séparation</td></tr>
+          <tr><td>spacing-14</td><td>56px / 3.5rem</td><td>Intervalles personnalisés dans les composants</td></tr>
+          <tr><td>spacing-16</td><td>64px / 4rem</td><td>Marges de page, sections majeures</td></tr>
+          <tr><td>spacing-20</td><td>80px / 5rem</td><td>Espaces profonds, zones de contenu</td></tr>
+          <tr><td>spacing-24</td><td>96px / 6rem</td><td>Large layout, top-level spacing</td></tr>
+          <tr><td>spacing-28</td><td>112px / 7rem</td><td>Colonnes de cartes, alignement visuel</td></tr>
+          <tr><td>spacing-32</td><td>128px / 8rem</td><td>Marges horizontales et verticales</td></tr>
+          <tr><td>spacing-40</td><td>160px / 10rem</td><td>Buffers de zone de contenu</td></tr>
+          <tr><td>spacing-48</td><td>192px / 12rem</td><td>Tableaux, formulaires groupés</td></tr>
+          <tr><td>spacing-56</td><td>224px / 14rem</td><td>Listes de sections, espaces profonds</td></tr>
+          <tr><td>spacing-64</td><td>256px / 16rem</td><td>Bannière, héros, layout large</td></tr>
+          <tr><td>spacing-80</td><td>320px / 20rem</td><td>Grands blocs de page</td></tr>
+          <tr><td>spacing-96</td><td>384px / 24rem</td><td>Espacement extra-large pour templates</td></tr>
+        </tbody>
+      </table>
+      <div class="note-box">
+        <h3>Principes d’usage</h3>
+        <ul>
+          <li><strong>Small</strong> (4–12px) : micro-spacing, icônes, badges, légendes.</li>
+          <li><strong>Medium</strong> (16–24px) : padding de champ, marges de composants, lignes de formulaire.</li>
+          <li><strong>Large</strong> (32–56px) : sections, cards, modales, zones d’actions.</li>
+          <li><strong>Extra-large</strong> (64–96px) : marges de page, separation entre grandes zones.</li>
+          <li>Éviter le « sur-spacing » sur mobile : ne pas dépasser 40px entre éléments fonctionnels dans une colonne étroite.</li>
+          <li>Garder la cohérence verticale/horizontale : une même valeur doit être réutilisée pour les margins et paddings apparentés.</li>
+        </ul>
+      </div>
+      <div class="note-box">
+        <h3>Règles de layout</h3>
+        <ul>
+          <li>Sections : 24–32px sur mobile, 32–48px sur desktop.</li>
+          <li>Pages : 32px de padding interne mobile, 40–48px desktop; containers max-width 1024px ou 1200px.</li>
+          <li>Cards : 16–24px de padding interne, 16–24px de marge externe.</li>
+          <li>Modals : 24–32px de padding interne avec 24px de gap entre champs.</li>
+          <li>Tables : 16–24px de padding dans les cellules et 24px entre groupes de lignes.</li>
+        </ul>
+      </div>
+      <div class="note-box">
+        <h3>Responsive et accessibilité</h3>
+        <ul>
+          <li>Sur mobile, privilégier 16–24px pour les blocs fonctionnels et 32px max pour les zones espacées.</li>
+          <li>Maintenir des cibles tactiles ≥ 44px en combinant spacing et dimensions des boutons.</li>
+          <li>Des espacements suffisants améliorent le focus clavier et la lisibilité des formulaires.</li>
+          <li>Éviter la densité excessive : ne pas réduire les gaps en dessous de 8px pour les éléments interactifs adjacents.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>2.2. Rayons et ombres</h2>
+      <p>Le système TDGS des arrondis reste sobre et institutionnel. Les rayons servent à hiérarchiser les surfaces sans verser dans un style trop « startup ».</p>
+      <table class="token-table">
+        <thead>
+          <tr><th>Token</th><th>Valeur</th><th>Usage recommandé</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>radius-none</td><td>0 / 0rem</td><td>Tables, cards formelles, composants extrêmement structurés</td></tr>
+          <tr><td>radius-xs</td><td>2px / 0.125rem</td><td>Surfaces neutres, containers de données, cards gouvernementales</td></tr>
+          <tr><td>radius-sm</td><td>4px / 0.25rem</td><td>Boutons, inputs, tags, barres d’actions</td></tr>
+          <tr><td>radius-md</td><td>8px / 0.5rem</td><td>Cards, modals, menus, sections de formulaire</td></tr>
+          <tr><td>radius-lg</td><td>12px / 0.75rem</td><td>Dialogues, overlays, panels plus doux</td></tr>
+          <tr><td>radius-xl</td><td>16px / 1rem</td><td>Sections majeures, encarts mis en avant</td></tr>
+          <tr><td>radius-full</td><td>9999px</td><td>Badges, tags, pills, boutons full-round</td></tr>
+        </tbody>
+      </table>
+      <div class="note-box">
+        <h3>Règles TDGS pour les arrondis</h3>
+        <ul>
+          <li><strong>Faible</strong> : `none`, `xs` et `sm` pour les interfaces formelles et les données.</li>
+          <li><strong>Moyen</strong> : `md` pour les cartes, panels et modales afin de conserver une densité lisible.</li>
+          <li><strong>Élevé</strong> : `lg` et `xl` seulement sur des surfaces isolées ou des sections d’accueil.</li>
+          <li><strong>Full</strong> : réservé aux éléments pétillants de statut ou aux badges, pas aux surfaces principales.</li>
+          <li>Éviter les coins trop arrondis sur les tables, cartes de services et sections de données.</li>
+        </ul>
+      </div>
+      <div class="note-box">
+        <h3>Correspondance composants</h3>
+        <ul>
+          <li>Buttons : `sm`</li>
+          <li>Inputs / forms : `sm`</li>
+          <li>Cards : `xs` ou `md` selon le niveau de formalité</li>
+          <li>Modals : `md`</li>
+          <li>Tables : `none` ou `xs`</li>
+          <li>Badges / tags : `full` ou `sm`</li>
+          <li>Navigation / menus : `sm`</li>
+        </ul>
+      </div>
+      <div class="note-box">
+        <h3>Accessibilité et cohérence visuelle</h3>
+        <ul>
+          <li>Les arrondis ne doivent pas masquer la structure des composants ni diminuer la lisibilité.</li>
+          <li>Les focus states doivent rester nets, avec un contraste de bordure suffisant.</li>
+          <li>La même valeur de radius doit être appliquée à des composants similaires pour éviter les incohérences.</li>
+          <li>Le radius est fixe sur mobile et desktop pour garantir une identité stable.</li>
+        </ul>
+      </div>
+      <table class="token-table">
+        <thead>
+          <tr><th>Token</th><th>Valeur</th><th>Usage TDGS</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>shadow-none</td><td>none</td><td>Surfaces plates, tables, sections formelles</td></tr>
+          <tr><td>shadow-xs</td><td>0 1px 2px rgba(0,0,0,0.05)</td><td>Menus légers, boutons hover, badges sur fond clair</td></tr>
+          <tr><td>shadow-sm</td><td>0 1px 3px rgba(0,0,0,0.08)</td><td>Cards simples, inputs, dropdowns, composants actifs</td></tr>
+          <tr><td>shadow-md</td><td>0 4px 12px rgba(0,0,0,0.08)</td><td>Modals, popovers, panels de contenu</td></tr>
+          <tr><td>shadow-lg</td><td>0 10px 30px rgba(0,0,0,0.12)</td><td>Overlays, dialogues de niveau supérieur</td></tr>
+          <tr><td>shadow-xl</td><td>0 20px 60px rgba(0,0,0,0.16)</td><td>Tooltips, floating UI critiques</td></tr>
+        </tbody>
+      </table>
+      <div class="note-box">
+        <h3>Guide d’utilisation des ombres</h3>
+        <ul>
+          <li>Les ombres servent uniquement à la hiérarchie visuelle, pas à la décoration.</li>
+          <li>Privilégier <code>shadow-none</code> pour les tables, listes de données et surfaces très formelles.</li>
+          <li>Utiliser <code>shadow-xs</code> ou <code>shadow-sm</code> pour des composants interactifs légers comme les dropdowns et boutons hover.</li>
+          <li>Réserver <code>shadow-md</code> à la profondeur standard des modals et des panels.</li>
+          <li><code>shadow-lg</code> et <code>shadow-xl</code> doivent être appliqués uniquement aux overlays et aux éléments flottants critiques.</li>
+          <li>Éviter d’ajouter une ombre sur des composants déjà très espacés ou colorés ; un bord/netteté suffit souvent.</li>
+          <li>En dark mode, baisser l’opacité des ombres pour conserver une sensation discrète et éviter l’effet brouillé.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>2.3. Motion et z-index</h2>
+      <p>Le système de motion TDGS est conçu pour être sobre, fonctionnel et accessible. Les animations doivent améliorer la compréhension de l’interface sans devenir décoratives.</p>
+      <table class="token-table">
+        <thead>
+          <tr><th>Token</th><th>Variable CSS</th><th>Valeur</th><th>Usage</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>instant</td><td><code>--tdgs-motion-instant</code></td><td>0ms</td><td>Reset instantané, avoids animation</td></tr>
+          <tr><td>fast</td><td><code>--tdgs-motion-fast</code></td><td>120ms</td><td>Hover/focus, micro-interactions</td></tr>
+          <tr><td>normal</td><td><code>--tdgs-motion-normal</code></td><td>200ms</td><td>Dropdowns, modals et transitions d’état</td></tr>
+          <tr><td>slow</td><td><code>--tdgs-motion-slow</code></td><td>320ms</td><td>Ouvertures de panels, toasts</td></tr>
+          <tr><td>verySlow</td><td><code>--tdgs-motion-very-slow</code></td><td>500ms</td><td>Changements d’état documentaires, page overlays</td></tr>
+        </tbody>
+      </table>
+      <table class="token-table">
+        <thead>
+          <tr><th>Easing</th><th>Variable CSS</th><th>Valeur</th><th>Usage</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>standard</td><td><code>--tdgs-easing-standard</code></td><td>cubic-bezier(0.4, 0, 0.2, 1)</td><td>Transmissions générales, valeurs par défaut</td></tr>
+          <tr><td>enter</td><td><code>--tdgs-easing-enter</code></td><td>cubic-bezier(0.3, 0, 0.15, 1)</td><td>Entrées d’éléments, modals, menus</td></tr>
+          <tr><td>exit</td><td><code>--tdgs-easing-exit</code></td><td>cubic-bezier(0.4, 0, 1, 1)</td><td>Sorties d’éléments, fermetures</td></tr>
+          <tr><td>linear</td><td><code>--tdgs-easing-linear</code></td><td>linear</td><td>Cas rares : loaders, progress bar</td></tr>
+        </tbody>
+      </table>
+      <div class="note-box">
+        <h3>Philosophie motion TDGS</h3>
+        <ul>
+          <li>Motion discrète, au service de la hiérarchie et de la compréhension.</li>
+          <li>Animations uniquement pour indiquer un changement d’état ou une relation spatiale.</li>
+          <li>Aucune animation décorative, aucun « bounce » inutile.</li>
+          <li>Les mouvements rapides sont réservés aux interactions tactiles mineures.</li>
+        </ul>
+      </div>
+      <div class="note-box">
+        <h3>Accessibilité</h3>
+        <ul>
+          <li>Supporter <code>prefers-reduced-motion</code> pour désactiver les animations.</li>
+          <li>Les animations ne doivent jamais être nécessaires pour comprendre le flux.</li>
+          <li>En cas de mode réduit, utiliser <code>instant</code> ou supprimer les transitions.</li>
+          <li>Les focus states doivent rester visibles et ne pas dépendre d’animations.</li>
+        </ul>
+      </div>
+      <div class="note-box">
+        <h3>Usage par composant</h3>
+        <ul>
+          <li>Buttons : hover/focus avec <code>fast</code> + <code>standard</code>.</li>
+          <li>Dropdowns : entrée/sortie avec <code>normal</code> + <code>enter</code>/<code>exit</code>.</li>
+          <li>Modals : ouverture avec <code>slow</code> + <code>enter</code>, fermeture avec <code>exit</code>.</li>
+          <li>Tooltips : apparition discrète <code>fast</code> + <code>enter</code>.</li>
+          <li>Toasts : affichage avec <code>slow</code>, disparition avec <code>exit</code>.</li>
+          <li>Navigation : transitions de page ou panneaux avec <code>normal</code> + <code>standard</code>.</li>
+        </ul>
+      </div>
+      <h3>Z-index TDGS</h3>
+      <p>La hiérarchie z-index TDGS est verrouillée et minimale. Les valeurs sont espacées de 100 pour conserver une marge de manœuvre, tout en restant explicites et sans ambiguïté.</p>
+      <table class="token-table">
+        <thead>
+          <tr><th>Token</th><th>Variable CSS</th><th>Valeur</th><th>Usage</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>base</td><td><code>--tdgs-z-base</code></td><td>0</td><td>Contenu de base, layout normal</td></tr>
+          <tr><td>dropdown</td><td><code>--tdgs-z-dropdown</code></td><td>100</td><td>Menus déroulants, popovers légers</td></tr>
+          <tr><td>sticky</td><td><code>--tdgs-z-sticky</code></td><td>200</td><td>Barres sticky, navigation fixe</td></tr>
+          <tr><td>overlay</td><td><code>--tdgs-z-overlay</code></td><td>300</td><td>Overlays masquants et backdrops</td></tr>
+          <tr><td>modal</td><td><code>--tdgs-z-modal</code></td><td>400</td><td>Fenêtres modales</td></tr>
+          <tr><td>toast</td><td><code>--tdgs-z-toast</code></td><td>500</td><td>Notifications, toasts</td></tr>
+          <tr><td>tooltip</td><td><code>--tdgs-z-tooltip</code></td><td>600</td><td>Tooltips, info-bulles critiques</td></tr>
+        </tbody>
+      </table>
+      <div class="note-box">
+        <h3>Règles strictes</h3>
+        <ul>
+          <li>Interdiction des z-index arbitraires hors de l’échelle TDGS.</li>
+          <li>Modal > dropdown toujours.</li>
+          <li>Tooltip > modal uniquement lorsque le tooltip est lié à une interaction modale et est absolument positionné dans le même stacking context.</li>
+          <li>Sticky ne doit jamais recouvrir une modal ou un overlay.</li>
+          <li>Overlay bloque l’interaction avec la page sous-jacente.</li>
+          <li>Ne pas utiliser de valeurs intermédiaires sans justification design system.</li>
+        </ul>
+      </div>
+      <div class="note-box">
+        <h3>Gestion des stacking contexts</h3>
+        <ul>
+          <li>Éviter de créer des stacking contexts inutiles avec <code>transform</code>, <code>opacity</code>, <code>filter</code>, <code>will-change</code> sur des éléments empilés.</li>
+          <li>Si un composant doit créer un stacking context, vérifier que sa valeur z-index utilise bien le token TDGS correspondant.</li>
+          <li>Les règles d’empilement s’appliquent dans le même context ; ne pas compter sur des valeurs z-index locales pour traverser plusieurs contexts.</li>
+        </ul>
+      </div>
+      <div class="note-box">
+        <h3>Tableau de priorité absolue</h3>
+        <ul>
+          <li><strong>tooltip (600)</strong> > toast (500)</li>
+          <li><strong>toast (500)</strong> > modal (400)</li>
+          <li><strong>modal (400)</strong> > overlay (300)</li>
+          <li><strong>overlay (300)</strong> > sticky (200)</li>
+          <li><strong>sticky (200)</strong> > dropdown (100)</li>
+          <li><strong>dropdown (100)</strong> > base (0)</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>3. Boutons TDGS</h2>
+      <p>Le système de boutons TDGS est conçu pour être direct, lisible et fiable dans les parcours administratifs. Les variantes sont limitées, hiérarchisées et compatibles HTML-first, sans dépendre de JavaScript.</p>
+      <div class="note-box">
+        <h3>Philosophie des boutons</h3>
+        <ul>
+          <li>Un bouton signifie une action claire ; il ne doit pas distraire.</li>
+          <li>La hiérarchie se manifeste par l’usage de variantes simples : primary, secondary, tertiary, danger, success.</li>
+          <li>Les styles sont pensés pour les formulaires publics : robustes, contrastés, accessibles.</li>
+          <li>La palette reste institutionnelle et sobre, sans couleurs vives non nécessaires.</li>
+        </ul>
+      </div>
+      <table class="token-table">
+        <thead>
+          <tr><th>Variant</th><th>Usage</th><th>Couleurs</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>primary</td><td>Action principale, confirmation, envoi de formulaire</td><td>Bleu foncé / texte blanc</td></tr>
+          <tr><td>secondary</td><td>Action secondaire, annuler, navigation</td><td>Fond clair / texte sombre / bord</td></tr>
+          <tr><td>tertiary</td><td>Action discrète, liens d’interface, actions moins critiques</td><td>Transparent / texte sombre</td></tr>
+          <tr><td>danger</td><td>Suppression, validation d’action irréversible</td><td>Rouge vif / texte blanc</td></tr>
+          <tr><td>success</td><td>Confirmation positive, état réussi.</td><td>Vert profond / texte blanc</td></tr>
+        </tbody>
+      </table>
+      <table class="token-table">
+        <thead>
+          <tr><th>Taille</th><th>Police</th><th>Padding</th><th>Min-height</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>sm</td><td>14px</td><td>0.375rem 0.75rem</td><td>2.75rem</td></tr>
+          <tr><td>md</td><td>16px</td><td>0.75rem 1rem</td><td>2.75rem</td></tr>
+          <tr><td>lg</td><td>18px</td><td>0.875rem 1.25rem</td><td>2.75rem</td></tr>
+        </tbody>
+      </table>
+      <div class="note-box">
+        <h3>Accessibilité</h3>
+        <ul>
+          <li>Contraste WCAG AA garanti pour tous les variants principaux.</li>
+          <li>Focus visible obligatoire avec contour clair.</li>
+          <li>Navigation clavier complète : bouton natif, `:focus-visible` et `aria-disabled`.</li>
+          <li>Les états loading et disabled doivent être exprimés en HTML/CSS sans JavaScript obligatoire.</li>
+        </ul>
+      </div>
+      <div class="note-box">
+        <h3>Bonnes règles</h3>
+        <ul>
+          <li>Utiliser primary pour l’action principale et secondary/tertiary pour les alternatives.</li>
+          <li>Réserver danger aux actions à risque et success aux confirmations maîtrisées.</li>
+          <li>Ne pas créer de nouvelles variantes colorées hors de cette palette.</li>
+          <li>Privilégier les boutons natifs `<button>` ou `<a role="button">` pour la compatibilité HTML-first.</li>
+        </ul>
+      </div>
+      <div class="example-grid">
+        <div class="sample-card">
+          <span class="sample-label">Primary</span>
+          <button class="tdgs-button tdgs-button--primary tdgs-button--md">Valider</button>
+        </div>
+        <div class="sample-card">
+          <span class="sample-label">Secondary</span>
+          <button class="tdgs-button tdgs-button--secondary tdgs-button--md">Retour</button>
+        </div>
+        <div class="sample-card">
+          <span class="sample-label">Tertiary</span>
+          <button class="tdgs-button tdgs-button--tertiary tdgs-button--md">Voir plus</button>
+        </div>
+        <div class="sample-card">
+          <span class="sample-label">Danger</span>
+          <button class="tdgs-button tdgs-button--danger tdgs-button--md">Supprimer</button>
+        </div>
+        <div class="sample-card">
+          <span class="sample-label">Success</span>
+          <button class="tdgs-button tdgs-button--success tdgs-button--md">Sauvegarder</button>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>4. Inputs TDGS</h2>
+      <p>Le système de champs TDGS s’appuie sur la même sobriété que les boutons : structure claire, états visibles et variantes limitées pour éviter les erreurs dans les formulaires publics.</p>
+      <div class="note-box">
+        <h3>Structure standard</h3>
+        <ul>
+          <li>Label obligatoire associé par <code>for</code>/<code>id</code>.</li>
+          <li>Champ : <code>input</code>, <code>textarea</code>, <code>select</code> ou contrôle booléen.</li>
+          <li>Helper text optionnel pour précision.</li>
+          <li>Message d’erreur visible et prioritaire.</li>
+          <li>Hint accessible via <code>aria-describedby</code>.</li>
+        </ul>
+      </div>
+      <table class="token-table">
+        <thead>
+          <tr><th>Variant</th><th>Usage</th><th>Remarques</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>default</td><td>Valeur normale / saisie standard</td><td>Cadres clairs, textes sombres</td></tr>
+          <tr><td>error</td><td>Validation invalide</td><td>Message rouge, bordure rouge</td></tr>
+          <tr><td>success</td><td>Champ validé / état positif</td><td>Bordure verte discrète</td></tr>
+          <tr><td>disabled</td><td>Champ inactif</td><td>Fond gris clair, texte atténué</td></tr>
+        </tbody>
+      </table>
+      <table class="token-table">
+        <thead>
+          <tr><th>Taille</th><th>Police</th><th>Padding</th><th>Hauteur min.</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>sm</td><td>14px</td><td>0.5rem 0.75rem</td><td>44px</td></tr>
+          <tr><td>md</td><td>16px</td><td>0.75rem 1rem</td><td>44px</td></tr>
+          <tr><td>lg</td><td>18px</td><td>0.875rem 1.25rem</td><td>52px</td></tr>
+        </tbody>
+      </table>
+      <div class="note-box">
+        <h3>Composants concernés</h3>
+        <ul>
+          <li><strong>Text inputs</strong> : texte, email, mot de passe, nombre.</li>
+          <li><strong>Textarea</strong> : saisie multi-ligne.</li>
+          <li><strong>Select</strong> : natif pour l’accessibilité.</li>
+          <li><strong>Checkbox / Radio / Switch</strong> : boolean controls.</li>
+          <li><strong>File upload</strong> : simple, avec option drag &amp; drop future.</li>
+        </ul>
+      </div>
+      <div class="note-box">
+        <h3>Accessibilité critique</h3>
+        <ul>
+          <li>Label associé à chaque champ.</li>
+          <li><code>aria-invalid="true"</code> pour les erreurs.</li>
+          <li><code>aria-describedby</code> pour helper / erreur.</li>
+          <li><code>:focus-visible</code> obligatoire.</li>
+          <li>Messages d’erreur clairs et accessibles.</li>
+        </ul>
+      </div>
+      <div class="example-grid">
+        <div class="sample-card">
+          <span class="sample-label">Text input</span>
+          <label class="tdgs-field__label" for="input-example">Nom complet</label>
+          <input id="input-example" class="tdgs-input tdgs-input--md" type="text" placeholder="Entrez votre nom" aria-describedby="input-example-help" />
+          <p id="input-example-help" class="tdgs-helper-text">Requis pour l’enregistrement du dossier.</p>
+        </div>
+        <div class="sample-card">
+          <span class="sample-label">Textarea</span>
+          <label class="tdgs-field__label" for="textarea-example">Description</label>
+          <textarea id="textarea-example" class="tdgs-textarea tdgs-textarea--md" placeholder="Décrivez votre demande" rows="4"></textarea>
+        </div>
+        <div class="sample-card">
+          <span class="sample-label">Select</span>
+          <label class="tdgs-field__label" for="select-example">Type de document</label>
+          <select id="select-example" class="tdgs-select tdgs-select--md">
+            <option>Choisissez une option</option>
+            <option>Carte d’identité</option>
+            <option>Passeport</option>
+            <option>Certificat de naissance</option>
+          </select>
+        </div>
+        <div class="sample-card">
+          <span class="sample-label">Checkbox</span>
+          <label class="tdgs-checkbox"><input type="checkbox" /> Je confirme l’exactitude des informations</label>
+        </div>
+        <div class="sample-card">
+          <span class="sample-label">Radio</span>
+          <label class="tdgs-radio"><input type="radio" name="radio-example" /> Option 1</label>
+          <label class="tdgs-radio"><input type="radio" name="radio-example" /> Option 2</label>
+        </div>
+        <div class="sample-card">
+          <span class="sample-label">Switch</span>
+          <label class="tdgs-switch"><input type="checkbox" role="switch" aria-checked="false" /> Activer la notification</label>
+        </div>
+      </div>
+      <div class="note-box">
+        <h3>Cas réel gouvernemental</h3>
+        <ul>
+          <li>Formulaires de demande de prestation : champs clairs, erreurs visibles, labels explicites.</li>
+          <li>Portails citoyens : select natif pour choix de documents et checkbox pour consentement.</li>
+          <li>Administration interne : toggles de permissions simples et compréhensibles.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>3. Styles textuels officiels</h2>
+      <div class="text-samples">
+        <div class="sample-card">
+          <span class="sample-label">Display</span>
+          <p style="font-size: var(--tdgs-font-size-5xl); line-height: var(--tdgs-line-height-5xl); font-weight: var(--tdgs-font-weight-semibold); letter-spacing: -0.02em;">TDGS Display — Usage héroïque</p>
+        </div>
+        <div class="sample-card">
+          <span class="sample-label">Page Title</span>
+          <p style="font-size: var(--tdgs-font-size-4xl); line-height: var(--tdgs-line-height-4xl); font-weight: var(--tdgs-font-weight-semibold);">Titre de page principal</p>
+        </div>
+        <div class="sample-card">
+          <span class="sample-label">Section Title</span>
+          <p style="font-size: var(--tdgs-font-size-2xl); line-height: var(--tdgs-line-height-2xl); font-weight: var(--tdgs-font-weight-semibold);">Titre de section</p>
+        </div>
+        <div class="sample-card">
+          <span class="sample-label">Subsection Title</span>
+          <p style="font-size: var(--tdgs-font-size-xl); line-height: var(--tdgs-line-height-xl); font-weight: var(--tdgs-font-weight-medium);">Sous-titre</p>
+        </div>
+        <div class="sample-card">
+          <span class="sample-label">Body</span>
+          <p style="font-size: var(--tdgs-font-size-md); line-height: var(--tdgs-line-height-md); font-weight: var(--tdgs-font-weight-regular);">Le texte de corps standard TDGS est conçu pour une lecture confortable. Il respecte la taille minimale de 16px et une hauteur de ligne généreuse pour l’accessibilité.</p>
+        </div>
+        <div class="sample-card">
+          <span class="sample-label">Button</span>
+          <p style="font-size: var(--tdgs-font-size-md); line-height: var(--tdgs-line-height-md); font-weight: var(--tdgs-font-weight-semibold); letter-spacing: 0.01em;">Bouton CTA</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>4. Règles de poids</h2>
+      <table class="token-table">
+        <thead>
+          <tr><th>Weight</th><th>Usage recommandé</th><th>À éviter</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>300</td><td>Display large uniquement</td><td>Petits textes, UI dense</td></tr>
+          <tr><td>400</td><td>Texte de paragraphe par défaut</td><td>Titres nécessitant structure forte</td></tr>
+          <tr><td>500</td><td>Liens / éléments UI modérés</td><td>Longs paragraphes</td></tr>
+          <tr><td>600</td><td>Titles, boutons, labels</td><td>Texte de paragraphe lourd</td></tr>
+          <tr><td>700</td><td>Emphase, alertes, titres courts</td><td>Longues lignes continues</td></tr>
+          <tr><td>800</td><td>Cas rares / identitaires</td><td>Usage courant</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>5. Multilingue (français / arabe)</h2>
+      <p>Le système est conçu pour gérer automatiquement le contenu français en Latin et l’arabe en RTL avec une police dédiée.</p>
+      <div class="code-block">
+        <pre><code>html {
+  font-family: "Source Sans 3", "Public Sans", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+html[lang="ar"], :lang(ar) {
+  direction: rtl;
+  font-family: "Noto Naskh Arabic", "Noto Sans Arabic", system-ui, sans-serif;
+  line-height: 1.6;
+}
+</code></pre>
+      </div>
+      <div class="sample-card rtl-sample">
+        <span class="sample-label">Exemple arabe</span>
+        <p>نظام TDGS هو معيار حكومي للخدمات الرقمية، مصمم للوضوح والاعتمادية والتوافق مع الأطر العالمية.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>6. Accessibilité</h2>
+      <p>TDGS applique les bonnes pratiques WCAG 2.1 AA :</p>
+      <ul>
+        <li>Texte de base à 16px minimum.</li>
+        <li>Line-height généreuses (1.4–1.5 pour le corps).</li>
+        <li>Longueur de ligne cible 45–75 caractères.</li>
+        <li>Zoom 200% : la mise en page reste utilisable.</li>
+        <li>Les accents d’alerte jaunes utilisent du texte ou des icônes foncés pour maintenir un contraste suffisant.</li>
+      </ul>
+      <p>Les petites tailles (12–14px) sont réservées aux légendes ou aides non critiques.</p>
+    </section>
+
+    <section>
+      <h2>7. Exemples d’application</h2>
+      <div class="example-card">
+        <p style="font-size: var(--tdgs-font-size-xl); line-height: var(--tdgs-line-height-xl); font-weight: var(--tdgs-font-weight-semibold);">Titre de section</p>
+        <p style="font-size: var(--tdgs-font-size-md); line-height: var(--tdgs-line-height-md);">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum.</p>
+        <p style="font-size: var(--tdgs-font-size-sm); line-height: var(--tdgs-line-height-sm); color: var(--tdgs-muted);">Information additionnelle — seulement utiliser si nécessaire.</p>
+      </div>
+      <div class="example-card">
+        <span class="sample-label">Typographie responsive</span>
+        <p>TDGS recommande d’adapter les titres et les échelles de texte entre mobile, tablette et desktop sans casser la hiérarchie.</p>
+        <div class="code-block">
+          <pre><code>h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  line-height: 1.12;
+}
+
+@media (min-width: 768px) {
+  h1 {
+    font-size: clamp(2.5rem, 4vw, 3.5rem);
+  }
+}
+</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>8. Notes de déploiement</h2>
+      <p>Pour un déploiement stable, self-hostez les fichiers WOFF2 de <kbd>Source Sans 3</kbd>, <kbd>Noto Naskh Arabic</kbd>, <kbd>Public Sans</kbd> et <kbd>JetBrains Mono</kbd>. Utilisez le mode <kbd>font-display: swap</kbd> et des subsets par langue pour optimiser la performance.</p>
+    </section>
+  </main>
+</body>
+</html>

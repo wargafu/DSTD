@@ -1,0 +1,81 @@
+{
+  "name": "@tdgs/core",
+  "version": "0.1.0",
+  "private": false,
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "sideEffects": ["**/*.css", "dist/**/*.css"],
+  "files": [
+    "dist",
+    "!dist/**/*.tsbuildinfo"
+  ],
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "clean": "node scripts/clean.mjs",
+    "dev": "tsc --build tsconfig.json --watch",
+    "typecheck": "tsc -p tsconfig.typecheck.json",
+    "validate:exports": "node scripts/validate-exports.mjs",
+    "validate:tokens": "node scripts/validate-tokens.mjs",
+    "validate": "pnpm validate:tokens && pnpm build && pnpm validate:exports",
+    "prepare": "pnpm build"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./base.css": "./dist/base.css",
+    "./tokens": {
+      "import": "./dist/tokens/index.js",
+      "types": "./dist/tokens/index.d.ts"
+    },
+    "./components": {
+      "import": "./dist/components/index.js",
+      "types": "./dist/components/index.d.ts"
+    },
+    "./components/button": {
+      "import": "./dist/components/button/index.js",
+      "types": "./dist/components/button/index.d.ts"
+    },
+    "./components/button/button.css": "./dist/components/button/button.css",
+    "./components/input": {
+      "import": "./dist/components/input/index.js",
+      "types": "./dist/components/input/index.d.ts"
+    },
+    "./components/input/input.css": "./dist/components/input/input.css",
+    "./components/alert": {
+      "import": "./dist/components/alert/index.js",
+      "types": "./dist/components/alert/index.d.ts"
+    },
+    "./components/alert/alert.css": "./dist/components/alert/alert.css",
+    "./components/badge": {
+      "import": "./dist/components/badge/index.js",
+      "types": "./dist/components/badge/index.d.ts"
+    },
+    "./components/badge/badge.css": "./dist/components/badge/badge.css",
+    "./components/card": {
+      "import": "./dist/components/card/index.js",
+      "types": "./dist/components/card/index.d.ts"
+    },
+    "./components/card/card.css": "./dist/components/card/card.css",
+    "./components/link": {
+      "import": "./dist/components/link/index.js",
+      "types": "./dist/components/link/index.d.ts"
+    },
+    "./components/link/link.css": "./dist/components/link/link.css",
+    "./components/table": {
+      "import": "./dist/components/table/index.js",
+      "types": "./dist/components/table/index.d.ts"
+    },
+    "./components/table/table.css": "./dist/components/table/table.css",
+    "./tokens/color.css": "./dist/tokens/color.css",
+    "./tokens/typography.css": "./dist/tokens/typography.css",
+    "./tokens/spacing.css": "./dist/tokens/spacing.css",
+    "./tokens/radius.css": "./dist/tokens/radius.css",
+    "./tokens/shadow.css": "./dist/tokens/shadow.css",
+    "./tokens/motion.css": "./dist/tokens/motion.css",
+    "./tokens/z-index.css": "./dist/tokens/z-index.css"
+  }
+}

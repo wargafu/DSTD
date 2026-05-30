@@ -1,0 +1,34 @@
+---
+title: TDGS — Tchad Design System
+description: Le système de design officiel pour les services numériques de l'État du Tchad.
+template: splash
+hero:
+  title: Tchad Design System
+  tagline: La référence officielle pour construire des interfaces numériques de l'État — accessibles, cohérentes et institutionnelles.
+  actions:
+    - text: Démarrage rapide
+      link: /getting-started/installation/
+      icon: right-arrow
+      variant: primary
+    - text: Explorer les tokens
+      link: /tokens/colors/
+      icon: open-book
+      variant: secondary
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="Design Tokens" icon="seti:json">
+    Couleurs, typographie, espacement, ombres — définis une fois, utilisés partout en TypeScript, JSON et CSS.
+  </Card>
+  <Card title="Composants" icon="puzzle">
+    Button, Input et plus — avec variants, états, accessibilité WCAG AA et exemples HTML / React / Vue.
+  </Card>
+  <Card title="Patterns gouvernementaux" icon="list-format">
+    Formulaire de connexion, multi-étapes, résumé d'erreurs, page de confirmation.
+  </Card>
+  <Card title="Guide accessibilité" icon="approve-check">
+    WCAG 2.1 AA, navigation clavier, lecteurs d'écran, support arabe RTL.
+  </Card>
+</CardGrid>

@@ -1,0 +1,210 @@
+---
+title: Anti-patterns
+description: Erreurs fréquentes à éviter dans les interfaces TDGS — design, code et accessibilité.
+sidebar:
+  order: 2
+---
+
+# Anti-patterns
+
+Cette page documente les erreurs fréquentes dans les interfaces gouvernementales.
+Chacune d'elles nuit à la confiance des citoyens, à l'accessibilité ou à la maintenabilité.
+
+---
+
+## Anti-patterns visuels
+
+### Startup design sur interface d'État
+
+L'État n'est pas une startup. Les dégradés colorés, les ombres portées excessives,
+les animations d'entrée complexes et les couleurs vives créent une interface
+qui ne correspond pas à la gravité des actes administratifs.
+
+```css
+/* ❌ Anti-pattern — "startup vibes" sur un service public */
+.hero {
+  background: linear-gradient(135deg, #6B94FF 0%, #0033A0 50%, #006B3C 100%);
+  animation: gradientShift 3s ease infinite;
+}
+
+/* ✅ TDGS — sobre et institutionnel */
+.hero {
+  background: var(--tdgs-color-neutral-100);
+  border-bottom: 3px solid var(--tdgs-color-blue-500);
+}
+```
+
+### Couleurs inventées hors palette
+
+Utiliser des couleurs hors de la palette TDGS casse la cohérence visuelle
+et crée des problèmes de contraste non vérifiés.
+
+```css
+/* ❌ Couleur inventée */
+.mon-composant {
+  background: #FF6B35;  /* D'où vient cette couleur ? */
+  color: #FFF;          /* Contraste non vérifié */
+}
+
+/* ✅ Palette TDGS vérifiée */
+.mon-composant {
+  background: var(--tdgs-color-blue-500);
+  color: white;  /* Contraste 8.59:1 ✅ */
+}
+```
+
+### Z-index arbitraires
+
+```css
+/* ❌ Z-index magiques — cause des bugs d'empilement non reproductibles */
+.ma-modal    { z-index: 9999; }
+.mon-tooltip { z-index: 99999; }
+.ma-nav      { z-index: 1000; }
+
+/* ✅ Échelle TDGS verrouillée */
+.ma-modal    { z-index: var(--tdgs-z-modal);    /* 400 */ }
+.mon-tooltip { z-index: var(--tdgs-z-tooltip);  /* 600 */ }
+.ma-nav      { z-index: var(--tdgs-z-sticky);   /* 200 */ }
+```
+
+---
+
+## Anti-patterns de formulaire
+
+### Label remplacé par placeholder
+
+Le placeholder disparaît à la saisie. L'utilisateur oublie ce qu'il devait saisir
+et ne peut plus le voir une fois le champ rempli.
+
+```html
+<!-- ❌ Label absent — le placeholder remplace le label -->
+<input type="text" placeholder="Nom complet" class="tdgs-input">
+
+<!-- ✅ Label visible toujours -->
+<div class="tdgs-field">
+  <label class="tdgs-field__label" for="nom">Nom complet</label>
+  <input id="nom" type="text" class="tdgs-input tdgs-input--md" placeholder="Ex : Moussa Ibrahim">
+</div>
+```
+
+### Validation uniquement à la soumission
+
+Valider uniquement au clic sur "Soumettre" oblige l'utilisateur à corriger
+toutes les erreurs en une seule passe, souvent stressante.
+
+```javascript
+// ❌ Validation uniquement au submit
+form.addEventListener('submit', validate);
+
+// ✅ Validation au départ du champ + au submit
+input.addEventListener('blur', () => validateField(input));
+form.addEventListener('submit', validateAll);
+```
+
+### Bouton "Réinitialiser" dans les formulaires longs
+
+Le bouton Reset détruit le travail de l'utilisateur d'un clic accidentel.
+
+```html
+<!-- ❌ Bouton reset visible dans un formulaire administratif -->
+<button type="reset">Effacer tout</button>
+
+<!-- ✅ Préférer un lien "Annuler" qui renvoie à l'étape précédente -->
+<a href="/etape-precedente" class="tdgs-button tdgs-button--secondary tdgs-button--md">
+  Annuler
+</a>
+```
+
+---
+
+## Anti-patterns d'accessibilité
+
+### Suppression du focus
+
+```css
+/* ❌ Suppression globale du focus — interdit en TDGS */
+* { outline: none; }
+*:focus { outline: none; }
+button:focus { outline: 0; }
+
+/* ✅ Focus personnalisé mais visible */
+:focus-visible {
+  outline: 2px solid var(--tdgs-color-blue-500);
+  outline-offset: 3px;
+}
+```
+
+### `<div>` cliquable au lieu de `<button>`
+
+```html
+<!-- ❌ Div cliquable — non accessible au clavier, pas annoncé par AT -->
+<div class="btn" onclick="doAction()">Valider</div>
+
+<!-- ✅ Bouton natif — accessible, focus, clavier, AT -->
+<button type="button" class="tdgs-button tdgs-button--primary tdgs-button--md" onclick="doAction()">
+  Valider
+</button>
+```
+
+### Message d'erreur dans une tooltip
+
+```html
+<!-- ❌ Erreur en tooltip — invisible pour les lecteurs d'écran -->
+<input type="text" title="Ce champ est requis">
+
+<!-- ✅ Erreur visible et annoncée -->
+<input
+  type="text"
+  aria-invalid="true"
+  aria-describedby="nom-error"
+>
+<p id="nom-error" class="tdgs-error-text" role="alert">
+  Ce champ est requis.
+</p>
+```
+
+### Images sans texte alternatif
+
+```html
+<!-- ❌ Icône significative sans alt -->
+<img src="/icons/warning.svg">
+
+<!-- ✅ Alt descriptif -->
+<img src="/icons/warning.svg" alt="Avertissement">
+
+<!-- ✅ Icône décorative — masquée pour les AT -->
+<img src="/icons/decorative-star.svg" alt="" role="presentation">
+```
+
+---
+
+## Anti-patterns de code
+
+### Hardcoder des valeurs de tokens
+
+```css
+/* ❌ Valeur hardcodée — difficile à maintenir, pas lié aux tokens */
+.mon-composant {
+  color: #0033A0;
+  padding: 16px;
+  border-radius: 4px;
+}
+
+/* ✅ Tokens — maintenable, cohérent, themeable */
+.mon-composant {
+  color: var(--tdgs-color-blue-500);
+  padding: var(--tdgs-spacing-4);
+  border-radius: var(--tdgs-radius-sm);
+}
+```
+
+### Importer `@tdgs/core` en entier dans chaque composant
+
+```typescript
+// ❌ Import massif dans chaque fichier
+import * as tdgs from '@tdgs/core';
+
+// ✅ Import ciblé — tree-shakeable
+import { color, spacing } from '@tdgs/core/tokens';
+import type { ButtonVariant } from '@tdgs/core/components/button';
+```

@@ -1,0 +1,296 @@
+/* TDGS form input tokens */
+:root {
+  --tdgs-input-border: var(--tdgs-neutral-300);
+  --tdgs-input-border-focus: var(--tdgs-color-blue-500);
+  --tdgs-input-border-error: var(--tdgs-color-red-500);
+  --tdgs-input-border-success: var(--tdgs-color-green-500);
+  --tdgs-input-border-disabled: var(--tdgs-neutral-200);
+  --tdgs-input-bg: var(--tdgs-neutral-0);
+  --tdgs-input-bg-disabled: var(--tdgs-neutral-100);
+  --tdgs-input-text: var(--tdgs-neutral-900);
+  --tdgs-input-text-disabled: var(--tdgs-neutral-500);
+  --tdgs-input-placeholder: var(--tdgs-neutral-500);
+  --tdgs-input-placeholder-disabled: var(--tdgs-neutral-400);
+  --tdgs-input-icon-color: var(--tdgs-neutral-500);
+  --tdgs-input-icon-error: var(--tdgs-color-red-500);
+  --tdgs-input-icon-success: var(--tdgs-color-green-500);
+  --tdgs-input-radius: var(--tdgs-radius-sm);
+  --tdgs-input-min-height: 2.75rem;
+  --tdgs-input-min-height-lg: 3.25rem;
+  --tdgs-input-padding-sm: 0.5rem 0.75rem;
+  --tdgs-input-padding-md: 0.75rem 1rem;
+  --tdgs-input-padding-lg: 0.875rem 1.25rem;
+  --tdgs-input-font-size-sm: var(--tdgs-font-size-sm);
+  --tdgs-input-font-size-md: var(--tdgs-font-size-md);
+  --tdgs-input-font-size-lg: var(--tdgs-font-size-lg);
+  --tdgs-input-line-height-sm: var(--tdgs-line-height-sm);
+  --tdgs-input-line-height-md: var(--tdgs-line-height-md);
+  --tdgs-input-line-height-lg: var(--tdgs-line-height-md);
+  --tdgs-input-transition: border-color var(--tdgs-motion-fast) var(--tdgs-easing-standard), background-color var(--tdgs-motion-fast) var(--tdgs-easing-standard), color var(--tdgs-motion-fast) var(--tdgs-easing-standard);
+  --tdgs-input-focus-outline: 2px solid var(--tdgs-input-border-focus);
+  --tdgs-input-focus-outline-offset: 2px;
+  --tdgs-input-box-shadow: var(--tdgs-shadow-none);
+}
+
+.tdgs-field {
+  display: grid;
+  gap: 0.25rem;
+  width: 100%;
+}
+
+.tdgs-field__label {
+  display: inline-flex;
+  font-size: var(--tdgs-font-size-sm);
+  line-height: var(--tdgs-line-height-sm);
+  font-weight: var(--tdgs-font-weight-semibold);
+  color: var(--tdgs-neutral-900);
+}
+
+.tdgs-field__control,
+.tdgs-field__control > .tdgs-input,
+.tdgs-field__control > .tdgs-select,
+.tdgs-field__control > .tdgs-textarea {
+  width: 100%;
+}
+
+.tdgs-input,
+.tdgs-select,
+.tdgs-textarea {
+  display: inline-flex;
+  align-items: center;
+  width: 100%;
+  min-height: var(--tdgs-input-min-height);
+  padding: var(--tdgs-input-padding-md);
+  font-family: var(--tdgs-font-family-primary);
+  font-size: var(--tdgs-input-font-size-md);
+  line-height: var(--tdgs-input-line-height-md);
+  color: var(--tdgs-input-text);
+  background: var(--tdgs-input-bg);
+  border: 1px solid var(--tdgs-input-border);
+  border-radius: var(--tdgs-input-radius);
+  box-shadow: var(--tdgs-input-box-shadow);
+  transition: var(--tdgs-input-transition);
+}
+
+.tdgs-textarea {
+  min-height: 8rem;
+  resize: vertical;
+  padding: 0.75rem 1rem;
+}
+
+.tdgs-select {
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, var(--tdgs-neutral-700) 50%), linear-gradient(135deg, var(--tdgs-neutral-700) 50%, transparent 50%);
+  background-position: calc(100% - 1rem) center, calc(100% - 0.65rem) center;
+  background-size: 0.45em 0.45em, 0.45em 0.45em;
+  background-repeat: no-repeat;
+  padding-right: 2.5rem;
+}
+
+.tdgs-input::placeholder,
+.tdgs-textarea::placeholder,
+.tdgs-select::placeholder {
+  color: var(--tdgs-input-placeholder);
+}
+
+.tdgs-input:focus-visible,
+.tdgs-select:focus-visible,
+.tdgs-textarea:focus-visible {
+  outline: var(--tdgs-input-focus-outline);
+  outline-offset: var(--tdgs-input-focus-outline-offset);
+  border-color: var(--tdgs-input-border-focus);
+}
+
+.tdgs-input--error,
+.tdgs-select--error,
+.tdgs-textarea--error {
+  border-color: var(--tdgs-input-border-error);
+}
+
+.tdgs-input--success,
+.tdgs-select--success,
+.tdgs-textarea--success {
+  border-color: var(--tdgs-input-border-success);
+}
+
+.tdgs-input--disabled,
+.tdgs-select--disabled,
+.tdgs-textarea--disabled {
+  background: var(--tdgs-input-bg-disabled);
+  color: var(--tdgs-input-text-disabled);
+  border-color: var(--tdgs-input-border-disabled);
+  cursor: not-allowed;
+}
+
+.tdgs-input--readonly,
+.tdgs-select--readonly,
+.tdgs-textarea--readonly {
+  background: var(--tdgs-input-bg-disabled);
+  border-color: var(--tdgs-input-border-disabled);
+}
+
+.tdgs-input--sm,
+.tdgs-select--sm,
+.tdgs-textarea--sm {
+  font-size: var(--tdgs-input-font-size-sm);
+  line-height: var(--tdgs-input-line-height-sm);
+  padding: var(--tdgs-input-padding-sm);
+  min-height: var(--tdgs-input-min-height);
+}
+
+.tdgs-input--lg,
+.tdgs-select--lg,
+.tdgs-textarea--lg {
+  font-size: var(--tdgs-input-font-size-lg);
+  line-height: var(--tdgs-input-line-height-lg);
+  padding: var(--tdgs-input-padding-lg);
+  min-height: var(--tdgs-input-min-height-lg);
+}
+
+.tdgs-helper-text,
+.tdgs-error-text,
+.tdgs-success-text {
+  font-size: var(--tdgs-font-size-sm);
+  line-height: var(--tdgs-line-height-sm);
+}
+
+.tdgs-helper-text {
+  color: var(--tdgs-neutral-600);
+}
+
+.tdgs-error-text {
+  color: var(--tdgs-color-red-600);
+}
+
+.tdgs-success-text {
+  color: var(--tdgs-color-green-700);
+}
+
+.tdgs-checkbox,
+.tdgs-radio,
+.tdgs-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: var(--tdgs-font-size-md);
+}
+
+.tdgs-checkbox input,
+.tdgs-radio input,
+.tdgs-switch input {
+  flex-shrink: 0;
+  width: 1rem;
+  height: 1rem;
+  border: 1px solid var(--tdgs-input-border);
+  border-radius: var(--tdgs-radius-sm);
+  background: var(--tdgs-input-bg);
+  appearance: none;
+  display: grid;
+  place-items: center;
+  transition: var(--tdgs-input-transition);
+}
+
+.tdgs-checkbox input:checked {
+  background: var(--tdgs-color-blue-500);
+  border-color: var(--tdgs-color-blue-500);
+}
+
+.tdgs-checkbox input:checked::after {
+  content: '';
+  width: 0.5rem;
+  height: 0.5rem;
+  background: var(--tdgs-neutral-0);
+  clip-path: polygon(14% 44%, 0 65%, 40% 100%, 100% 20%, 84% 0%, 36% 64%);
+}
+
+.tdgs-radio input {
+  border-radius: 50%;
+}
+
+.tdgs-radio input:checked {
+  background: var(--tdgs-color-blue-500);
+  border-color: var(--tdgs-color-blue-500);
+}
+
+.tdgs-radio input:checked::after {
+  content: '';
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--tdgs-neutral-0);
+}
+
+.tdgs-switch {
+  gap: 0.75rem;
+}
+
+.tdgs-switch input {
+  width: 2.5rem;
+  height: 1.4rem;
+  border-radius: 9999px;
+  position: relative;
+  appearance: none;
+  background: var(--tdgs-neutral-200);
+  border: 1px solid var(--tdgs-neutral-300);
+  transition: background-color var(--tdgs-motion-fast) var(--tdgs-easing-standard), border-color var(--tdgs-motion-fast) var(--tdgs-easing-standard);
+}
+
+.tdgs-switch input::before {
+  content: '';
+  position: absolute;
+  top: 0.2rem;
+  left: 0.2rem;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  background: var(--tdgs-neutral-0);
+  transition: transform var(--tdgs-motion-fast) var(--tdgs-easing-standard);
+}
+
+.tdgs-switch input:checked {
+  background: var(--tdgs-color-blue-500);
+  border-color: var(--tdgs-color-blue-500);
+}
+
+.tdgs-switch input:checked::before {
+  transform: translateX(1.1rem);
+}
+
+.tdgs-file-upload {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.tdgs-file-upload__control {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: var(--tdgs-input-min-height);
+  padding: var(--tdgs-input-padding-md);
+  font-family: var(--tdgs-font-family-primary);
+  font-size: var(--tdgs-input-font-size-md);
+  line-height: var(--tdgs-input-line-height-md);
+  color: var(--tdgs-input-text);
+  background: var(--tdgs-input-bg);
+  border: 1px solid var(--tdgs-input-border);
+  border-radius: var(--tdgs-input-radius);
+}
+
+.tdgs-file-upload__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 8rem;
+  padding: 0.5rem 0.75rem;
+  font-size: var(--tdgs-font-size-sm);
+  line-height: var(--tdgs-line-height-sm);
+  color: var(--tdgs-neutral-0);
+  background: var(--tdgs-color-blue-500);
+  border: 1px solid transparent;
+  border-radius: var(--tdgs-radius-sm);
+}
+
+.tdgs-file-upload__button:hover {
+  background: var(--tdgs-color-blue-600);
+}

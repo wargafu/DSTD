@@ -1,0 +1,114 @@
+---
+title: Alert
+description: Composant Alert TDGS — messages info/succès/avertissement/danger accessibles.
+sidebar:
+  order: 3
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+# Alert
+
+Les alertes communiquent des messages contextuels importants sans interrompre le flux utilisateur.
+Elles existent en 4 variantes sémantiques alignées sur les couleurs du drapeau tchadien.
+
+## Importation
+
+```css
+@import "@tdgs/core/components/alert/alert.css";
+```
+
+```typescript
+import type { AlertVariant } from '@tdgs/core/components/alert';
+```
+
+---
+
+## Variantes
+
+<div class="tdgs-preview">
+  <div class="tdgs-preview__stage" style="flex-direction:column;gap:0.75rem;">
+    <div class="tdgs-alert tdgs-alert--info" role="status">
+      <div class="tdgs-alert__content">
+        <p class="tdgs-alert__title">Information</p>
+        <div class="tdgs-alert__body">Votre demande est en cours de traitement. Délai estimé : 3 jours ouvrables.</div>
+      </div>
+    </div>
+    <div class="tdgs-alert tdgs-alert--success" role="status">
+      <div class="tdgs-alert__content">
+        <p class="tdgs-alert__title">Succès</p>
+        <div class="tdgs-alert__body">Votre dossier a été soumis avec succès. Référence : REF-2024-001234.</div>
+      </div>
+    </div>
+    <div class="tdgs-alert tdgs-alert--warning" role="status">
+      <div class="tdgs-alert__content">
+        <p class="tdgs-alert__title">Avertissement</p>
+        <div class="tdgs-alert__body">Votre session expire dans 5 minutes. Sauvegardez vos données.</div>
+      </div>
+    </div>
+    <div class="tdgs-alert tdgs-alert--danger" role="alert">
+      <div class="tdgs-alert__content">
+        <p class="tdgs-alert__title">Erreur</p>
+        <div class="tdgs-alert__body">La soumission a échoué. Vérifiez votre connexion et réessayez.</div>
+      </div>
+    </div>
+  </div>
+  <div class="tdgs-preview__label">4 variantes sémantiques</div>
+</div>
+
+| Variante | Classe | `role` ARIA | Usage |
+|---|---|---|---|
+| `info` | `tdgs-alert--info` | `status` | Information neutre, aide contextuelle |
+| `success` | `tdgs-alert--success` | `status` | Confirmation, action réussie |
+| `warning` | `tdgs-alert--warning` | `status` | Attention requise, non bloquant |
+| `danger` | `tdgs-alert--danger` | `alert` | Erreur bloquante, action critique |
+
+---
+
+## Structure HTML complète
+
+```html
+<div class="tdgs-alert tdgs-alert--info" role="status" aria-labelledby="alert-title">
+  <!-- Icône optionnelle -->
+  <svg class="tdgs-alert__icon" aria-hidden="true" viewBox="0 0 20 20" fill="currentColor">
+    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"/>
+  </svg>
+
+  <div class="tdgs-alert__content">
+    <p class="tdgs-alert__title" id="alert-title">Demande reçue</p>
+    <div class="tdgs-alert__body">
+      Votre demande a été enregistrée sous la référence <strong>REF-2024-001234</strong>.
+      Vous serez notifié par e-mail dans les 48 heures.
+    </div>
+  </div>
+
+  <!-- Bouton de fermeture optionnel -->
+  <button class="tdgs-alert__close" aria-label="Fermer cette notification" type="button">
+    <svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+      <path d="M4.646 4.646a.5.5 0 01.708 0L8 7.293l2.646-2.647a.5.5 0 01.708.708L8.707 8l2.647 2.646a.5.5 0 01-.708.708L8 8.707l-2.646 2.647a.5.5 0 01-.708-.708L7.293 8 4.646 5.354a.5.5 0 010-.708z"/>
+    </svg>
+  </button>
+</div>
+```
+
+---
+
+## Accessibilité
+
+<Aside type="tip" title="role alert vs status">
+  - `role="alert"` + `aria-live="assertive"` — pour les erreurs critiques. Annoncé immédiatement.
+  - `role="status"` + `aria-live="polite"` — pour les confirmations et infos. Annoncé au moment opportun.
+  - N'utilisez `role="alert"` que pour les erreurs bloquantes — sinon les lecteurs d'écran interrompent constamment l'utilisateur.
+</Aside>
+
+```html
+<!-- Erreur bloquante — annonce immédiate -->
+<div class="tdgs-alert tdgs-alert--danger" role="alert" aria-live="assertive">
+  ...
+</div>
+
+<!-- Confirmation — annonce polie -->
+<div class="tdgs-alert tdgs-alert--success" role="status" aria-live="polite">
+  ...
+</div>
+```

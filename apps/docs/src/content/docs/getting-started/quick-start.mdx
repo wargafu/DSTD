@@ -1,0 +1,331 @@
+---
+title: Démarrage rapide
+description: Construire votre première interface TDGS en 5 minutes.
+sidebar:
+  order: 3
+---
+
+import { Steps, Tabs, TabItem, Aside } from '@astrojs/starlight/components';
+
+# Démarrage rapide
+
+Ce guide vous permet de construire un formulaire de connexion fonctionnel avec TDGS en 5 minutes.
+
+---
+
+## Prérequis
+
+- `@tdgs/core` installé ([voir Installation](/getting-started/installation))
+- Un projet web (HTML, React, Vue ou autre)
+
+---
+
+<Steps>
+
+1. **Charger les tokens CSS**
+
+   Ajoutez les imports CSS en tête de votre feuille de style principale.
+
+   ```css
+   /* styles/global.css */
+   @import "@tdgs/core/tokens/color.css";
+   @import "@tdgs/core/tokens/typography.css";
+   @import "@tdgs/core/tokens/spacing.css";
+   @import "@tdgs/core/tokens/radius.css";
+   @import "@tdgs/core/tokens/shadow.css";
+   @import "@tdgs/core/tokens/motion.css";
+
+   @import "@tdgs/core/components/button/button.css";
+   @import "@tdgs/core/components/input/input.css";
+
+   /* Polices institutionnelles */
+   body {
+     font-family: "Source Sans 3", system-ui, sans-serif;
+     font-size: var(--tdgs-font-size-md);
+     line-height: var(--tdgs-line-height-md);
+     color: var(--tdgs-color-neutral-900);
+     background-color: var(--tdgs-color-neutral-0);
+   }
+   ```
+
+2. **Créer votre première page**
+
+   <Tabs>
+     <TabItem label="HTML">
+       ```html
+       <!doctype html>
+       <html lang="fr">
+       <head>
+         <meta charset="UTF-8">
+         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+         <title>Connexion — Service en ligne</title>
+         <link rel="stylesheet" href="/styles/global.css">
+       </head>
+       <body>
+         <main style="
+           max-width: 480px;
+           margin: var(--tdgs-spacing-16) auto;
+           padding: 0 var(--tdgs-spacing-4);
+         ">
+           <h1 style="
+             font-size: var(--tdgs-font-size-4xl);
+             font-weight: var(--tdgs-font-weight-semibold);
+             margin-bottom: var(--tdgs-spacing-8);
+           ">Connexion</h1>
+
+           <form method="post" action="/login" novalidate>
+
+             <!-- Champ email -->
+             <div class="tdgs-field" style="margin-bottom: var(--tdgs-spacing-5);">
+               <label class="tdgs-field__label" for="email">
+                 Adresse e-mail
+               </label>
+               <input
+                 id="email"
+                 name="email"
+                 type="email"
+                 class="tdgs-input tdgs-input--md"
+                 autocomplete="email"
+                 required
+                 placeholder="votre@email.td"
+                 aria-describedby="email-hint"
+               >
+               <p id="email-hint" class="tdgs-helper-text">
+                 Utilisez l'adresse e-mail liée à votre compte.
+               </p>
+             </div>
+
+             <!-- Champ mot de passe -->
+             <div class="tdgs-field" style="margin-bottom: var(--tdgs-spacing-6);">
+               <label class="tdgs-field__label" for="password">
+                 Mot de passe
+               </label>
+               <input
+                 id="password"
+                 name="password"
+                 type="password"
+                 class="tdgs-input tdgs-input--md"
+                 autocomplete="current-password"
+                 required
+               >
+             </div>
+
+             <!-- Bouton de soumission -->
+             <button type="submit" class="tdgs-button tdgs-button--primary tdgs-button--md">
+               Se connecter
+             </button>
+
+           </form>
+         </main>
+       </body>
+       </html>
+       ```
+     </TabItem>
+     <TabItem label="React">
+       ```tsx
+       import '@tdgs/core/tokens/color.css';
+       import '@tdgs/core/tokens/typography.css';
+       import '@tdgs/core/tokens/spacing.css';
+       import '@tdgs/core/tokens/radius.css';
+       import '@tdgs/core/components/button/button.css';
+       import '@tdgs/core/components/input/input.css';
+
+       export default function LoginPage() {
+         return (
+           <main style={{
+             maxWidth: '480px',
+             margin: 'var(--tdgs-spacing-16) auto',
+             padding: '0 var(--tdgs-spacing-4)',
+           }}>
+             <h1 style={{
+               fontSize: 'var(--tdgs-font-size-4xl)',
+               fontWeight: 'var(--tdgs-font-weight-semibold)',
+               marginBottom: 'var(--tdgs-spacing-8)',
+             }}>
+               Connexion
+             </h1>
+
+             <form method="post" action="/login" noValidate>
+               <div className="tdgs-field" style={{ marginBottom: 'var(--tdgs-spacing-5)' }}>
+                 <label className="tdgs-field__label" htmlFor="email">
+                   Adresse e-mail
+                 </label>
+                 <input
+                   id="email"
+                   name="email"
+                   type="email"
+                   className="tdgs-input tdgs-input--md"
+                   autoComplete="email"
+                   required
+                   placeholder="votre@email.td"
+                   aria-describedby="email-hint"
+                 />
+                 <p id="email-hint" className="tdgs-helper-text">
+                   Utilisez l'adresse e-mail liée à votre compte.
+                 </p>
+               </div>
+
+               <div className="tdgs-field" style={{ marginBottom: 'var(--tdgs-spacing-6)' }}>
+                 <label className="tdgs-field__label" htmlFor="password">
+                   Mot de passe
+                 </label>
+                 <input
+                   id="password"
+                   name="password"
+                   type="password"
+                   className="tdgs-input tdgs-input--md"
+                   autoComplete="current-password"
+                   required
+                 />
+               </div>
+
+               <button
+                 type="submit"
+                 className="tdgs-button tdgs-button--primary tdgs-button--md"
+               >
+                 Se connecter
+               </button>
+             </form>
+           </main>
+         );
+       }
+       ```
+     </TabItem>
+     <TabItem label="Vue 3">
+       ```vue
+       <script setup lang="ts">
+       import '@tdgs/core/tokens/color.css';
+       import '@tdgs/core/tokens/typography.css';
+       import '@tdgs/core/tokens/spacing.css';
+       import '@tdgs/core/tokens/radius.css';
+       import '@tdgs/core/components/button/button.css';
+       import '@tdgs/core/components/input/input.css';
+       </script>
+
+       <template>
+         <main :style="{
+           maxWidth: '480px',
+           margin: 'var(--tdgs-spacing-16) auto',
+           padding: '0 var(--tdgs-spacing-4)',
+         }">
+           <h1 :style="{
+             fontSize: 'var(--tdgs-font-size-4xl)',
+             fontWeight: 'var(--tdgs-font-weight-semibold)',
+             marginBottom: 'var(--tdgs-spacing-8)',
+           }">
+             Connexion
+           </h1>
+
+           <form method="post" action="/login" novalidate>
+             <div class="tdgs-field" style="margin-bottom: var(--tdgs-spacing-5);">
+               <label class="tdgs-field__label" for="email">
+                 Adresse e-mail
+               </label>
+               <input
+                 id="email"
+                 name="email"
+                 type="email"
+                 class="tdgs-input tdgs-input--md"
+                 autocomplete="email"
+                 required
+                 placeholder="votre@email.td"
+                 aria-describedby="email-hint"
+               />
+               <p id="email-hint" class="tdgs-helper-text">
+                 Utilisez l'adresse e-mail liée à votre compte.
+               </p>
+             </div>
+
+             <div class="tdgs-field" style="margin-bottom: var(--tdgs-spacing-6);">
+               <label class="tdgs-field__label" for="password">
+                 Mot de passe
+               </label>
+               <input
+                 id="password"
+                 name="password"
+                 type="password"
+                 class="tdgs-input tdgs-input--md"
+                 autocomplete="current-password"
+                 required
+               />
+             </div>
+
+             <button
+               type="submit"
+               class="tdgs-button tdgs-button--primary tdgs-button--md"
+             >
+               Se connecter
+             </button>
+           </form>
+         </main>
+       </template>
+       ```
+     </TabItem>
+   </Tabs>
+
+3. **Afficher un état d'erreur**
+
+   Les champs TDGS gèrent les états d'erreur via des classes modificatrices.
+
+   ```html
+   <!-- Champ en erreur -->
+   <div class="tdgs-field">
+     <label class="tdgs-field__label" for="email">Adresse e-mail</label>
+     <input
+       id="email"
+       type="email"
+       class="tdgs-input tdgs-input--md tdgs-input--error"
+       aria-invalid="true"
+       aria-describedby="email-error"
+       value="adresse-invalide"
+     >
+     <p id="email-error" class="tdgs-error-text" role="alert">
+       Veuillez saisir une adresse e-mail valide.
+     </p>
+   </div>
+   ```
+
+4. **Utiliser les tokens TypeScript**
+
+   Accédez aux valeurs de tokens dans votre logique applicative.
+
+   ```typescript
+   import { color, spacing, typography } from '@tdgs/core';
+
+   // Dans un système de thème, une génération CSS dynamique
+   // ou des tests de valeurs
+   const palette = {
+     primary: color.blue[500],        // '#0033A0'
+     danger: color.semantic.danger.text,  // '#82160F'
+   };
+
+   const scale = {
+     unit: spacing.px[4],   // 16
+     large: spacing.px[8],  // 32
+   };
+
+   // Vérifier les tailles typographiques
+   const sizes = Object.entries(typography.sizes).map(([name, value]) => ({
+     name,
+     value,
+   }));
+   ```
+
+</Steps>
+
+---
+
+## C'est tout
+
+Vous avez une interface TDGS fonctionnelle. Explorez la suite :
+
+- [Système de couleurs →](/tokens/colors) — Palette complète et sémantique
+- [Composant Button →](/components/button) — Toutes les variantes avec exemples
+- [Composant Input →](/components/input) — Tous les types de champs
+- [Patterns gouvernementaux →](/patterns/overview) — Formulaires et pages types
+
+<Aside type="tip" title="Polices de production">
+  Pour la production, téléchargez et hébergez localement les polices **Source Sans 3**
+  (Google Fonts) et **Noto Naskh Arabic** (Google Fonts) en WOFF2.
+  Ajoutez `font-display: swap` et des subsets par langue pour les meilleures performances.
+</Aside>

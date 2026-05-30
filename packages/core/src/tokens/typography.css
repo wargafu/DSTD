@@ -1,0 +1,87 @@
+/* TDGS typography tokens */
+:root{
+  /* font families */
+  --tdgs-font-family-primary: "Source Sans 3", "Public Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --tdgs-font-family-ar: "Noto Naskh Arabic", "Noto Sans Arabic", system-ui, sans-serif;
+  --tdgs-font-family-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Courier New", monospace;
+
+  /* sizes (rem) */
+  --tdgs-font-size-xs: 0.75rem; /*12px*/
+  --tdgs-font-size-sm: 0.875rem; /*14px*/
+  --tdgs-font-size-md: 1rem; /*16px*/
+  --tdgs-font-size-lg: 1.125rem; /*18px*/
+  --tdgs-font-size-xl: 1.25rem; /*20px*/
+  --tdgs-font-size-2xl: 1.5rem; /*24px*/
+  --tdgs-font-size-3xl: 1.875rem; /*30px*/
+  --tdgs-font-size-4xl: 2.25rem; /*36px*/
+  --tdgs-font-size-5xl: 3rem; /*48px*/
+
+  /* line-heights */
+  --tdgs-line-height-xs: 1.2;
+  --tdgs-line-height-sm: 1.3;
+  --tdgs-line-height-md: 1.5;
+  --tdgs-line-height-lg: 1.5;
+  --tdgs-line-height-xl: 1.35;
+  --tdgs-line-height-2xl: 1.3;
+  --tdgs-line-height-3xl: 1.2;
+  --tdgs-line-height-4xl: 1.15;
+  --tdgs-line-height-5xl: 1.1;
+
+  /* weights */
+  --tdgs-font-weight-light: 300;
+  --tdgs-font-weight-regular: 400;
+  --tdgs-font-weight-medium: 500;
+  --tdgs-font-weight-semibold: 600;
+  --tdgs-font-weight-bold: 700;
+  --tdgs-font-weight-xbold: 800;
+
+  /* text style snippets (font-size + line-height + weight) */
+  --tdgs-text-display-size: var(--tdgs-font-size-5xl);
+  --tdgs-text-display-line-height: var(--tdgs-line-height-5xl);
+  --tdgs-text-display-weight: var(--tdgs-font-weight-semibold);
+
+  --tdgs-text-page-title-size: var(--tdgs-font-size-4xl);
+  --tdgs-text-page-title-line-height: var(--tdgs-line-height-4xl);
+  --tdgs-text-page-title-weight: var(--tdgs-font-weight-semibold);
+
+  --tdgs-text-section-title-size: var(--tdgs-font-size-2xl);
+  --tdgs-text-section-title-line-height: var(--tdgs-line-height-2xl);
+  --tdgs-text-section-title-weight: var(--tdgs-font-weight-semibold);
+
+  --tdgs-text-subsection-title-size: var(--tdgs-font-size-xl);
+  --tdgs-text-subsection-title-line-height: var(--tdgs-line-height-xl);
+  --tdgs-text-subsection-title-weight: var(--tdgs-font-weight-medium);
+
+  --tdgs-text-body-large-size: var(--tdgs-font-size-lg);
+  --tdgs-text-body-large-line-height: var(--tdgs-line-height-lg);
+  --tdgs-text-body-large-weight: var(--tdgs-font-weight-regular);
+
+  --tdgs-text-body-size: var(--tdgs-font-size-md);
+  --tdgs-text-body-line-height: var(--tdgs-line-height-md);
+  --tdgs-text-body-weight: var(--tdgs-font-weight-regular);
+
+  --tdgs-text-body-small-size: var(--tdgs-font-size-sm);
+  --tdgs-text-body-small-line-height: var(--tdgs-line-height-sm);
+  --tdgs-text-body-small-weight: var(--tdgs-font-weight-regular);
+
+  --tdgs-text-caption-size: var(--tdgs-font-size-xs);
+  --tdgs-text-caption-line-height: var(--tdgs-line-height-xs);
+  --tdgs-text-caption-weight: var(--tdgs-font-weight-regular);
+
+  --tdgs-text-label-size: var(--tdgs-font-size-sm);
+  --tdgs-text-label-line-height: var(--tdgs-line-height-sm);
+  --tdgs-text-label-weight: var(--tdgs-font-weight-semibold);
+
+  --tdgs-text-button-size: var(--tdgs-font-size-md);
+  --tdgs-text-button-line-height: var(--tdgs-line-height-md);
+  --tdgs-text-button-weight: var(--tdgs-font-weight-semibold);
+
+  --tdgs-text-link-size: var(--tdgs-font-size-md);
+  --tdgs-text-link-line-height: var(--tdgs-line-height-md);
+  --tdgs-text-link-weight: var(--tdgs-font-weight-medium);
+}
+
+/* RTL / Arabic usage helper */
+:root[lang="ar"], :root:lang(ar) {
+  --tdgs-default-line-height-ar: 1.6; /* recommend slightly larger line-height for Arabic */
+}

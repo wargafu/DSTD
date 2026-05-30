@@ -1,0 +1,58 @@
+---
+title: Patterns gouvernementaux
+description: Patterns d'interface récurrents pour les services numériques de l'État du Tchad.
+sidebar:
+  order: 1
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+# Patterns gouvernementaux
+
+Les patterns sont des **solutions standardisées** à des problèmes d'interface récurrents.
+Ils combinent les tokens et composants TDGS en structures prêtes à l'emploi.
+
+---
+
+## Pourquoi des patterns ?
+
+Sans patterns partagés, chaque équipe réinvente :
+- Le formulaire de connexion
+- La page d'erreur
+- La confirmation d'action
+
+Le résultat : des interfaces incohérentes qui désorientent les citoyens
+qui naviguent entre plusieurs services de l'État.
+
+---
+
+## Patterns disponibles
+
+<CardGrid>
+  <Card title="Formulaire de connexion" icon="right-arrow">
+    Email + mot de passe, avec gestion des erreurs et lien de récupération.
+    [Voir le pattern →](/patterns/login-form)
+  </Card>
+  <Card title="Formulaire multi-étapes" icon="list-format">
+    Parcours guidé en plusieurs étapes avec barre de progression.
+    [Voir le pattern →](/patterns/multi-step-form)
+  </Card>
+  <Card title="Résumé d'erreurs" icon="warning">
+    Page ou section récapitulant toutes les erreurs d'un formulaire.
+    [Voir le pattern →](/patterns/error-summary)
+  </Card>
+  <Card title="Page de confirmation" icon="approve-check">
+    Confirmation de soumission d'une demande ou d'un acte administratif.
+    [Voir le pattern →](/patterns/confirmation-page)
+  </Card>
+</CardGrid>
+
+---
+
+## Principes des patterns TDGS
+
+1. **HTML-first** — chaque pattern fonctionne sans JavaScript
+2. **Accessible par défaut** — WCAG AA respecté dans chaque pattern
+3. **Mobile-first** — conçus pour fonctionner sur écran 320px
+4. **Institutionnel** — sobre, sans effets superflus
+5. **Complet** — chaque pattern inclut les états d'erreur

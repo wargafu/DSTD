@@ -1,0 +1,37 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "pipeline": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**"]
+    },
+    "clean": {
+      "cache": false
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "typecheck": {
+      "dependsOn": ["^build"],
+      "outputs": []
+    },
+    "lint": {
+      "outputs": []
+    },
+    "format": {
+      "outputs": []
+    },
+    "validate": {
+      "dependsOn": ["build"],
+      "outputs": []
+    },
+    "validate:exports": {
+      "dependsOn": ["build"],
+      "outputs": []
+    },
+    "validate:tokens": {
+      "outputs": []
+    }
+  }
+}

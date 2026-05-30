@@ -1,0 +1,464 @@
+/* ═══════════════════════════════════════════════════════════════
+   TDGS Documentation — Charte officielle
+   Basé sur l'inspection du vrai système de variables Starlight 0.32
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ─── 1. Polices institutionnelles ──────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* ─── 2. Polices — variables correctes Starlight ────────────── */
+/* Starlight lit --sl-font et --sl-font-mono, PAS --sl-font-system */
+:root {
+  --sl-font:      "Source Sans 3", "Public Sans", system-ui, -apple-system, sans-serif;
+  --sl-font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+/* ─── 3. Header bleu TDGS — GLOBAL (dark + light) ───────────── */
+:root {
+  --sl-color-bg-nav: #0033a0;
+}
+
+/* ─── 4. MODE SOMBRE (défaut :root dans Starlight) ───────────── */
+/*
+   RÈGLE : gray-1 = texte clair, gray-6 = surface sombre, black = fond page
+   white = texte le plus clair (blanc pur)
+*/
+:root {
+  --sl-color-accent-low:  #001647;   /* bleu très sombre pour surfaces */
+  --sl-color-accent:      #6b94ff;   /* blue.300 — lisible sur fond sombre */
+  --sl-color-accent-high: #d9e3ff;   /* blue.100 — texte accentué clair */
+
+  --sl-color-white:  #ffffff;        /* texte pur blanc */
+  --sl-color-gray-1: #f3f4f6;        /* neutral.100 — texte principal clair */
+  --sl-color-gray-2: #e5e7eb;        /* neutral.200 */
+  --sl-color-gray-3: #9ca3af;        /* neutral.400 — texte secondaire */
+  --sl-color-gray-4: #4b5563;        /* neutral.600 */
+  --sl-color-gray-5: #1f2937;        /* neutral.800 — surfaces sombres */
+  --sl-color-gray-6: #111827;        /* surface très sombre */
+  --sl-color-black:  #0b1220;        /* neutral.900 — fond de page */
+}
+
+/* ─── 5. MODE CLAIR ──────────────────────────────────────────── */
+/*
+   RÈGLE INVERSÉE : gray-1 = texte sombre, gray-6 = surface claire, black = fond blanc
+   white = #0b1220 (texte quasi-noir sur fond blanc) ← NOM TROMPEUR STARLIGHT
+*/
+:root[data-theme='light'],
+[data-theme='light'] ::backdrop {
+  --sl-color-accent-low:  #d9e3ff;   /* blue.100 — fond accentué subtil */
+  --sl-color-accent:      #0033a0;   /* blue.500 — primaire TDGS */
+  --sl-color-accent-high: #002063;   /* blue.700 — texte accentué fort */
+
+  /* IMPORTANT : en mode clair Starlight, "white" = couleur de TEXTE (sombre),
+     "black" = couleur de FOND (blanc). Nommage inversé intentionnel. */
+  --sl-color-white:  #0b1220;        /* texte sombre (neutral.900) */
+  --sl-color-gray-1: #0b1220;        /* neutral.900 — texte principal */
+  --sl-color-gray-2: #1f2937;        /* neutral.800 */
+  --sl-color-gray-3: #4b5563;        /* neutral.600 — texte secondaire */
+  --sl-color-gray-4: #9ca3af;        /* neutral.400 */
+  --sl-color-gray-5: #e5e7eb;        /* neutral.200 — bordures */
+  --sl-color-gray-6: #f3f4f6;        /* neutral.100 — surfaces claires */
+  --sl-color-gray-7: #ffffff;        /* neutral.0 — blanc pur */
+  --sl-color-black:  #ffffff;        /* fond de page blanc */
+}
+
+/* ─── 6. Header — texte blanc forcé sur fond bleu ───────────── */
+/*
+   En mode clair, --sl-color-white devient #0b1220 (sombre).
+   Le header étant bleu (#0033a0), on force le texte blanc.
+*/
+header.header {
+  background-color: #0033a0 !important;
+  border-bottom: 1px solid #002b89;
+}
+
+header.header .site-title,
+header.header .site-title *,
+[data-theme='light'] header.header .site-title,
+[data-theme='light'] header.header .site-title * {
+  color: #ffffff !important;
+}
+
+header.header starlight-theme-select button,
+header.header a[href*='github.com'],
+[data-theme='light'] header.header starlight-theme-select button,
+[data-theme='light'] header.header a[href*='github.com'] {
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+
+header.header starlight-theme-select button:hover,
+header.header a[href*='github.com']:hover {
+  color: #ffffff !important;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 4px;
+}
+
+/* Bouton menu mobile */
+header.header .sl-menu-button button,
+[data-theme='light'] header.header .sl-menu-button button {
+  color: #ffffff !important;
+}
+
+/* ─── 7. Bandeau drapeau tchadien ────────────────────────────── */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(
+    to right,
+    #0033a0  0%     33.33%,
+    #ffd100  33.33% 66.66%,
+    #da291c  66.66% 100%
+  );
+  z-index: calc(var(--sl-z-index-navbar) + 1);
+  pointer-events: none;
+}
+
+/* ─── 8. Sidebar ─────────────────────────────────────────────── */
+/* Page active dans la sidebar */
+.sidebar-content a[aria-current='page'],
+[data-theme='light'] .sidebar-content a[aria-current='page'] {
+  background: #d9e3ff !important;   /* blue.100 */
+  color: #0033a0 !important;
+  font-weight: 600;
+}
+
+:root .sidebar-content a[aria-current='page'] {
+  background: #001647 !important;   /* accent-low dark mode */
+  color: #6b94ff !important;
+  font-weight: 600;
+}
+
+/* ─── 9. Tableaux — style institutionnel ─────────────────────── */
+.sl-markdown-content table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9375rem;
+  margin: 1.5rem 0;
+}
+
+.sl-markdown-content thead th {
+  background: #0033a0;
+  color: #ffffff;
+  font-weight: 600;
+  padding: 0.625rem 0.875rem;
+  text-align: left;
+  font-size: 0.875rem;
+}
+
+.sl-markdown-content tbody tr:nth-child(even) {
+  background: var(--sl-color-gray-6);
+}
+
+.sl-markdown-content tbody td {
+  padding: 0.5rem 0.875rem;
+  border-bottom: 1px solid var(--sl-color-gray-5);
+  vertical-align: top;
+  line-height: 1.55;
+}
+
+.sl-markdown-content tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* ─── 10. Liens ──────────────────────────────────────────────── */
+:root[data-theme='light'] .sl-markdown-content a:not([class]) {
+  color: #0033a0;
+  text-decoration-color: #a6c1ff;
+}
+
+:root[data-theme='light'] .sl-markdown-content a:not([class]):hover {
+  color: #002b89;
+  text-decoration-color: #0033a0;
+}
+
+:root .sl-markdown-content a:not([class]),
+:root:not([data-theme='light']) .sl-markdown-content a:not([class]) {
+  color: #6b94ff;
+  text-decoration-color: #002b89;
+}
+
+/* ─── 11. Code inline ────────────────────────────────────────── */
+:root[data-theme='light'] .sl-markdown-content code:not(pre code) {
+  background: #f3f4f6;
+  border: 1px solid #e5e7eb;
+  color: #0033a0;
+}
+
+:root .sl-markdown-content code:not(pre code) {
+  color: #6b94ff;
+}
+
+.sl-markdown-content code:not(pre code) {
+  font-family: var(--sl-font-mono);
+  font-size: 0.875em;
+  border-radius: 3px;
+  padding: 0.1em 0.4em;
+}
+
+/* ─── 12. Composants doc TDGS ────────────────────────────────── */
+
+/* Grille de swatches couleurs */
+.tdgs-color-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+  gap: 0.75rem;
+  margin: 1.5rem 0;
+}
+
+.tdgs-color-swatch {
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid var(--sl-color-gray-5);
+  transition: box-shadow 120ms ease;
+}
+
+.tdgs-color-swatch:hover {
+  box-shadow: 0 2px 8px rgba(0, 51, 160, 0.2);
+}
+
+.tdgs-color-swatch__preview {
+  height: 3.5rem;
+  width: 100%;
+}
+
+.tdgs-color-swatch__info {
+  padding: 0.5rem 0.625rem;
+  background: var(--sl-color-black);
+}
+
+.tdgs-color-swatch__name {
+  font-weight: 600;
+  font-size: 0.8125rem;
+  display: block;
+}
+
+.tdgs-color-swatch__value {
+  font-family: var(--sl-font-mono);
+  font-size: 0.75rem;
+  color: var(--sl-color-gray-3);
+}
+
+/* Cartes Do / Don't */
+.tdgs-do-dont {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+@media (max-width: 640px) {
+  .tdgs-do-dont { grid-template-columns: 1fr; }
+}
+
+.tdgs-do-dont__card {
+  border-radius: 6px;
+  padding: 1rem 1rem 1rem 1.25rem;
+  border: 1px solid;
+  border-inline-start-width: 4px;
+}
+
+/* Light mode */
+:root[data-theme='light'] .tdgs-do-dont__card--do {
+  border-color: #a8e9c7;
+  border-left-color: #006b3c;
+  background: #f0fbf5;
+}
+:root[data-theme='light'] .tdgs-do-dont__card--dont {
+  border-color: #ffb0ad;
+  border-left-color: #da291c;
+  background: #fff2f1;
+}
+:root[data-theme='light'] .tdgs-do-dont__card--do .tdgs-do-dont__heading   { color: #006b3c; }
+:root[data-theme='light'] .tdgs-do-dont__card--dont .tdgs-do-dont__heading { color: #b21f16; }
+
+/* Dark mode */
+:root .tdgs-do-dont__card--do {
+  border-color: #004224;
+  border-left-color: #38c07f;
+  background: rgba(0, 107, 60, 0.12);
+}
+:root .tdgs-do-dont__card--dont {
+  border-color: #560e08;
+  border-left-color: #ff665d;
+  background: rgba(218, 41, 28, 0.12);
+}
+:root .tdgs-do-dont__card--do .tdgs-do-dont__heading   { color: #6fd8a1; }
+:root .tdgs-do-dont__card--dont .tdgs-do-dont__heading { color: #ff8a83; }
+
+.tdgs-do-dont__heading {
+  font-weight: 700;
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.625rem;
+}
+
+.tdgs-do-dont__card ul {
+  margin: 0;
+  padding-inline-start: 1.25rem;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+
+/* Aperçu des composants */
+.tdgs-preview {
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 6px;
+  overflow: hidden;
+  margin: 1.5rem 0;
+}
+
+.tdgs-preview__stage {
+  padding: 2rem 1.5rem;
+  background: var(--sl-color-black);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.tdgs-preview__label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--sl-color-gray-3);
+  padding: 0.375rem 0.875rem;
+  background: var(--sl-color-gray-6);
+  border-top: 1px solid var(--sl-color-gray-5);
+}
+
+/* ─── 13. Preview boutons TDGS ───────────────────────────────── */
+.tdgs-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--sl-font);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none !important;
+  line-height: 1.5;
+  transition: background-color 120ms ease, border-color 120ms ease;
+  white-space: nowrap;
+}
+.tdgs-button:focus-visible {
+  outline: 2px solid #0033a0;
+  outline-offset: 3px;
+}
+.tdgs-button--sm { font-size: 0.875rem; padding: 0.375rem 0.75rem;  min-height: 2.75rem; }
+.tdgs-button--md { font-size: 1rem;     padding: 0.75rem 1rem;       min-height: 2.75rem; }
+.tdgs-button--lg { font-size: 1.125rem; padding: 0.875rem 1.25rem;   min-height: 2.75rem; }
+
+.tdgs-button--primary  { background:#0033a0; color:#fff; border-color:#0033a0; }
+.tdgs-button--primary:hover  { background:#002b89; border-color:#002b89; }
+
+.tdgs-button--secondary { background:#fff; color:#1f2937; border-color:#d1d5db; }
+.tdgs-button--secondary:hover { background:#f3f4f6; border-color:#9ca3af; }
+
+.tdgs-button--tertiary { background:transparent; color:#1f2937; border-color:transparent; }
+.tdgs-button--tertiary:hover { background:#f3f4f6; }
+
+.tdgs-button--danger { background:#da291c; color:#fff; border-color:#da291c; }
+.tdgs-button--danger:hover { background:#b21f16; border-color:#b21f16; }
+
+.tdgs-button--success { background:#006b3c; color:#fff; border-color:#006b3c; }
+.tdgs-button--success:hover { background:#005b32; border-color:#005b32; }
+
+/* Dark mode adjustments for button previews */
+:root .tdgs-button--secondary { background:#1f2937; color:#f3f4f6; border-color:#374151; }
+:root .tdgs-button--secondary:hover { background:#374151; }
+:root .tdgs-button--tertiary { color:#e5e7eb; }
+:root .tdgs-button--tertiary:hover { background:#1f2937; }
+
+/* ─── 14. Preview champs de formulaire TDGS ──────────────────── */
+.tdgs-field__label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.tdgs-input,
+.tdgs-textarea,
+.tdgs-select {
+  display: block;
+  width: 100%;
+  font-family: var(--sl-font);
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 4px;
+  background: var(--sl-color-black);
+  color: var(--sl-color-gray-1);
+  outline: none;
+  transition: border-color 120ms ease;
+}
+.tdgs-input:focus,
+.tdgs-textarea:focus,
+.tdgs-select:focus {
+  border-color: #0033a0;
+  outline: 2px solid #0033a0;
+  outline-offset: 2px;
+}
+:root[data-theme='light'] .tdgs-input:focus,
+:root[data-theme='light'] .tdgs-textarea:focus {
+  border-color: #0033a0;
+}
+:root .tdgs-input:focus,
+:root .tdgs-textarea:focus {
+  border-color: #6b94ff;
+  outline-color: #6b94ff;
+}
+
+.tdgs-input--sm { font-size:0.875rem; padding:0.5rem 0.75rem;   min-height:2.75rem; }
+.tdgs-input--md { font-size:1rem;     padding:0.75rem 1rem;      min-height:2.75rem; }
+.tdgs-input--lg { font-size:1.125rem; padding:0.875rem 1.25rem;  min-height:3.25rem; }
+
+.tdgs-input--error  { border-color: #da291c !important; }
+.tdgs-input--success { border-color: #006b3c !important; }
+
+.tdgs-helper-text { font-size:0.875rem; color:var(--sl-color-gray-3); margin-top:0.25rem; }
+.tdgs-error-text  { font-size:0.875rem; color:#b21f16; margin-top:0.25rem; font-weight:500; }
+
+:root .tdgs-error-text { color: #ff8a83; }
+
+/* Checkbox / radio / switch dans les previews */
+.tdgs-checkbox,
+.tdgs-radio,
+.tdgs-switch {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  margin-bottom: 0.375rem;
+}
+
+/* Visualiseur d'espacement */
+.tdgs-spacing-bar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 0.25rem 0;
+}
+
+.tdgs-spacing-bar__visual {
+  background: var(--sl-color-accent);
+  opacity: 0.3;
+  height: 1rem;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.tdgs-spacing-bar__label {
+  font-size: 0.8125rem;
+  color: var(--sl-color-gray-3);
+  font-family: var(--sl-font-mono);
+}

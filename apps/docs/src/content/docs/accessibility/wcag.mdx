@@ -1,0 +1,200 @@
+---
+title: Principes WCAG
+description: Guide d'accessibilité TDGS — WCAG 2.1 AA simplifié pour les services gouvernementaux.
+sidebar:
+  order: 1
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+# Accessibilité — Principes WCAG 2.1 AA
+
+Les services numériques de l'État du Tchad doivent être accessibles à **tous les citoyens**,
+indépendamment de leurs capacités visuelles, motrices, auditives ou cognitives.
+
+TDGS implémente WCAG 2.1 niveau AA par défaut.
+
+<Aside type="tip" title="Standard de référence">
+  Le niveau **AA** est le standard minimum pour les services publics numériques.
+  Il couvre environ 80% des besoins des personnes handicapées.
+  Le niveau AAA est souhaitable mais pas requis pour toute l'interface.
+</Aside>
+
+---
+
+## Les 4 principes POUR
+
+### P — Perceptible
+L'information doit être présentable de manière perceptible par tous.
+
+**Règles clés :**
+- Tout contenu non-textuel (images, icônes) a un texte alternatif `alt`
+- Les vidéos ont des sous-titres
+- Le contenu ne dépend pas d'une couleur seule pour transmettre une information
+- Le texte peut être agrandi jusqu'à 200% sans perte de contenu
+- Le contraste texte/fond est ≥ 4.5:1 (normal) ou ≥ 3:1 (grand texte ≥ 18px bold)
+
+**Dans TDGS :**
+```html
+<!-- Icône avec texte alternatif -->
+<img src="/icons/info.svg" alt="Information" width="16" height="16">
+
+<!-- Icône décorative — masquée pour les AT -->
+<svg aria-hidden="true" focusable="false">...</svg>
+
+<!-- Erreur — couleur + icône + texte (pas seulement la couleur rouge) -->
+<p class="tdgs-error-text" role="alert">
+  <svg aria-hidden="true">...</svg> <!-- Icône d'erreur -->
+  Ce champ est requis.
+</p>
+```
+
+---
+
+### O — Opérable
+Les composants d'interface doivent être utilisables.
+
+**Règles clés :**
+- Toute fonctionnalité est accessible au clavier (pas de souris obligatoire)
+- Le focus est visible en permanence
+- Pas de délai de session trop court sans avertissement
+- Les contenus en mouvement peuvent être mis en pause
+- Les utilisateurs ont assez de temps pour compléter les actions
+
+**Dans TDGS :**
+```css
+/* Focus obligatoire — jamais supprimer outline sans alternative */
+:focus-visible {
+  outline: 2px solid var(--tdgs-color-blue-500);
+  outline-offset: 3px;
+}
+
+/* INTERDIT en production TDGS */
+*:focus { outline: none; } /* ← supprime le focus pour tous les utilisateurs */
+```
+
+---
+
+### C — Compréhensible
+L'information et le fonctionnement de l'interface doivent être compréhensibles.
+
+**Règles clés :**
+- La langue de la page est définie (`lang="fr"`)
+- Les messages d'erreur expliquent comment corriger le problème
+- Les formulaires ont des labels clairs
+- La navigation est cohérente entre les pages
+
+**Dans TDGS :**
+```html
+<!-- Langue déclarée -->
+<html lang="fr">
+
+<!-- Message d'erreur actionnable -->
+<p role="alert">
+  <!-- ✅ Explique le problème ET la correction -->
+  L'adresse e-mail doit contenir un symbole @ suivi d'un nom de domaine.
+  Exemple valide : contact@ministere.td
+</p>
+
+<!-- ❌ Message vague à éviter -->
+<p role="alert">Erreur de saisie.</p>
+```
+
+---
+
+### R — Robuste
+Le contenu doit être suffisamment robuste pour être interprété par les technologies d'assistance.
+
+**Règles clés :**
+- Le HTML est valide et bien formé
+- Les éléments interactifs ont des rôles, états et propriétés ARIA corrects
+- Les mises à jour dynamiques sont annoncées via des live regions
+
+**Dans TDGS :**
+```html
+<!-- Rôles ARIA corrects -->
+<button type="button" aria-pressed="false">Filtrer</button>
+<input type="checkbox" role="switch" aria-checked="false">
+
+<!-- Live region pour les messages dynamiques -->
+<div role="status" aria-live="polite" aria-atomic="true">
+  <!-- Les messages injectés ici sont annoncés aux lecteurs d'écran -->
+</div>
+
+<div role="alert" aria-live="assertive">
+  <!-- Pour les erreurs critiques nécessitant attention immédiate -->
+</div>
+```
+
+---
+
+## Critères AA essentiels pour TDGS
+
+| Critère | Niveau | Description |
+|---|---|---|
+| 1.1.1 Contenu non textuel | A | Alt text pour images et icônes |
+| 1.3.1 Information et relations | A | Structure HTML sémantique |
+| 1.3.3 Caractéristiques sensorielles | A | Ne pas utiliser uniquement la couleur |
+| 1.4.1 Utilisation de la couleur | A | Couleur + autre indicateur pour les états |
+| 1.4.3 Contraste (minimum) | AA | ≥ 4.5:1 texte normal, ≥ 3:1 grand texte |
+| 1.4.4 Redimensionnement du texte | AA | Zoom 200% sans perte de fonctionnalité |
+| 1.4.10 Reflow | AA | Pas de défilement horizontal à 320px |
+| 1.4.11 Contraste des composants | AA | ≥ 3:1 pour les éléments UI |
+| 2.1.1 Clavier | A | Tout accessible au clavier |
+| 2.4.3 Ordre du focus | A | Focus cohérent et logique |
+| 2.4.7 Focus visible | AA | Focus toujours visible |
+| 3.1.1 Langue de la page | A | `lang` déclaré |
+| 3.2.2 À la saisie | A | Pas de changement inattendu au focus |
+| 3.3.1 Identification des erreurs | A | Erreurs identifiées et décrites |
+| 3.3.2 Étiquettes ou instructions | A | Labels explicites |
+| 4.1.2 Nom, rôle, valeur | A | ARIA correct sur tous les composants |
+| 4.1.3 Messages de statut | AA | Annonces via live regions |
+
+---
+
+## Tester l'accessibilité
+
+### Outils automatiques (première étape)
+
+```bash
+# axe-core en ligne de commande
+npx axe https://mon-service.td
+
+# Lighthouse accessibility audit
+npx lighthouse https://mon-service.td --only-categories=accessibility
+```
+
+### Test clavier manuel (obligatoire)
+
+1. **Tab** — naviguer entre les éléments focusables
+2. **Shift + Tab** — naviguer en sens inverse
+3. **Enter / Espace** — activer boutons et checkboxes
+4. **Flèches** — naviguer dans les groupes radio et menus
+5. **Escape** — fermer modales et popups
+
+Vérifier que :
+- Le focus ne "disparaît" jamais
+- L'ordre du focus est logique (haut → bas, gauche → droite)
+- Les modales piègent le focus à l'intérieur pendant qu'elles sont ouvertes
+
+### Lecteur d'écran (test recommandé)
+
+- **Windows** : NVDA (gratuit) + Firefox
+- **macOS** : VoiceOver intégré + Safari
+- **iOS** : VoiceOver intégré
+- **Android** : TalkBack intégré
+
+---
+
+## Ratios de contraste TDGS
+
+| Utilisation | Couleur texte | Couleur fond | Ratio | Standard |
+|---|---|---|---|---|
+| Corps de texte | `neutral.800` | `neutral.0` | 14.2:1 | ✅ AAA |
+| Texte secondaire | `neutral.600` | `neutral.0` | 7.5:1 | ✅ AAA |
+| Bouton primary | blanc | `blue.500` | 8.59:1 | ✅ AAA |
+| Bouton danger | blanc | `red.500` | 5.1:1 | ✅ AA |
+| Bouton success | blanc | `green.500` | 7.2:1 | ✅ AA |
+| Erreur | `red.700` | `red.50` | 7.2:1 | ✅ AA |
+| Avertissement | `neutral.900` | `yellow.50` | 16.4:1 | ✅ AAA |
+| Placeholder | `neutral.500` | `neutral.0` | 4.6:1 | ✅ AA |

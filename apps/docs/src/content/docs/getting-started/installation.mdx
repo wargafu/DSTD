@@ -1,0 +1,206 @@
+---
+title: Installation
+description: Ajouter @tdgs/core à votre projet — npm, pnpm, yarn ou CDN.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem, Aside, Steps } from '@astrojs/starlight/components';
+
+# Installation
+
+`@tdgs/core` est disponible sur npm. Choisissez votre gestionnaire de paquets.
+
+## Gestionnaire de paquets
+
+<Tabs>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @tdgs/core
+    ```
+  </TabItem>
+  <TabItem label="npm">
+    ```bash
+    npm install @tdgs/core
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @tdgs/core
+    ```
+  </TabItem>
+</Tabs>
+
+<Aside type="note" title="Version Node.js">
+  TDGS nécessite Node.js 18 ou supérieur. Le package utilise les modules ES natifs (`"type": "module"`).
+</Aside>
+
+---
+
+## Importer les tokens CSS
+
+La manière la plus simple est d'importer les CSS custom properties directement.
+Elles sont disponibles pour chaque système de tokens.
+
+```css
+/* Importer tous les tokens (recommandé pour démarrer) */
+@import "@tdgs/core/tokens/color.css";
+@import "@tdgs/core/tokens/typography.css";
+@import "@tdgs/core/tokens/spacing.css";
+@import "@tdgs/core/tokens/radius.css";
+@import "@tdgs/core/tokens/shadow.css";
+@import "@tdgs/core/tokens/motion.css";
+@import "@tdgs/core/tokens/z-index.css";
+```
+
+Après import, toutes les variables CSS `--tdgs-*` sont disponibles globalement.
+
+```css
+/* Utilisation directe */
+.mon-composant {
+  color: var(--tdgs-color-blue-500);
+  padding: var(--tdgs-spacing-4);
+  border-radius: var(--tdgs-radius-sm);
+}
+```
+
+---
+
+## Importer les styles composants
+
+Importez les CSS des composants que vous utilisez.
+
+```css
+/* Bouton */
+@import "@tdgs/core/components/button/button.css";
+
+/* Champs de formulaire */
+@import "@tdgs/core/components/input/input.css";
+```
+
+---
+
+## Importer les tokens TypeScript
+
+Pour accéder aux valeurs de tokens dans votre code TypeScript/JavaScript :
+
+```typescript
+// Importer les tokens individuellement
+import { color } from '@tdgs/core/tokens';
+import { typography } from '@tdgs/core/tokens';
+import { spacing } from '@tdgs/core/tokens';
+
+// Ou tout importer depuis la racine
+import { color, typography, spacing, radius, shadow, motion } from '@tdgs/core';
+
+// Utiliser les tokens
+const primaryBlue = color.blue[500];    // '#0033A0'
+const bodySize = typography.sizes.md;   // '1rem'
+const gap = spacing.scale[4];           // '1rem' (16px)
+```
+
+---
+
+## Importer les types TypeScript
+
+```typescript
+import type { ColorTokens } from '@tdgs/core/tokens';
+import type { ButtonVariant, ButtonSize } from '@tdgs/core/components/button';
+import type { InputVariant, InputSize, InputState } from '@tdgs/core/components/input';
+```
+
+---
+
+## Import JSON (Style Dictionary / Figma)
+
+Les tokens sont aussi disponibles en JSON pour l'intégration avec Style Dictionary,
+les plugins Figma ou d'autres outils de design.
+
+```javascript
+import colorJson from '@tdgs/core/tokens/color.json' assert { type: 'json' };
+// ou en CommonJS
+const colorJson = require('@tdgs/core/tokens/color.json');
+```
+
+---
+
+## Installation sans bundler (CDN / HTML pur)
+
+Pour utiliser TDGS sans outil de build, copiez les fichiers CSS dans votre projet
+ou pointez vers un CDN auto-hébergé.
+
+```html
+<!doctype html>
+<html lang="fr">
+<head>
+  <!-- Polices institutionnelles -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Tokens TDGS (depuis votre serveur) -->
+  <link rel="stylesheet" href="/assets/tdgs/tokens/color.css">
+  <link rel="stylesheet" href="/assets/tdgs/tokens/typography.css">
+  <link rel="stylesheet" href="/assets/tdgs/tokens/spacing.css">
+  <link rel="stylesheet" href="/assets/tdgs/tokens/radius.css">
+  <link rel="stylesheet" href="/assets/tdgs/tokens/shadow.css">
+  <link rel="stylesheet" href="/assets/tdgs/tokens/motion.css">
+  <link rel="stylesheet" href="/assets/tdgs/tokens/z-index.css">
+
+  <!-- Composants TDGS -->
+  <link rel="stylesheet" href="/assets/tdgs/components/button/button.css">
+  <link rel="stylesheet" href="/assets/tdgs/components/input/input.css">
+</head>
+```
+
+<Aside type="tip" title="Self-hosting des polices">
+  En production, hébergez les fichiers WOFF2 de **Source Sans 3** et **Noto Naskh Arabic**
+  sur vos propres serveurs. Cela évite les requêtes vers Google Fonts et garantit
+  la disponibilité en environnements réseau restreints (intranet gouvernemental).
+</Aside>
+
+---
+
+## Vérification de l'installation
+
+Après installation, vérifiez que les tokens CSS sont bien chargés dans le navigateur :
+
+```javascript
+// Dans la console du navigateur
+getComputedStyle(document.documentElement)
+  .getPropertyValue('--tdgs-color-blue-500')
+// Doit retourner : ' #0033A0'
+```
+
+---
+
+## Arborescence du package publié
+
+```
+@tdgs/core/
+├── dist/
+│   ├── index.js              — Point d'entrée principal (ESM)
+│   ├── index.d.ts            — Types TypeScript
+│   ├── tokens/
+│   │   ├── index.js          — Barrel tokens
+│   │   ├── color.js + color.d.ts + color.css + color.json
+│   │   ├── typography.*
+│   │   ├── spacing.*
+│   │   ├── radius.*
+│   │   ├── shadow.*
+│   │   ├── motion.*
+│   │   └── z-index.*
+│   └── components/
+│       ├── button/
+│       │   ├── index.js + index.d.ts
+│       │   ├── button.tokens.js + button.tokens.d.ts
+│       │   ├── button.tokens.json
+│       │   └── button.css
+│       └── input/
+│           └── (même structure)
+```
+
+---
+
+## Prochaine étape
+
+Construisez votre première interface avec le [Démarrage rapide →](/getting-started/quick-start)

@@ -1,0 +1,99 @@
+---
+title: Card
+description: Composant Card TDGS — surfaces de contenu groupé pour portails et tableaux de bord.
+sidebar:
+  order: 5
+---
+
+# Card
+
+Les cards regroupent du contenu lié dans une surface visuellement délimitée.
+Elles structurent les portails citoyens, tableaux de bord et listes de services.
+
+## Importation
+
+```css
+@import "@tdgs/core/components/card/card.css";
+```
+
+---
+
+## Structure de base
+
+```html
+<div class="tdgs-card">
+  <div class="tdgs-card__header">
+    <h3 class="tdgs-card__title">Demande de carte d'identité</h3>
+  </div>
+  <div class="tdgs-card__body">
+    <p class="tdgs-card__subtitle">Déposée le 15 janvier 2024</p>
+    <p class="tdgs-card__description">
+      Votre demande est en cours de traitement par la préfecture de N'Djamena.
+    </p>
+  </div>
+  <div class="tdgs-card__footer">
+    <span class="tdgs-badge tdgs-badge--warning">En cours</span>
+    <a href="/dossier/001234" class="tdgs-link tdgs-link--standalone">Voir le dossier</a>
+  </div>
+</div>
+```
+
+---
+
+## Variantes
+
+```html
+<!-- Plate (défaut) -->
+<div class="tdgs-card tdgs-card--flat">...</div>
+
+<!-- Avec ombre -->
+<div class="tdgs-card tdgs-card--elevated">...</div>
+
+<!-- Avec bordure renforcée -->
+<div class="tdgs-card tdgs-card--outlined">...</div>
+```
+
+---
+
+## Card interactive (lien)
+
+```html
+<a href="/service/cni" class="tdgs-card tdgs-card--elevated">
+  <div class="tdgs-card__body">
+    <h3 class="tdgs-card__title">Carte nationale d'identité</h3>
+    <p class="tdgs-card__description">
+      Demandez ou renouvelez votre carte d'identité en ligne.
+    </p>
+  </div>
+  <div class="tdgs-card__footer">
+    <span class="tdgs-link tdgs-link--standalone">Faire une demande</span>
+  </div>
+</a>
+```
+
+---
+
+## Grille de cards
+
+```html
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:var(--tdgs-spacing-5);">
+  <div class="tdgs-card tdgs-card--elevated">
+    <div class="tdgs-card__body">
+      <h3 class="tdgs-card__title">État civil</h3>
+      <p class="tdgs-card__description">Actes de naissance, mariage, décès.</p>
+    </div>
+  </div>
+  <div class="tdgs-card tdgs-card--elevated">
+    <div class="tdgs-card__body">
+      <h3 class="tdgs-card__title">Documents d'identité</h3>
+      <p class="tdgs-card__description">CNI, passeport, permis de séjour.</p>
+    </div>
+  </div>
+  <div class="tdgs-card tdgs-card--elevated">
+    <div class="tdgs-card__body">
+      <h3 class="tdgs-card__title">Fiscalité</h3>
+      <p class="tdgs-card__description">Déclaration de revenus, taxes locales.</p>
+    </div>
+  </div>
+</div>
+```

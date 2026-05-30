@@ -1,0 +1,18 @@
+export const link = {
+  default: {
+    color: 'var(--tdgs-color-blue-500)',
+    colorHover: 'var(--tdgs-color-blue-700)',
+    colorVisited: 'var(--tdgs-color-blue-700)',
+    decorationColor: 'var(--tdgs-color-blue-200)',
+    decorationColorHover: 'var(--tdgs-color-blue-500)',
+  },
+  variants: {
+    default: { color: 'var(--tdgs-color-blue-500)' },
+    muted:   { color: 'var(--tdgs-neutral-600)'    },
+    danger:  { color: 'var(--tdgs-color-red-600)'  },
+  },
+} as const;
+
+export type LinkVariant = keyof typeof link.variants;
+export type LinkTokens = typeof link;
+export default link;

@@ -1,0 +1,144 @@
+---
+title: Résumé d'erreurs
+description: Pattern de résumé d'erreurs TDGS — récapitulatif d'erreurs de formulaire accessible.
+sidebar:
+  order: 4
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+# Pattern — Résumé d'erreurs
+
+Le résumé d'erreurs est affiché en haut d'un formulaire lorsque la soumission échoue.
+Il liste toutes les erreurs avec des liens vers les champs concernés.
+
+<Aside type="tip" title="Pourquoi un résumé d'erreurs ?">
+  Afficher les erreurs uniquement près de chaque champ ne suffit pas.
+  Sur mobile ou avec un lecteur d'écran, l'utilisateur peut ne pas voir ou entendre
+  toutes les erreurs. Le résumé en haut de page garantit que toutes les erreurs
+  sont communiquées dès le rechargement.
+</Aside>
+
+---
+
+## Structure
+
+```html
+<!-- Résumé d'erreurs — affiché au sommet du formulaire en cas d'erreur -->
+<div
+  class="tdgs-error-summary"
+  role="alert"
+  aria-labelledby="error-summary-title"
+  tabindex="-1"
+  style="
+    background: var(--tdgs-color-semantic-danger-background);
+    border: 2px solid var(--tdgs-color-semantic-danger-border);
+    border-left: 4px solid var(--tdgs-color-semantic-danger-icon);
+    border-radius: var(--tdgs-radius-sm);
+    padding: var(--tdgs-spacing-5);
+    margin-bottom: var(--tdgs-spacing-6);
+  "
+>
+  <h2
+    id="error-summary-title"
+    style="
+      font-size: var(--tdgs-font-size-lg);
+      font-weight: var(--tdgs-font-weight-semibold);
+      color: var(--tdgs-color-semantic-danger-text);
+      margin-bottom: var(--tdgs-spacing-3);
+    "
+  >
+    Votre formulaire contient 3 erreurs
+  </h2>
+
+  <ul style="
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  ">
+    <li style="margin-bottom: var(--tdgs-spacing-2);">
+      <a
+        href="#nom"
+        style="color: var(--tdgs-color-semantic-danger-text); font-weight: var(--tdgs-font-weight-medium);"
+      >
+        Nom complet — Ce champ est requis
+      </a>
+    </li>
+    <li style="margin-bottom: var(--tdgs-spacing-2);">
+      <a
+        href="#email"
+        style="color: var(--tdgs-color-semantic-danger-text); font-weight: var(--tdgs-font-weight-medium);"
+      >
+        Adresse e-mail — Saisissez une adresse e-mail valide
+      </a>
+    </li>
+    <li>
+      <a
+        href="#telephone"
+        style="color: var(--tdgs-color-semantic-danger-text); font-weight: var(--tdgs-font-weight-medium);"
+      >
+        Numéro de téléphone — Saisissez un numéro à 8 chiffres
+      </a>
+    </li>
+  </ul>
+</div>
+```
+
+---
+
+## Comportement JavaScript
+
+```javascript
+function showErrorSummary(errors) {
+  const summary = document.getElementById('error-summary');
+  const list = document.getElementById('error-summary-list');
+  const title = document.getElementById('error-summary-title');
+
+  // Construire la liste d'erreurs
+  list.innerHTML = errors
+    .map(({ fieldId, message }) => `
+      <li style="margin-bottom: 0.5rem;">
+        <a href="#${fieldId}" style="color: inherit; font-weight: 500;">
+          ${getFieldLabel(fieldId)} — ${message}
+        </a>
+      </li>
+    `)
+    .join('');
+
+  // Mettre à jour le titre
+  const count = errors.length;
+  title.textContent = `Votre formulaire contient ${count} erreur${count > 1 ? 's' : ''}`;
+
+  // Afficher et déplacer le focus
+  summary.hidden = false;
+  summary.focus(); // Le focus déclenche l'annonce par les lecteurs d'écran
+}
+
+function getFieldLabel(fieldId) {
+  const label = document.querySelector(`label[for="${fieldId}"]`);
+  return label?.textContent?.trim() ?? fieldId;
+}
+
+// À la soumission du formulaire
+document.querySelector('form').addEventListener('submit', (event) => {
+  event.preventDefault();
+
+  const errors = validateForm();
+
+  if (errors.length > 0) {
+    showErrorSummary(errors);
+  } else {
+    event.target.submit();
+  }
+});
+```
+
+---
+
+## Règles importantes
+
+- Le résumé doit recevoir le focus après validation (`tabindex="-1"` + `.focus()`)
+- Chaque lien dans la liste doit pointer vers le champ concerné (`href="#field-id"`)
+- Les messages d'erreur doivent expliquer comment corriger le problème
+- Le résumé doit disparaître si les erreurs sont corrigées et la soumission réussit
+- Ne jamais afficher un résumé vide

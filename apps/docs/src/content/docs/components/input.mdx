@@ -1,0 +1,452 @@
+---
+title: Input
+description: Composants de formulaire TDGS — text input, textarea, select, checkbox, radio, switch. Avec états, accessibilité et exemples HTML/React/Vue.
+sidebar:
+  order: 2
+---
+
+import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
+
+# Input
+
+Le système de champs TDGS couvre tous les contrôles de formulaire : text, textarea, select,
+checkbox, radio, switch et file upload. La structure standard est toujours `label + champ + (message)`.
+
+---
+
+## Importation
+
+```css
+@import "@tdgs/core/components/input/input.css";
+```
+
+```typescript
+import type { InputVariant, InputSize, InputState } from '@tdgs/core/components/input';
+```
+
+---
+
+## Structure de champ standard
+
+```html
+<div class="tdgs-field">
+  <label class="tdgs-field__label" for="CHAMP_ID">
+    Libellé du champ
+    <!-- Marqueur requis si nécessaire -->
+    <span aria-hidden="true"> *</span>
+  </label>
+
+  <!-- Aide contextuelle optionnelle -->
+  <p id="CHAMP_ID-hint" class="tdgs-helper-text">
+    Texte d'aide pour préciser la saisie attendue.
+  </p>
+
+  <!-- Le champ lui-même -->
+  <input
+    id="CHAMP_ID"
+    name="nom_champ"
+    type="text"
+    class="tdgs-input tdgs-input--md"
+    aria-describedby="CHAMP_ID-hint"
+    required
+  >
+
+  <!-- Message d'erreur (affiché en cas d'erreur) -->
+  <p id="CHAMP_ID-error" class="tdgs-error-text" role="alert" hidden>
+    Message d'erreur explicite.
+  </p>
+</div>
+```
+
+<Aside type="tip" title="Association label-champ">
+  L'attribut `for` du `<label>` doit correspondre exactement à l'`id` du champ.
+  C'est une exigence d'accessibilité : sans cette association, les lecteurs d'écran
+  ne peuvent pas annoncer le label lors de la mise au focus.
+</Aside>
+
+---
+
+## Variantes
+
+| Variante | Classe | Usage |
+|---|---|---|
+| `default` | `tdgs-input--default` (ou aucune) | Saisie normale |
+| `error` | `tdgs-input--error` | Validation échouée, champ requis vide |
+| `success` | `tdgs-input--success` | Champ validé avec succès |
+| `disabled` | attribut `disabled` | Champ inactif, non modifiable |
+
+---
+
+## Tailles
+
+| Taille | Classe | Police | Padding | Min-height |
+|---|---|---|---|---|
+| `sm` | `tdgs-input--sm` | 14px | `0.5rem 0.75rem` | 44px |
+| **`md`** | **`tdgs-input--md`** | **16px** | **`0.75rem 1rem`** | **44px** |
+| `lg` | `tdgs-input--lg` | 18px | `0.875rem 1.25rem` | 52px |
+
+---
+
+## Types de contrôles
+
+### Text Input
+
+<Tabs>
+  <TabItem label="HTML">
+    ```html
+    <!-- Champ texte standard -->
+    <div class="tdgs-field">
+      <label class="tdgs-field__label" for="nom">Nom complet</label>
+      <input
+        id="nom"
+        name="nom"
+        type="text"
+        class="tdgs-input tdgs-input--md"
+        autocomplete="name"
+        required
+        placeholder="Ex : Moussa Ibrahim"
+      >
+    </div>
+
+    <!-- Champ en erreur -->
+    <div class="tdgs-field">
+      <label class="tdgs-field__label" for="email">Adresse e-mail</label>
+      <input
+        id="email"
+        name="email"
+        type="email"
+        class="tdgs-input tdgs-input--md tdgs-input--error"
+        autocomplete="email"
+        aria-invalid="true"
+        aria-describedby="email-error"
+        value="invalide@"
+      >
+      <p id="email-error" class="tdgs-error-text" role="alert">
+        L'adresse e-mail saisie n'est pas valide.
+      </p>
+    </div>
+
+    <!-- Champ désactivé -->
+    <div class="tdgs-field">
+      <label class="tdgs-field__label" for="ref">Numéro de référence</label>
+      <input
+        id="ref"
+        name="ref"
+        type="text"
+        class="tdgs-input tdgs-input--md"
+        disabled
+        aria-disabled="true"
+        value="REF-2024-001234"
+        readonly
+      >
+      <p class="tdgs-helper-text">Ce champ est généré automatiquement.</p>
+    </div>
+    ```
+  </TabItem>
+  <TabItem label="React">
+    ```tsx
+    import '@tdgs/core/components/input/input.css';
+    import type { InputVariant, InputSize } from '@tdgs/core/components/input';
+
+    interface TextFieldProps {
+      id: string;
+      name: string;
+      label: string;
+      type?: 'text' | 'email' | 'password' | 'tel' | 'number';
+      size?: InputSize;
+      variant?: InputVariant;
+      hint?: string;
+      error?: string;
+      required?: boolean;
+      disabled?: boolean;
+      value?: string;
+      onChange?: (value: string) => void;
+    }
+
+    export function TextField({
+      id,
+      name,
+      label,
+      type = 'text',
+      size = 'md',
+      variant = 'default',
+      hint,
+      error,
+      required = false,
+      disabled = false,
+      value,
+      onChange,
+    }: TextFieldProps) {
+      const hintId = hint ? `${id}-hint` : undefined;
+      const errorId = error ? `${id}-error` : undefined;
+      const describedBy = [hintId, errorId].filter(Boolean).join(' ') || undefined;
+      const effectiveVariant = error ? 'error' : variant;
+
+      return (
+        <div className="tdgs-field">
+          <label className="tdgs-field__label" htmlFor={id}>
+            {label}
+            {required && <span aria-hidden="true"> *</span>}
+          </label>
+
+          {hint && (
+            <p id={hintId} className="tdgs-helper-text">{hint}</p>
+          )}
+
+          <input
+            id={id}
+            name={name}
+            type={type}
+            className={`tdgs-input tdgs-input--${size} tdgs-input--${effectiveVariant}`}
+            disabled={disabled}
+            required={required}
+            aria-invalid={error ? 'true' : undefined}
+            aria-describedby={describedBy}
+            aria-required={required || undefined}
+            value={value}
+            onChange={(e) => onChange?.(e.target.value)}
+          />
+
+          {error && (
+            <p id={errorId} className="tdgs-error-text" role="alert">{error}</p>
+          )}
+        </div>
+      );
+    }
+    ```
+  </TabItem>
+  <TabItem label="Vue 3">
+    ```vue
+    <script setup lang="ts">
+    import '@tdgs/core/components/input/input.css';
+    import { computed } from 'vue';
+    import type { InputVariant, InputSize } from '@tdgs/core/components/input';
+
+    const props = withDefaults(defineProps<{
+      id: string;
+      name: string;
+      label: string;
+      type?: string;
+      size?: InputSize;
+      variant?: InputVariant;
+      hint?: string;
+      error?: string;
+      required?: boolean;
+      disabled?: boolean;
+      modelValue?: string;
+    }>(), {
+      type: 'text',
+      size: 'md',
+      variant: 'default',
+      required: false,
+      disabled: false,
+    });
+
+    const emit = defineEmits<{ 'update:modelValue': [value: string] }>();
+
+    const effectiveVariant = computed(() => props.error ? 'error' : props.variant);
+    const hintId = computed(() => props.hint ? `${props.id}-hint` : undefined);
+    const errorId = computed(() => props.error ? `${props.id}-error` : undefined);
+    const describedBy = computed(() =>
+      [hintId.value, errorId.value].filter(Boolean).join(' ') || undefined
+    );
+    </script>
+
+    <template>
+      <div class="tdgs-field">
+        <label class="tdgs-field__label" :for="id">
+          {{ label }}
+          <span v-if="required" aria-hidden="true"> *</span>
+        </label>
+
+        <p v-if="hint" :id="hintId" class="tdgs-helper-text">{{ hint }}</p>
+
+        <input
+          :id="id"
+          :name="name"
+          :type="type"
+          :class="`tdgs-input tdgs-input--${size} tdgs-input--${effectiveVariant}`"
+          :disabled="disabled"
+          :required="required"
+          :aria-invalid="error ? 'true' : undefined"
+          :aria-describedby="describedBy"
+          :value="modelValue"
+          @input="emit('update:modelValue', ($event.target as HTMLInputElement).value)"
+        />
+
+        <p v-if="error" :id="errorId" class="tdgs-error-text" role="alert">
+          {{ error }}
+        </p>
+      </div>
+    </template>
+    ```
+  </TabItem>
+</Tabs>
+
+---
+
+### Textarea
+
+```html
+<div class="tdgs-field">
+  <label class="tdgs-field__label" for="description">
+    Description de la demande
+  </label>
+  <p id="description-hint" class="tdgs-helper-text">
+    Maximum 500 caractères. Soyez précis pour accélérer le traitement.
+  </p>
+  <textarea
+    id="description"
+    name="description"
+    class="tdgs-textarea tdgs-textarea--md"
+    rows="5"
+    maxlength="500"
+    aria-describedby="description-hint"
+    required
+  ></textarea>
+</div>
+```
+
+---
+
+### Select
+
+```html
+<div class="tdgs-field">
+  <label class="tdgs-field__label" for="type-document">
+    Type de document demandé
+  </label>
+  <select
+    id="type-document"
+    name="type_document"
+    class="tdgs-select tdgs-select--md"
+    required
+    aria-required="true"
+  >
+    <option value="" disabled selected>Sélectionnez un type</option>
+    <option value="cni">Carte Nationale d'Identité</option>
+    <option value="passeport">Passeport</option>
+    <option value="naissance">Acte de naissance</option>
+    <option value="mariage">Acte de mariage</option>
+    <option value="permis">Permis de conduire</option>
+  </select>
+</div>
+```
+
+---
+
+### Checkbox
+
+```html
+<!-- Checkbox unique — consentement -->
+<label class="tdgs-checkbox">
+  <input
+    type="checkbox"
+    name="consentement"
+    value="1"
+    required
+    aria-required="true"
+  >
+  J'accepte que mes données soient traitées conformément à la politique de confidentialité.
+</label>
+
+<!-- Groupe de checkboxes -->
+<fieldset>
+  <legend class="tdgs-field__label">Documents à fournir</legend>
+  <label class="tdgs-checkbox">
+    <input type="checkbox" name="docs[]" value="cni"> Carte d'identité
+  </label>
+  <label class="tdgs-checkbox">
+    <input type="checkbox" name="docs[]" value="justificatif"> Justificatif de domicile
+  </label>
+  <label class="tdgs-checkbox">
+    <input type="checkbox" name="docs[]" value="photo"> Photo d'identité
+  </label>
+</fieldset>
+```
+
+---
+
+### Radio
+
+```html
+<fieldset>
+  <legend class="tdgs-field__label">Vous êtes</legend>
+  <label class="tdgs-radio">
+    <input type="radio" name="statut" value="citoyen" required> Citoyen tchadien
+  </label>
+  <label class="tdgs-radio">
+    <input type="radio" name="statut" value="resident"> Résident étranger
+  </label>
+  <label class="tdgs-radio">
+    <input type="radio" name="statut" value="diaspora"> Ressortissant en diaspora
+  </label>
+</fieldset>
+```
+
+<Aside type="caution" title="Groupes radio et checkbox">
+  Les groupes radio et checkbox **doivent** être encadrés par un `<fieldset>` avec un `<legend>`.
+  Sans cela, les lecteurs d'écran ne peuvent pas rattacher les options au groupe auquel elles appartiennent.
+</Aside>
+
+---
+
+### Switch
+
+```html
+<!-- Switch simple -->
+<label class="tdgs-switch">
+  <input
+    type="checkbox"
+    name="notifications"
+    role="switch"
+    aria-checked="false"
+  >
+  Recevoir les notifications par e-mail
+</label>
+```
+
+<Aside type="note" title="Switch vs Checkbox">
+  Utilisez un switch uniquement pour des options à effet **immédiat** (sans bouton de validation).
+  Pour les préférences d'un formulaire, préférez une checkbox standard.
+</Aside>
+
+---
+
+## Accessibilité des formulaires
+
+### Check-list obligatoire
+
+- ✅ Chaque champ a un `<label>` associé via `for` / `id`
+- ✅ Les champs requis portent `required` (HTML) et `aria-required="true"`
+- ✅ Les champs en erreur portent `aria-invalid="true"`
+- ✅ Le message d'erreur est lié au champ via `aria-describedby`
+- ✅ Le message d'erreur utilise `role="alert"` pour être annoncé immédiatement
+- ✅ Les groupes checkbox/radio sont dans un `<fieldset>` + `<legend>`
+- ✅ Le focus visible est maintenu (`:focus-visible`)
+- ✅ Les champs disabled portent aussi `aria-disabled="true"`
+
+---
+
+## Do / Don't
+
+<div class="tdgs-do-dont">
+  <div class="tdgs-do-dont__card tdgs-do-dont__card--do">
+    <div class="tdgs-do-dont__heading">✓ Faire</div>
+    <ul>
+      <li>Label court et explicite au-dessus du champ</li>
+      <li>Message d'erreur en dessous du champ, jamais dans le placeholder</li>
+      <li>Placeholder = exemple de valeur, jamais le label</li>
+      <li>Utiliser <code>autocomplete</code> pour faciliter la saisie</li>
+    </ul>
+  </div>
+  <div class="tdgs-do-dont__card tdgs-do-dont__card--dont">
+    <div class="tdgs-do-dont__heading">✗ Éviter</div>
+    <ul>
+      <li>Supprimer le label et le remplacer par un placeholder</li>
+      <li>Valider le champ uniquement à la soumission (préférer <code>onBlur</code>)</li>
+      <li>Mettre les messages d'erreur dans une tooltip</li>
+      <li>Désactiver le copier-coller dans les champs mot de passe</li>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+/* TDGS z-index tokens */
+:root{
+  --tdgs-z-base: 0;
+  --tdgs-z-dropdown: 100;
+  --tdgs-z-sticky: 200;
+  --tdgs-z-overlay: 300;
+  --tdgs-z-modal: 400;
+  --tdgs-z-toast: 500;
+  --tdgs-z-tooltip: 600;
+}

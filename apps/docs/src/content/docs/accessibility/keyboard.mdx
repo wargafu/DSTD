@@ -1,0 +1,170 @@
+---
+title: Clavier & Focus
+description: Navigation au clavier et gestion du focus dans les interfaces TDGS.
+sidebar:
+  order: 2
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+# Clavier & Focus
+
+Environ 5% des utilisateurs naviguent principalement au clavier.
+Cette population inclut les personnes avec handicap moteur, les utilisateurs avancés
+et les utilisateurs de lecteurs d'écran.
+
+---
+
+## Interactions clavier standard
+
+| Touche | Action |
+|---|---|
+| `Tab` | Focus élément suivant |
+| `Shift + Tab` | Focus élément précédent |
+| `Enter` | Activer bouton, lien, soumettre formulaire |
+| `Espace` | Cocher checkbox, activer bouton |
+| `↑ ↓ ← →` | Naviguer dans groupe radio, menu, select |
+| `Escape` | Fermer modal, dropdown, dialogue |
+| `Home / End` | Premier / dernier élément d'une liste |
+
+---
+
+## Focus visible obligatoire
+
+<Aside type="danger" title="Règle absolue">
+  Ne jamais supprimer `outline` sans fournir une alternative de focus visible.
+  La suppression du focus est une violation de WCAG 2.4.7 et rend l'interface
+  inutilisable pour les navigateurs clavier.
+</Aside>
+
+TDGS applique ce style de focus sur tous les éléments interactifs :
+
+```css
+:focus-visible {
+  outline: 2px solid var(--tdgs-color-blue-500);  /* #0033A0 */
+  outline-offset: 3px;
+  border-radius: var(--tdgs-radius-xs);
+}
+```
+
+---
+
+## Ordre du focus (tab order)
+
+L'ordre de navigation au clavier doit suivre l'ordre visuel de la page :
+de haut en bas, de gauche à droite.
+
+```html
+<!-- ✅ Ordre naturel — utiliser la structure DOM -->
+<header>...</header>
+<nav>...</nav>
+<main>
+  <h1>...</h1>
+  <form>
+    <label for="nom">Nom</label>
+    <input id="nom" type="text">
+
+    <label for="prenom">Prénom</label>
+    <input id="prenom" type="text">
+
+    <button type="submit">Envoyer</button>
+  </form>
+</main>
+<footer>...</footer>
+```
+
+```html
+<!-- ❌ Éviter tabindex positifs — ils cassent l'ordre naturel -->
+<input type="text" tabindex="3">
+<input type="text" tabindex="1">
+<button tabindex="2">Envoyer</button>
+```
+
+### Règles tabindex
+
+| Valeur | Effet | Quand l'utiliser |
+|---|---|---|
+| `tabindex="-1"` | Focusable par script, pas par Tab | Éléments focusés programmatiquement (modales) |
+| `tabindex="0"` | Ajout dans l'ordre naturel | Éléments non-interactifs rendus focusables |
+| `tabindex="1+"` | **Déconseillé** | Jamais, sauf cas très rares justifiés |
+
+---
+
+## Focus trap (Modales)
+
+Les modales doivent piéger le focus à l'intérieur pendant qu'elles sont ouvertes.
+
+```javascript
+// Pattern de focus trap minimal
+function trapFocus(modal) {
+  const focusable = modal.querySelectorAll(
+    'a[href], button:not([disabled]), input:not([disabled]), ' +
+    'select:not([disabled]), textarea:not([disabled]), [tabindex="0"]'
+  );
+
+  const first = focusable[0];
+  const last = focusable[focusable.length - 1];
+
+  modal.addEventListener('keydown', (e) => {
+    if (e.key !== 'Tab') return;
+
+    if (e.shiftKey) {
+      if (document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      }
+    } else {
+      if (document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
+  });
+
+  // Focus le premier élément à l'ouverture
+  first?.focus();
+}
+
+// À la fermeture, retourner le focus sur l'élément déclencheur
+function closeModal(modal, triggerElement) {
+  modal.hidden = true;
+  triggerElement?.focus();
+}
+```
+
+---
+
+## Skip links (liens d'évitement)
+
+Les skip links permettent aux utilisateurs clavier de sauter la navigation répétitive.
+
+```html
+<!-- Premier élément du <body> -->
+<a href="#main-content" class="tdgs-skip-link">
+  Aller au contenu principal
+</a>
+
+<!-- Dans les styles -->
+<style>
+.tdgs-skip-link {
+  position: absolute;
+  top: -100%;
+  left: var(--tdgs-spacing-4);
+  background: var(--tdgs-color-blue-500);
+  color: white;
+  padding: var(--tdgs-spacing-2) var(--tdgs-spacing-4);
+  border-radius: var(--tdgs-radius-sm);
+  text-decoration: none;
+  font-weight: var(--tdgs-font-weight-semibold);
+  z-index: var(--tdgs-z-tooltip);
+}
+
+.tdgs-skip-link:focus {
+  top: var(--tdgs-spacing-4);
+}
+</style>
+
+<main id="main-content" tabindex="-1">
+  <!-- Contenu principal -->
+</main>
+```

@@ -1,0 +1,106 @@
+---
+title: Motion
+description: Système de transitions TDGS — durées, easing, règles d'accessibilité prefers-reduced-motion.
+sidebar:
+  order: 6
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+# Motion
+
+Le système de motion TDGS est **fonctionnel, jamais décoratif**.
+Les animations doivent guider l'utilisateur, pas le distraire.
+
+---
+
+## Durées
+
+| Token | Variable CSS | Valeur | Usage |
+|---|---|---|---|
+| `instant` | `--tdgs-motion-instant` | `0ms` | Reset instantané, suppression d'animation |
+| **`fast`** | **`--tdgs-motion-fast`** | **`120ms`** | **Hover/focus, micro-interactions** |
+| `normal` | `--tdgs-motion-normal` | `200ms` | Dropdowns, modales, transitions d'état |
+| `slow` | `--tdgs-motion-slow` | `320ms` | Panels, toasts, ouvertures |
+| `verySlow` | `--tdgs-motion-very-slow` | `500ms` | Changements documentaires, page overlays |
+
+---
+
+## Courbes d'easing
+
+| Token | Variable CSS | Valeur | Usage |
+|---|---|---|---|
+| `standard` | `--tdgs-easing-standard` | `cubic-bezier(0.4, 0, 0.2, 1)` | Transitions générales |
+| `enter` | `--tdgs-easing-enter` | `cubic-bezier(0.3, 0, 0.15, 1)` | Entrées d'éléments |
+| `exit` | `--tdgs-easing-exit` | `cubic-bezier(0.4, 0, 1, 1)` | Sorties d'éléments |
+| `linear` | `--tdgs-easing-linear` | `linear` | Loaders, barres de progression |
+
+---
+
+## Combinaisons recommandées
+
+| Composant | Durée | Easing |
+|---|---|---|
+| Bouton (hover/focus) | `fast` (120ms) | `standard` |
+| Dropdown (ouverture) | `normal` (200ms) | `enter` |
+| Dropdown (fermeture) | `normal` (200ms) | `exit` |
+| Modale (ouverture) | `slow` (320ms) | `enter` |
+| Modale (fermeture) | `normal` (200ms) | `exit` |
+| Toast (apparition) | `slow` (320ms) | `enter` |
+| Tooltip | `fast` (120ms) | `enter` |
+| Navigation / page | `normal` (200ms) | `standard` |
+
+---
+
+## Accessibilité — `prefers-reduced-motion`
+
+<Aside type="danger" title="Règle obligatoire">
+  Toute animation doit être désactivée lorsque l'utilisateur a activé `prefers-reduced-motion`.
+  Ce paramètre indique une sensibilité aux mouvements (épilepsie, vertiges).
+</Aside>
+
+```css
+/* Pattern obligatoire pour toute transition TDGS */
+.mon-composant {
+  transition:
+    background-color var(--tdgs-motion-fast) var(--tdgs-easing-standard),
+    border-color var(--tdgs-motion-fast) var(--tdgs-easing-standard);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mon-composant {
+    transition: none;
+  }
+}
+```
+
+```css
+/* Version utilitaire globale — à inclure dans le reset CSS */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+```
+
+---
+
+## Variables CSS
+
+```css
+--tdgs-motion-instant:   0ms;
+--tdgs-motion-fast:      120ms;
+--tdgs-motion-normal:    200ms;
+--tdgs-motion-slow:      320ms;
+--tdgs-motion-very-slow: 500ms;
+
+--tdgs-easing-standard: cubic-bezier(0.4, 0, 0.2, 1);
+--tdgs-easing-enter:    cubic-bezier(0.3, 0, 0.15, 1);
+--tdgs-easing-exit:     cubic-bezier(0.4, 0, 1, 1);
+--tdgs-easing-linear:   linear;
+```

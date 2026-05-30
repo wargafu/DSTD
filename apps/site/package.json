@@ -1,0 +1,9 @@
+{
+  "name": "tdgs-site",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "echo \"Start TDGS doc site placeholder\"",
+    "build": "echo \"Build TDGS doc site placeholder\""
+  }
+}

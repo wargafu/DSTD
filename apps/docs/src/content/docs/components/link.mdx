@@ -1,0 +1,72 @@
+---
+title: Link
+description: Composant Link TDGS — styles de liens pour navigation et contenu.
+sidebar:
+  order: 6
+---
+
+# Link
+
+Les liens TDGS sont accessibles, contrastés et cohérents avec la charte institutionnelle.
+La classe `.tdgs-link` s'applique aux liens de contenu ; les boutons de navigation utilisent `.tdgs-button--tertiary`.
+
+## Importation
+
+```css
+@import "@tdgs/core/components/link/link.css";
+```
+
+---
+
+## Variantes
+
+```html
+<!-- Lien standard -->
+<a href="/services" class="tdgs-link">Accéder aux services en ligne</a>
+
+<!-- Lien atténué -->
+<a href="/mentions-legales" class="tdgs-link tdgs-link--muted">Mentions légales</a>
+
+<!-- Lien de danger (confirmation de suppression) -->
+<a href="/supprimer" class="tdgs-link tdgs-link--danger">Supprimer ce dossier</a>
+
+<!-- Lien externe -->
+<a href="https://gouv.td" class="tdgs-link tdgs-link--external" target="_blank" rel="noopener noreferrer">
+  Portail officiel du Gouvernement du Tchad
+</a>
+
+<!-- Lien standalone (CTA de contenu) -->
+<a href="/dossier/001234" class="tdgs-link tdgs-link--standalone">
+  Voir le dossier complet
+</a>
+```
+
+---
+
+## Lien vs Bouton
+
+| Élément | Quand l'utiliser |
+|---|---|
+| `<a class="tdgs-link">` | Navigation vers une autre page ou ressource |
+| `<a class="tdgs-button">` | Navigation qui ressemble à une action |
+| `<button class="tdgs-button">` | Action qui modifie l'état (soumettre, supprimer) |
+| `<button class="tdgs-button--tertiary">` | Action secondaire discrète dans un formulaire |
+
+---
+
+## Accessibilité
+
+```html
+<!-- Lien externe — avertir l'utilisateur -->
+<a href="https://..." class="tdgs-link tdgs-link--external"
+   target="_blank" rel="noopener noreferrer"
+   aria-label="Portail officiel — s'ouvre dans un nouvel onglet">
+  Portail officiel
+</a>
+
+<!-- Lien avec contexte supplémentaire pour les AT -->
+<a href="/dossier/001234" class="tdgs-link">
+  Consulter
+  <span class="sr-only">le dossier REF-2024-001234</span>
+</a>
+```

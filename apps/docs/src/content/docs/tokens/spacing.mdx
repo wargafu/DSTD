@@ -1,0 +1,168 @@
+---
+title: Espacement
+description: Grille d'espacement TDGS — échelle 4px, tokens CSS, règles de layout responsive.
+sidebar:
+  order: 3
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+# Espacement
+
+TDGS utilise une grille modulaire basée sur **4px**, exprimée en `rem`.
+Chaque token est un multiple de 4px : `spacing-4` = 16px = 1rem.
+
+---
+
+## Principe de la grille 4px
+
+La grille 4px garantit que tous les espacements sont compatibles entre eux.
+Combiner `spacing-4` (16px) et `spacing-2` (8px) donne toujours un résultat cohérent.
+
+Les tokens utilisent des nombres entiers qui correspondent au nombre d'unités de 4px :
+- `spacing-1` = 1 × 4px = 4px
+- `spacing-4` = 4 × 4px = 16px
+- `spacing-8` = 8 × 4px = 32px
+
+---
+
+## Échelle complète
+
+| Token | Variable CSS | rem | px | Zone d'usage |
+|---|---|---|---|---|
+| `0` | `--tdgs-spacing-0` | `0` | 0px | Aucun espace |
+| `1` | `--tdgs-spacing-1` | `0.25rem` | 4px | Micro-spacing, séparateurs |
+| `2` | `--tdgs-spacing-2` | `0.5rem` | 8px | Icônes et labels, espaces très fins |
+| `3` | `--tdgs-spacing-3` | `0.75rem` | 12px | Padding compact, interlignes serrés |
+| **`4`** | **`--tdgs-spacing-4`** | **`1rem`** | **16px** | **Padding standard, marge de base** |
+| `5` | `--tdgs-spacing-5` | `1.25rem` | 20px | Formulaires, boutons, listes |
+| `6` | `--tdgs-spacing-6` | `1.5rem` | 24px | Groupes de composants, cards |
+| `8` | `--tdgs-spacing-8` | `2rem` | 32px | Espaces entre sections |
+| `10` | `--tdgs-spacing-10` | `2.5rem` | 40px | Layout, barres d'actions |
+| `12` | `--tdgs-spacing-12` | `3rem` | 48px | Espaces larges |
+| `14` | `--tdgs-spacing-14` | `3.5rem` | 56px | Intervalles personnalisés |
+| `16` | `--tdgs-spacing-16` | `4rem` | 64px | Marges de page, sections majeures |
+| `20` | `--tdgs-spacing-20` | `5rem` | 80px | Zones de contenu larges |
+| `24` | `--tdgs-spacing-24` | `6rem` | 96px | Layout top-level |
+| `32` | `--tdgs-spacing-32` | `8rem` | 128px | Marges horizontales/verticales |
+| `40` | `--tdgs-spacing-40` | `10rem` | 160px | Buffers de contenu |
+| `48` | `--tdgs-spacing-48` | `12rem` | 192px | Tableaux, formulaires groupés |
+| `64` | `--tdgs-spacing-64` | `16rem` | 256px | Bannière, héros |
+| `80` | `--tdgs-spacing-80` | `20rem` | 320px | Grands blocs de page |
+| `96` | `--tdgs-spacing-96` | `24rem` | 384px | Extra-large, templates |
+
+---
+
+## Groupes d'usage
+
+### Micro (4–12px) — `spacing-1` à `spacing-3`
+Espaces internes très petits : icônes et textes, badges, séparateurs fins, padding de tags.
+
+```css
+.tdgs-badge {
+  padding: var(--tdgs-spacing-1) var(--tdgs-spacing-2);
+  /* 4px vertical, 8px horizontal */
+}
+
+.tdgs-icon-label {
+  gap: var(--tdgs-spacing-2); /* 8px entre icône et texte */
+}
+```
+
+### Standard (16–24px) — `spacing-4` à `spacing-6`
+Padding de composants, marges internes, espaces entre champs de formulaire.
+
+```css
+.tdgs-card {
+  padding: var(--tdgs-spacing-6); /* 24px */
+}
+
+.tdgs-field + .tdgs-field {
+  margin-top: var(--tdgs-spacing-5); /* 20px */
+}
+```
+
+### Section (32–56px) — `spacing-8` à `spacing-14`
+Espaces entre blocs fonctionnels, séparation de sections, zones d'actions.
+
+```css
+.page-section + .page-section {
+  margin-top: var(--tdgs-spacing-8); /* 32px */
+}
+
+.page-actions {
+  padding: var(--tdgs-spacing-6) var(--tdgs-spacing-10);
+}
+```
+
+### Page (64px+) — `spacing-16` et plus
+Marges de page, padding de layout, zones de contenu de grande taille.
+
+```css
+.page-container {
+  padding: 0 var(--tdgs-spacing-6);   /* mobile : 24px */
+  max-width: 1024px;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .page-container {
+    padding: 0 var(--tdgs-spacing-10); /* desktop : 40px */
+  }
+}
+```
+
+---
+
+## Règles de layout
+
+### Mobile
+- Padding latéral de page : `spacing-4` (16px) minimum, `spacing-6` (24px) recommandé
+- Espace entre sections fonctionnelles : `spacing-6` à `spacing-8` (24–32px)
+- Espace interne des cards : `spacing-4` (16px)
+- Ne pas dépasser `spacing-10` (40px) entre éléments fonctionnels dans une colonne
+
+### Desktop
+- Padding latéral de page : `spacing-10` (40px) ou `spacing-12` (48px)
+- Espace entre sections : `spacing-8` à `spacing-12` (32–48px)
+- Espace interne des cards : `spacing-5` à `spacing-6` (20–24px)
+- Container max-width : 1024px ou 1200px selon le template
+
+### Tableaux et formulaires
+- Padding des cellules de tableau : `spacing-4` (16px)
+- Espace entre groupes de champs : `spacing-6` (24px)
+- Espace entre un label et son champ : `spacing-1` (4px)
+- Espace entre champs de formulaire : `spacing-5` (20px)
+
+---
+
+## Variables CSS — Référence
+
+```css
+--tdgs-spacing-0:  0rem;      /*   0px */
+--tdgs-spacing-1:  0.25rem;   /*   4px */
+--tdgs-spacing-2:  0.5rem;    /*   8px */
+--tdgs-spacing-3:  0.75rem;   /*  12px */
+--tdgs-spacing-4:  1rem;      /*  16px */
+--tdgs-spacing-5:  1.25rem;   /*  20px */
+--tdgs-spacing-6:  1.5rem;    /*  24px */
+--tdgs-spacing-8:  2rem;      /*  32px */
+--tdgs-spacing-10: 2.5rem;    /*  40px */
+--tdgs-spacing-12: 3rem;      /*  48px */
+--tdgs-spacing-14: 3.5rem;    /*  56px */
+--tdgs-spacing-16: 4rem;      /*  64px */
+--tdgs-spacing-20: 5rem;      /*  80px */
+--tdgs-spacing-24: 6rem;      /*  96px */
+--tdgs-spacing-32: 8rem;      /* 128px */
+--tdgs-spacing-40: 10rem;     /* 160px */
+--tdgs-spacing-48: 12rem;     /* 192px */
+--tdgs-spacing-64: 16rem;     /* 256px */
+--tdgs-spacing-80: 20rem;     /* 320px */
+--tdgs-spacing-96: 24rem;     /* 384px */
+```
+
+<Aside type="caution" title="Cibles tactiles">
+  Les éléments interactifs (boutons, liens, cases à cocher) doivent avoir une cible tactile
+  minimale de **44×44px** pour l'accessibilité mobile (WCAG 2.5.5).
+  Combinez `spacing` et `min-height`/`min-width` pour atteindre cette cible.
+</Aside>

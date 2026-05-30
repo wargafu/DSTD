@@ -1,0 +1,96 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    name: Quality Checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 8.11.0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      # ── Type safety ─────────────────────────────────────────────────────────
+      - name: Typecheck
+        run: pnpm typecheck
+
+      # ── Code quality ────────────────────────────────────────────────────────
+      - name: Lint
+        run: pnpm lint
+
+      - name: Format check
+        run: pnpm format:check
+
+      # ── Token validation (pre-build, no dist needed) ─────────────────────────
+      - name: Validate tokens
+        run: pnpm --filter @tdgs/core validate:tokens
+
+      # ── Build ────────────────────────────────────────────────────────────────
+      - name: Build
+        run: pnpm build
+
+      # ── Export validation (post-build) ───────────────────────────────────────
+      - name: Validate exports
+        run: pnpm --filter @tdgs/core validate:exports
+
+      # ── Publish dry-run ──────────────────────────────────────────────────────
+      - name: Publish dry-run
+        run: pnpm --filter @tdgs/core pack --dry-run
+        continue-on-error: false
+
+  publish:
+    name: Publish (release only)
+    needs: quality
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 8.11.0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
+        run: pnpm build
+
+      - name: Publish @tdgs/core
+        run: pnpm --filter @tdgs/core publish --no-git-checks --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

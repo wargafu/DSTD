@@ -1,0 +1,24 @@
+/**
+ * TDGS motion tokens
+ *
+ * Ce système de motion est sobre, fonctionnel et accessible.
+ * Les durées sont verrouillées pour garantir une expérience fiable et stable.
+ */
+export const motion = {
+  durations: {
+    instant: '0ms',
+    fast: '120ms',
+    normal: '200ms',
+    slow: '320ms',
+    verySlow: '500ms'
+  },
+  easing: {
+    standard: 'cubic-bezier(0.4, 0, 0.2, 1)',
+    enter: 'cubic-bezier(0.3, 0, 0.15, 1)',
+    exit: 'cubic-bezier(0.4, 0, 1, 1)',
+    linear: 'linear'
+  }
+} as const;
+
+export type MotionTokens = typeof motion;
+export default motion;

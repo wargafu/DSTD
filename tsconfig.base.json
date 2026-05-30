@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "jsx": "preserve",
+
+    // Strict core
+    "strict": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true,
+
+    // Module hygiene
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+
+    // Monorepo paths
+    "baseUrl": ".",
+    "paths": {
+      "@tdgs/*": ["packages/*/src"],
+      "@tdgs/core": ["packages/core/src"],
+      "@tdgs/tokens": ["packages/tokens/src"]
+    }
+  },
+  "include": ["packages", "apps", "templates"]
+}

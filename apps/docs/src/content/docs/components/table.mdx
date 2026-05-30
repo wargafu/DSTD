@@ -1,0 +1,121 @@
+---
+title: Table
+description: Composant Table TDGS — tableaux de données pour interfaces gouvernementales.
+sidebar:
+  order: 7
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+# Table
+
+Les tableaux TDGS affichent des données structurées : listes de dossiers, résultats de recherche,
+données administratives. Ils sont accessibles et responsive par défaut.
+
+## Importation
+
+```css
+@import "@tdgs/core/components/table/table.css";
+```
+
+---
+
+## Structure de base
+
+```html
+<div class="tdgs-table-wrapper">
+  <table class="tdgs-table">
+    <caption>Liste des demandes en cours — Préfecture de N'Djamena</caption>
+    <thead>
+      <tr>
+        <th scope="col">Référence</th>
+        <th scope="col">Type</th>
+        <th scope="col">Date</th>
+        <th scope="col">Statut</th>
+        <th scope="col" class="tdgs-table__actions">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>REF-2024-001234</code></td>
+        <td>Carte nationale d'identité</td>
+        <td>15 jan. 2024</td>
+        <td data-status="warning"><span class="tdgs-badge tdgs-badge--warning">En cours</span></td>
+        <td class="tdgs-table__actions">
+          <a href="/dossier/001234" class="tdgs-link">Consulter</a>
+        </td>
+      </tr>
+      <tr>
+        <td><code>REF-2024-001198</code></td>
+        <td>Acte de naissance</td>
+        <td>8 jan. 2024</td>
+        <td data-status="success"><span class="tdgs-badge tdgs-badge--success">Approuvé</span></td>
+        <td class="tdgs-table__actions">
+          <a href="/dossier/001198" class="tdgs-link">Consulter</a>
+        </td>
+      </tr>
+      <tr>
+        <td><code>REF-2024-001089</code></td>
+        <td>Passeport</td>
+        <td>3 jan. 2024</td>
+        <td data-status="danger"><span class="tdgs-badge tdgs-badge--danger">Rejeté</span></td>
+        <td class="tdgs-table__actions">
+          <a href="/dossier/001089" class="tdgs-link">Consulter</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+```
+
+---
+
+## Modificateurs
+
+```html
+<!-- Lignes alternées -->
+<table class="tdgs-table tdgs-table--striped">...</table>
+
+<!-- Avec bordures -->
+<table class="tdgs-table tdgs-table--bordered">...</table>
+
+<!-- Compact (moins de padding) -->
+<table class="tdgs-table tdgs-table--compact">...</table>
+```
+
+---
+
+## Accessibilité
+
+<Aside type="tip" title="Règles critiques">
+  - Toujours utiliser `<caption>` pour décrire le contenu du tableau
+  - Utiliser `scope="col"` sur les `<th>` d'en-tête de colonne
+  - Utiliser `scope="row"` sur les `<th>` d'en-tête de ligne
+  - Ne pas utiliser de tableaux pour la mise en page — uniquement pour les données
+</Aside>
+
+```html
+<!-- Tableau avec en-têtes de ligne et colonne -->
+<table class="tdgs-table">
+  <caption>Tarifs des services administratifs 2024</caption>
+  <thead>
+    <tr>
+      <th scope="col">Service</th>
+      <th scope="col">Délai normal</th>
+      <th scope="col">Délai urgent</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">Carte d'identité</th>
+      <td>15 jours — 2 500 FCFA</td>
+      <td>5 jours — 7 500 FCFA</td>
+    </tr>
+    <tr>
+      <th scope="row">Passeport</th>
+      <td>30 jours — 25 000 FCFA</td>
+      <td>10 jours — 50 000 FCFA</td>
+    </tr>
+  </tbody>
+</table>
+```

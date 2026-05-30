@@ -1,0 +1,358 @@
+---
+title: Couleurs
+description: Système de couleurs TDGS — palette complète, couleurs sémantiques, variables CSS et règles d'usage.
+sidebar:
+  order: 1
+---
+
+import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
+
+# Couleurs
+
+Le système de couleurs TDGS est construit sur deux niveaux :
+**la palette de base** (valeurs brutes) et **les couleurs sémantiques** (significations fonctionnelles).
+
+<Aside type="caution" title="Règle fondamentale">
+  Toujours utiliser les **couleurs sémantiques** pour les états fonctionnels (succès, erreur, avertissement, info).
+  La palette de base sert à construire des composants, jamais à exprimer directement un état.
+</Aside>
+
+---
+
+## Palette de base
+
+### Bleu — Couleur primaire de l'État
+
+Le bleu `500` est la couleur d'action principale. Il représente l'autorité et la fiabilité de l'État.
+
+| Token | Valeur CSS | Hex | Usage |
+|---|---|---|---|
+| `blue.50` | `--tdgs-color-blue-50` | `#F2F5FF` | Fond d'information légère |
+| `blue.100` | `--tdgs-color-blue-100` | `#D9E3FF` | Fond de badge / chip info |
+| `blue.200` | `--tdgs-color-blue-200` | `#A6C1FF` | Bordure focus, état survol léger |
+| `blue.300` | `--tdgs-color-blue-300` | `#6B94FF` | Éléments interactifs secondaires |
+| `blue.400` | `--tdgs-color-blue-400` | `#2F68FF` | Liens actifs, états hover |
+| **`blue.500`** | **`--tdgs-color-blue-500`** | **`#0033A0`** | **Action principale, couleur de marque** |
+| `blue.600` | `--tdgs-color-blue-600` | `#002B89` | Hover sur bleu 500 |
+| `blue.700` | `--tdgs-color-blue-700` | `#002063` | Active sur bleu 500, texte fort |
+| `blue.800` | `--tdgs-color-blue-800` | `#00143E` | Texte très fort sur fond clair |
+| `blue.900` | `--tdgs-color-blue-900` | `#00061A` | Quasi-noir bleu |
+
+<div class="tdgs-color-grid">
+  <div class="tdgs-color-swatch"><div class="tdgs-color-swatch__preview" style="background:#F2F5FF;border-bottom:1px solid #e5e7eb;"></div><div class="tdgs-color-swatch__info"><span class="tdgs-color-swatch__name">blue.50</span><span class="tdgs-color-swatch__value">#F2F5FF</span></div></div>
+  <div class="tdgs-color-swatch"><div class="tdgs-color-swatch__preview" style="background:#D9E3FF;"></div><div class="tdgs-color-swatch__info"><span class="tdgs-color-swatch__name">blue.100</span><span class="tdgs-color-swatch__value">#D9E3FF</span></div></div>
+  <div class="tdgs-color-swatch"><div class="tdgs-color-swatch__preview" style="background:#A6C1FF;"></div><div class="tdgs-color-swatch__info"><span class="tdgs-color-swatch__name">blue.200</span><span class="tdgs-color-swatch__value">#A6C1FF</span></div></div>
+  <div class="tdgs-color-swatch"><div class="tdgs-color-swatch__preview" style="background:#6B94FF;"></div><div class="tdgs-color-swatch__info"><span class="tdgs-color-swatch__name">blue.300</span><span class="tdgs-color-swatch__value">#6B94FF</span></div></div>
+  <div class="tdgs-color-swatch"><div class="tdgs-color-swatch__preview" style="background:#2F68FF;"></div><div class="tdgs-color-swatch__info"><span class="tdgs-color-swatch__name">blue.400</span><span class="tdgs-color-swatch__value">#2F68FF</span></div></div>
+  <div class="tdgs-color-swatch"><div class="tdgs-color-swatch__preview" style="background:#0033A0;"></div><div class="tdgs-color-swatch__info"><span class="tdgs-color-swatch__name">blue.500 ★</span><span class="tdgs-color-swatch__value">#0033A0</span></div></div>
+  <div class="tdgs-color-swatch"><div class="tdgs-color-swatch__preview" style="background:#002B89;"></div><div class="tdgs-color-swatch__info"><span class="tdgs-color-swatch__name">blue.600</span><span class="tdgs-color-swatch__value">#002B89</span></div></div>
+  <div class="tdgs-color-swatch"><div class="tdgs-color-swatch__preview" style="background:#002063;"></div><div class="tdgs-color-swatch__info"><span class="tdgs-color-swatch__name">blue.700</span><span class="tdgs-color-swatch__value">#002063</span></div></div>
+  <div class="tdgs-color-swatch"><div class="tdgs-color-swatch__preview" style="background:#00143E;"></div><div class="tdgs-color-swatch__info"><span class="tdgs-color-swatch__name">blue.800</span><span class="tdgs-color-swatch__value">#00143E</span></div></div>
+  <div class="tdgs-color-swatch"><div class="tdgs-color-swatch__preview" style="background:#00061A;"></div><div class="tdgs-color-swatch__info"><span class="tdgs-color-swatch__name">blue.900</span><span class="tdgs-color-swatch__value">#00061A</span></div></div>
+</div>
+
+---
+
+### Jaune — Couleur nationale, attention
+
+Le jaune est la seconde couleur du drapeau tchadien. Il sert aux avertissements et aux éléments identitaires.
+
+| Token | Hex | Usage |
+|---|---|---|
+| `yellow.50` | `#FFFBEB` | Fond d'alerte légère |
+| `yellow.100` | `#FFF3CC` | Fond badge avertissement |
+| `yellow.200` | `#FFE699` | Bordure de notification |
+| `yellow.300` | `#FFDA66` | Accent secondaire |
+| `yellow.400` | `#FFCF33` | Éléments d'alerte visible |
+| **`yellow.500`** | **`#FFD100`** | **Couleur d'avertissement principale** |
+| `yellow.600` | `#E6B800` | Hover sur jaune 500 |
+| `yellow.700` | `#B58D00` | Texte sur fond jaune clair |
+| `yellow.800` | `#846200` | Texte fort sur fond jaune pâle |
+| `yellow.900` | `#4D3A00` | Texte haute emphase |
+
+<Aside type="caution" title="Contraste sur fond jaune">
+  Le jaune présente des problèmes de contraste avec du texte blanc.
+  Utilisez toujours **du texte sombre** (`neutral.800` ou `neutral.900`) sur fond jaune.
+  Le contraste blanc/jaune ne respecte pas WCAG AA.
+</Aside>
+
+---
+
+### Rouge — Danger, erreur
+
+| Token | Hex | Usage |
+|---|---|---|
+| `red.50` | `#FFF2F1` | Fond d'erreur légère |
+| `red.100` | `#FFD8D6` | Fond de badge erreur |
+| **`red.500`** | **`#DA291C`** | **Action destructive, état d'erreur** |
+| `red.600` | `#B21F16` | Hover bouton danger |
+| `red.700` | `#82160F` | Texte d'erreur sur fond clair |
+
+---
+
+### Vert — Succès, confirmation
+
+| Token | Hex | Usage |
+|---|---|---|
+| `green.50` | `#F0FBF5` | Fond de confirmation légère |
+| `green.100` | `#D9F6E6` | Fond badge succès |
+| **`green.500`** | **`#006B3C`** | **Confirmation, succès, validation** |
+| `green.600` | `#005B32` | Hover bouton succès |
+| `green.700` | `#004224` | Texte de succès sur fond clair |
+
+---
+
+### Neutrals — Interface et typographie
+
+Les neutrals constituent l'échelle de gris pour l'interface. Ce sont les couleurs les plus utilisées.
+
+| Token | Hex | Usage principal |
+|---|---|---|
+| `neutral.0` | `#FFFFFF` | Fond de page, cartes, modales |
+| `neutral.100` | `#F3F4F6` | Fond alterné, lignes de tableau |
+| `neutral.200` | `#E5E7EB` | Séparateurs, bordures légères |
+| `neutral.300` | `#D1D5DB` | Bordures de champs inactifs |
+| `neutral.400` | `#9CA3AF` | Placeholders, icônes désactivées |
+| `neutral.500` | `#6B7280` | Texte secondaire, helper text |
+| `neutral.600` | `#4B5563` | Légendes, labels secondaires |
+| `neutral.700` | `#374151` | Texte de corps secondaire |
+| `neutral.800` | `#1F2937` | Texte de corps principal |
+| `neutral.900` | `#0B1220` | Titres, texte fort |
+
+<div class="tdgs-color-grid">
+  <div class="tdgs-color-swatch"><div class="tdgs-color-swatch__preview" style="background:#FFFFFF;border-bottom:1px solid #e5e7eb;"></div><div class="tdgs-color-swatch__info"><span class="tdgs-color-swatch__name">neutral.0</span><span class="tdgs-color-swatch__value">#FFFFFF</span></div></div>
+  <div class="tdgs-color-swatch"><div class="tdgs-color-swatch__preview" style="background:#F3F4F6;"></div><div class="tdgs-color-swatch__info"><span class="tdgs-color-swatch__name">neutral.100</span><span class="tdgs-color-swatch__value">#F3F4F6</span></div></div>
+  <div class="tdgs-color-swatch"><div class="tdgs-color-swatch__preview" style="background:#E5E7EB;"></div><div class="tdgs-color-swatch__info"><span class="tdgs-color-swatch__name">neutral.200</span><span class="tdgs-color-swatch__value">#E5E7EB</span></div></div>
+  <div class="tdgs-color-swatch"><div class="tdgs-color-swatch__preview" style="background:#D1D5DB;"></div><div class="tdgs-color-swatch__info"><span class="tdgs-color-swatch__name">neutral.300</span><span class="tdgs-color-swatch__value">#D1D5DB</span></div></div>
+  <div class="tdgs-color-swatch"><div class="tdgs-color-swatch__preview" style="background:#9CA3AF;"></div><div class="tdgs-color-swatch__info"><span class="tdgs-color-swatch__name">neutral.400</span><span class="tdgs-color-swatch__value">#9CA3AF</span></div></div>
+  <div class="tdgs-color-swatch"><div class="tdgs-color-swatch__preview" style="background:#6B7280;"></div><div class="tdgs-color-swatch__info"><span class="tdgs-color-swatch__name">neutral.500</span><span class="tdgs-color-swatch__value">#6B7280</span></div></div>
+  <div class="tdgs-color-swatch"><div class="tdgs-color-swatch__preview" style="background:#4B5563;"></div><div class="tdgs-color-swatch__info"><span class="tdgs-color-swatch__name">neutral.600</span><span class="tdgs-color-swatch__value">#4B5563</span></div></div>
+  <div class="tdgs-color-swatch"><div class="tdgs-color-swatch__preview" style="background:#374151;"></div><div class="tdgs-color-swatch__info"><span class="tdgs-color-swatch__name">neutral.700</span><span class="tdgs-color-swatch__value">#374151</span></div></div>
+  <div class="tdgs-color-swatch"><div class="tdgs-color-swatch__preview" style="background:#1F2937;"></div><div class="tdgs-color-swatch__info"><span class="tdgs-color-swatch__name">neutral.800</span><span class="tdgs-color-swatch__value">#1F2937</span></div></div>
+  <div class="tdgs-color-swatch"><div class="tdgs-color-swatch__preview" style="background:#0B1220;"></div><div class="tdgs-color-swatch__info"><span class="tdgs-color-swatch__name">neutral.900</span><span class="tdgs-color-swatch__value">#0B1220</span></div></div>
+</div>
+
+---
+
+## Couleurs sémantiques
+
+Les couleurs sémantiques expriment une **signification fonctionnelle**. Chaque état a quatre rôles :
+`background`, `border`, `text`, `icon`.
+
+### Info
+
+Utilisée pour les messages informatifs neutres, les aides contextuelles.
+
+| Rôle | Variable CSS | Valeur |
+|---|---|---|
+| background | `--tdgs-color-semantic-info-background` | `#F2F5FF` (blue.50) |
+| border | `--tdgs-color-semantic-info-border` | `#A6C1FF` (blue.200) |
+| text | `--tdgs-color-semantic-info-text` | `#002063` (blue.700) |
+| icon | `--tdgs-color-semantic-info-icon` | `#0033A0` (blue.500) |
+
+```html
+<div style="
+  background: var(--tdgs-color-semantic-info-background);
+  border: 1px solid var(--tdgs-color-semantic-info-border);
+  border-left: 4px solid var(--tdgs-color-semantic-info-icon);
+  color: var(--tdgs-color-semantic-info-text);
+  padding: var(--tdgs-spacing-4);
+  border-radius: var(--tdgs-radius-sm);
+">
+  Votre demande est en cours de traitement. Délai estimé : 5 jours ouvrables.
+</div>
+```
+
+### Succès
+
+Confirmations, validations réussies, étapes complétées.
+
+| Rôle | Variable CSS | Valeur |
+|---|---|---|
+| background | `--tdgs-color-semantic-success-background` | `#F0FBF5` (green.50) |
+| border | `--tdgs-color-semantic-success-border` | `#A8E9C7` (green.200) |
+| text | `--tdgs-color-semantic-success-text` | `#004224` (green.700) |
+| icon | `--tdgs-color-semantic-success-icon` | `#006B3C` (green.500) |
+
+### Avertissement
+
+Situations nécessitant attention sans être des erreurs.
+
+| Rôle | Variable CSS | Valeur |
+|---|---|---|
+| background | `--tdgs-color-semantic-warning-background` | `#FFFBEB` (yellow.50) |
+| border | `--tdgs-color-semantic-warning-border` | `#FFDA66` (yellow.300) |
+| text | `--tdgs-color-semantic-warning-text` | `#0B1220` (neutral.900) |
+| icon | `--tdgs-color-semantic-warning-icon` | `#0B1220` (neutral.900) |
+
+<Aside type="note" title="Texte sombre sur fond jaune">
+  L'avertissement utilise `neutral.900` pour le texte et l'icône afin de garantir
+  un contraste suffisant sur le fond jaune pâle.
+</Aside>
+
+### Danger
+
+Erreurs bloquantes, actions irréversibles, validations échouées.
+
+| Rôle | Variable CSS | Valeur |
+|---|---|---|
+| background | `--tdgs-color-semantic-danger-background` | `#FFF2F1` (red.50) |
+| border | `--tdgs-color-semantic-danger-border` | `#FFB0AD` (red.200) |
+| text | `--tdgs-color-semantic-danger-text` | `#82160F` (red.700) |
+| icon | `--tdgs-color-semantic-danger-icon` | `#DA291C` (red.500) |
+
+---
+
+## Variables CSS — Référence complète
+
+```css
+/* Palette Bleue */
+--tdgs-color-blue-50:    #F2F5FF;
+--tdgs-color-blue-100:   #D9E3FF;
+--tdgs-color-blue-200:   #A6C1FF;
+--tdgs-color-blue-300:   #6B94FF;
+--tdgs-color-blue-400:   #2F68FF;
+--tdgs-color-blue-500:   #0033A0;   /* ← primaire */
+--tdgs-color-blue-600:   #002B89;
+--tdgs-color-blue-700:   #002063;
+--tdgs-color-blue-800:   #00143E;
+--tdgs-color-blue-900:   #00061A;
+
+/* Palette Jaune */
+--tdgs-color-yellow-50:  #FFFBEB;
+--tdgs-color-yellow-100: #FFF3CC;
+--tdgs-color-yellow-200: #FFE699;
+--tdgs-color-yellow-300: #FFDA66;
+--tdgs-color-yellow-400: #FFCF33;
+--tdgs-color-yellow-500: #FFD100;   /* ← avertissement */
+--tdgs-color-yellow-600: #E6B800;
+--tdgs-color-yellow-700: #B58D00;
+--tdgs-color-yellow-800: #846200;
+--tdgs-color-yellow-900: #4D3A00;
+
+/* Palette Rouge */
+--tdgs-color-red-50:     #FFF2F1;
+--tdgs-color-red-100:    #FFD8D6;
+--tdgs-color-red-200:    #FFB0AD;
+--tdgs-color-red-300:    #FF8A83;
+--tdgs-color-red-400:    #FF665D;
+--tdgs-color-red-500:    #DA291C;   /* ← danger */
+--tdgs-color-red-600:    #B21F16;
+--tdgs-color-red-700:    #82160F;
+--tdgs-color-red-800:    #560E08;
+--tdgs-color-red-900:    #2B0604;
+
+/* Palette Verte */
+--tdgs-color-green-50:   #F0FBF5;
+--tdgs-color-green-100:  #D9F6E6;
+--tdgs-color-green-200:  #A8E9C7;
+--tdgs-color-green-300:  #6FD8A1;
+--tdgs-color-green-400:  #38C07F;
+--tdgs-color-green-500:  #006B3C;   /* ← succès */
+--tdgs-color-green-600:  #005B32;
+--tdgs-color-green-700:  #004224;
+--tdgs-color-green-800:  #002B18;
+--tdgs-color-green-900:  #00140C;
+
+/* Neutrals */
+--tdgs-neutral-0:   #FFFFFF;
+--tdgs-neutral-100: #F3F4F6;
+--tdgs-neutral-200: #E5E7EB;
+--tdgs-neutral-300: #D1D5DB;
+--tdgs-neutral-400: #9CA3AF;
+--tdgs-neutral-500: #6B7280;
+--tdgs-neutral-600: #4B5563;
+--tdgs-neutral-700: #374151;
+--tdgs-neutral-800: #1F2937;
+--tdgs-neutral-900: #0B1220;
+
+/* Couleurs sémantiques */
+--tdgs-color-semantic-info-background:       #F2F5FF;
+--tdgs-color-semantic-info-border:           #A6C1FF;
+--tdgs-color-semantic-info-text:             #002063;
+--tdgs-color-semantic-info-icon:             #0033A0;
+
+--tdgs-color-semantic-success-background:    #F0FBF5;
+--tdgs-color-semantic-success-border:        #A8E9C7;
+--tdgs-color-semantic-success-text:          #004224;
+--tdgs-color-semantic-success-icon:          #006B3C;
+
+--tdgs-color-semantic-warning-background:    #FFFBEB;
+--tdgs-color-semantic-warning-border:        #FFDA66;
+--tdgs-color-semantic-warning-text:          #0B1220;
+--tdgs-color-semantic-warning-icon:          #0B1220;
+
+--tdgs-color-semantic-danger-background:     #FFF2F1;
+--tdgs-color-semantic-danger-border:         #FFB0AD;
+--tdgs-color-semantic-danger-text:           #82160F;
+--tdgs-color-semantic-danger-icon:           #DA291C;
+```
+
+---
+
+## Utilisation TypeScript
+
+```typescript
+import { color } from '@tdgs/core/tokens';
+import type { ColorTokens } from '@tdgs/core/tokens';
+
+// Accès direct aux valeurs
+const primary = color.blue[500];          // '#0033A0'
+const dangerText = color.semantic.danger.text;   // '#82160F'
+const pageBg = color.neutral[0];          // '#FFFFFF'
+
+// Utilisation dans un objet de thème
+const theme = {
+  brand: color.blue[500],
+  surface: color.neutral[0],
+  text: color.neutral[900],
+  textMuted: color.neutral[500],
+  border: color.neutral[200],
+} as const;
+```
+
+---
+
+## Règles d'usage
+
+### À faire
+
+<div class="tdgs-do-dont">
+  <div class="tdgs-do-dont__card tdgs-do-dont__card--do">
+    <div class="tdgs-do-dont__heading">✓ Faire</div>
+    <ul>
+      <li>Utiliser les couleurs sémantiques pour les états (info/succès/danger/avertissement)</li>
+      <li>Utiliser <code>neutral.800</code> ou <code>neutral.900</code> pour le texte de corps</li>
+      <li>Utiliser <code>blue.500</code> pour les actions primaires et les liens importants</li>
+      <li>Vérifier le contraste avant d'utiliser une combinaison non standard</li>
+    </ul>
+  </div>
+  <div class="tdgs-do-dont__card tdgs-do-dont__card--dont">
+    <div class="tdgs-do-dont__heading">✗ Éviter</div>
+    <ul>
+      <li>Inventer des couleurs hors de la palette TDGS</li>
+      <li>Utiliser du texte blanc sur fond jaune</li>
+      <li>Utiliser <code>red.500</code> pour une action primaire non-destructive</li>
+      <li>Utiliser les palettes brutes pour exprimer des états (préférez les sémantiques)</li>
+    </ul>
+  </div>
+</div>
+
+---
+
+## Ratios de contraste WCAG
+
+| Combinaison | Ratio | Standard |
+|---|---|---|
+| `blue.500` sur `neutral.0` | 8.59:1 | ✅ AAA |
+| `neutral.900` sur `neutral.0` | 18.1:1 | ✅ AAA |
+| `red.700` sur `red.50` | 7.2:1 | ✅ AAA |
+| `green.700` sur `green.50` | 6.9:1 | ✅ AA |
+| `neutral.900` sur `yellow.50` | 16.4:1 | ✅ AAA |
+| `blue.200` sur `neutral.0` | 2.1:1 | ❌ Insuffisant pour texte |
+| Blanc sur `yellow.500` | 1.5:1 | ❌ Insuffisant |
+
+<Aside type="danger" title="Combinaisons interdites">
+  Ne jamais utiliser `yellow.500` avec du texte blanc, ni `blue.200` comme couleur de texte sur fond blanc.
+  Ces combinaisons échouent WCAG AA et rendent le contenu illisible pour les personnes malvoyantes.
+</Aside>

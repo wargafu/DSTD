@@ -1,0 +1,74 @@
+---
+title: Z-index
+description: Hiérarchie d'empilement TDGS — échelle verrouillée, règles strictes, stacking contexts.
+sidebar:
+  order: 7
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+# Z-index
+
+La hiérarchie z-index TDGS est **verrouillée et non négociable**.
+Les valeurs arbitraires hors de l'échelle sont interdites.
+
+---
+
+## Échelle
+
+| Token | Variable CSS | Valeur | Usage |
+|---|---|---|---|
+| `base` | `--tdgs-z-base` | `0` | Contenu de base, layout normal |
+| `dropdown` | `--tdgs-z-dropdown` | `100` | Menus déroulants, popovers |
+| `sticky` | `--tdgs-z-sticky` | `200` | Navigation fixe, barres collantes |
+| `overlay` | `--tdgs-z-overlay` | `300` | Backdrops masquants |
+| `modal` | `--tdgs-z-modal` | `400` | Fenêtres modales |
+| `toast` | `--tdgs-z-toast` | `500` | Notifications, toasts |
+| `tooltip` | `--tdgs-z-tooltip` | `600` | Tooltips, info-bulles |
+
+**Ordre de priorité absolue :**
+`tooltip (600)` > `toast (500)` > `modal (400)` > `overlay (300)` > `sticky (200)` > `dropdown (100)` > `base (0)`
+
+---
+
+## Règles strictes
+
+- Les z-index arbitraires (ex: `z-index: 9999`) sont **interdits**
+- `sticky` ne recouvre jamais une modale ou un overlay
+- `overlay` bloque toujours l'interaction avec la page sous-jacente
+- Ne pas créer de stacking contexts inutiles (`transform`, `opacity < 1`, `filter`, `will-change`)
+
+<Aside type="caution" title="Stacking contexts">
+  Les propriétés CSS `transform`, `opacity < 1`, `filter` et `will-change` créent
+  un nouveau stacking context. Cela peut rendre un z-index élevé inopérant si l'élément
+  parent a un contexte d'empilement avec une valeur plus basse.
+  Vérifiez toujours la hiérarchie de contextes avant de déboguer les z-index.
+</Aside>
+
+---
+
+## Variables CSS
+
+```css
+--tdgs-z-base:     0;
+--tdgs-z-dropdown: 100;
+--tdgs-z-sticky:   200;
+--tdgs-z-overlay:  300;
+--tdgs-z-modal:    400;
+--tdgs-z-toast:    500;
+--tdgs-z-tooltip:  600;
+```
+
+```css
+/* Exemple d'usage */
+.ma-modale {
+  z-index: var(--tdgs-z-modal);    /* 400 */
+  position: fixed;
+}
+
+.mon-backdrop {
+  z-index: var(--tdgs-z-overlay);  /* 300 */
+  position: fixed;
+  inset: 0;
+}
+```

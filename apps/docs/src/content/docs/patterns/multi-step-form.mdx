@@ -1,0 +1,147 @@
+---
+title: Formulaire multi-étapes
+description: Pattern de formulaire multi-étapes TDGS — barre de progression, navigation, accessibilité.
+sidebar:
+  order: 3
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+# Pattern — Formulaire multi-étapes
+
+Les démarches administratives complexes (demande de document, inscription, déclaration)
+nécessitent souvent plusieurs étapes. Ce pattern guide les citoyens à travers le processus
+sans les submerger.
+
+---
+
+## Principes
+
+- Afficher une seule étape à la fois — ne pas tout montrer sur une page
+- Indiquer la progression clairement (étape X sur Y)
+- Permettre de revenir en arrière sans perdre les données
+- Valider chaque étape avant de passer à la suivante
+- Permettre de sauvegarder et reprendre plus tard (pour les formulaires longs)
+
+---
+
+## Structure HTML
+
+### Barre de progression
+
+```html
+<nav aria-label="Progression du formulaire">
+  <ol style="
+    display: flex;
+    gap: var(--tdgs-spacing-2);
+    list-style: none;
+    padding: 0;
+    margin-bottom: var(--tdgs-spacing-8);
+  ">
+    <li aria-current="step" style="font-weight: var(--tdgs-font-weight-semibold);">
+      <span style="
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 28px;
+        height: 28px;
+        border-radius: var(--tdgs-radius-full);
+        background: var(--tdgs-color-blue-500);
+        color: white;
+        font-size: var(--tdgs-font-size-sm);
+        margin-right: var(--tdgs-spacing-2);
+      ">1</span>
+      Identité
+    </li>
+    <li aria-disabled="true" style="color: var(--tdgs-color-neutral-400);">
+      <span style="
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 28px;
+        height: 28px;
+        border-radius: var(--tdgs-radius-full);
+        background: var(--tdgs-color-neutral-200);
+        color: var(--tdgs-color-neutral-500);
+        font-size: var(--tdgs-font-size-sm);
+        margin-right: var(--tdgs-spacing-2);
+      ">2</span>
+      Documents
+    </li>
+    <li aria-disabled="true" style="color: var(--tdgs-color-neutral-400);">
+      <span style="
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 28px;
+        height: 28px;
+        border-radius: var(--tdgs-radius-full);
+        background: var(--tdgs-color-neutral-200);
+        color: var(--tdgs-color-neutral-500);
+        font-size: var(--tdgs-font-size-sm);
+        margin-right: var(--tdgs-spacing-2);
+      ">3</span>
+      Confirmation
+    </li>
+  </ol>
+</nav>
+```
+
+### Étape courante
+
+```html
+<main id="main-content">
+  <form method="post" action="/demande/etape-1" novalidate>
+    <input type="hidden" name="_token" value="{{csrf}}">
+    <input type="hidden" name="etape" value="1">
+
+    <h1 style="
+      font-size: var(--tdgs-font-size-3xl);
+      font-weight: var(--tdgs-font-weight-semibold);
+      margin-bottom: var(--tdgs-spacing-6);
+    ">
+      Étape 1 sur 3 — Informations d'identité
+    </h1>
+
+    <!-- Champs de l'étape 1 -->
+    <div class="tdgs-field" style="margin-bottom: var(--tdgs-spacing-5);">
+      <label class="tdgs-field__label" for="prenom">Prénom</label>
+      <input id="prenom" name="prenom" type="text" class="tdgs-input tdgs-input--md" required>
+    </div>
+
+    <div class="tdgs-field" style="margin-bottom: var(--tdgs-spacing-8);">
+      <label class="tdgs-field__label" for="nom">Nom de famille</label>
+      <input id="nom" name="nom" type="text" class="tdgs-input tdgs-input--md" required>
+    </div>
+
+    <!-- Navigation entre étapes -->
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+      <a
+        href="/demande"
+        class="tdgs-button tdgs-button--secondary tdgs-button--md"
+      >
+        ← Retour
+      </a>
+      <button type="submit" class="tdgs-button tdgs-button--primary tdgs-button--md">
+        Continuer →
+      </button>
+    </div>
+  </form>
+</main>
+```
+
+---
+
+## Points critiques
+
+<Aside type="tip" title="Sauvegarde des données">
+  Ne pas perdre les données saisies si l'utilisateur clique "Retour".
+  Stocker les valeurs en session côté serveur ou en `sessionStorage` côté client.
+</Aside>
+
+- **Valider à chaque étape**, pas seulement à la fin
+- **Le bouton "Retour" ne doit pas supprimer** les données de l'étape actuelle
+- **Indiquer le nombre total d'étapes** dès la première étape
+- **Permettre la navigation vers les étapes déjà complétées**
+- **Afficher un résumé** avant la soumission finale (étape de confirmation)
+- **Générer un token CSRF** sur chaque formulaire d'étape

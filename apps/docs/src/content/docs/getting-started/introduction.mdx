@@ -1,0 +1,107 @@
+---
+title: Introduction
+description: Le Tchad Design System (TDGS) — référence officielle pour les interfaces numériques de l'État.
+sidebar:
+  order: 1
+---
+
+import { Card, CardGrid, Badge } from '@astrojs/starlight/components';
+
+# Tchad Design System
+
+**TDGS** est le système de design officiel pour les services numériques de l'État du Tchad.
+Il fournit les fondations visuelles et techniques nécessaires à la création d'interfaces cohérentes,
+accessibles et conformes aux standards gouvernementaux.
+
+<CardGrid>
+  <Card title="Tokens de design" icon="seti:json">
+    Couleurs, typographie, espacement, ombres — définis une fois, utilisés partout.
+  </Card>
+  <Card title="Composants certifiés" icon="puzzle">
+    Boutons, champs de formulaire, avec documentation complète et accessibilité garantie.
+  </Card>
+  <Card title="Multi-formats" icon="open-book">
+    Chaque token est disponible en TypeScript, JSON et CSS custom properties.
+  </Card>
+  <Card title="Multilingue" icon="translate">
+    Prise en charge native du français et de l'arabe (RTL), avec polices institutionnelles dédiées.
+  </Card>
+</CardGrid>
+
+---
+
+## Pourquoi un Design System d'État ?
+
+Les services numériques gouvernementaux servent des millions de citoyens aux niveaux de littératie numérique très variés.
+Un Design System impose :
+
+- **La cohérence** — un citoyen reconnaît immédiatement qu'il est sur un service officiel.
+- **L'accessibilité** — les interfaces respectent WCAG 2.1 AA par défaut, pas par exception.
+- **La fiabilité** — les équipes développent plus vite car les choix de base sont déjà faits.
+- **La confiance** — un design sobre et institutionnel inspire la confiance dans les actes administratifs.
+
+---
+
+## Principes fondateurs
+
+### 1. HTML-first
+
+TDGS fonctionne sans JavaScript. Tous les composants de base sont utilisables en HTML pur avec des classes CSS.
+React et Vue sont des adaptations, pas des prérequis.
+
+### 2. Sobre par défaut
+
+Les interfaces d'État ne sont pas des landing pages startup. TDGS évite les effets visuels superflus,
+les animations décoratives et les couleurs criardes. La sobriété est une marque de respect envers les citoyens.
+
+### 3. Accessible ou inutilisable
+
+Chaque token de couleur respecte les ratios de contraste WCAG AA. Chaque composant est testable au clavier
+et compatible avec les lecteurs d'écran courants.
+
+### 4. Stable et versionné
+
+TDGS suit le versionnement sémantique strict. Aucune rupture d'API sans version majeure. Les institutions
+peuvent adopter TDGS sans risquer de régressions silencieuses.
+
+---
+
+## Ce que TDGS n'est pas
+
+- ❌ Un framework UI — il ne remplace pas React, Vue ou Angular
+- ❌ Un générateur de pages — il ne définit pas la mise en page finale de vos applications
+- ❌ Une contrainte sur l'architecture backend
+- ❌ Une alternative aux frameworks CSS complets comme Tailwind
+
+TDGS est une **fondation**, pas un plafond. Il définit les règles communes et laisse aux équipes
+la liberté d'implémenter leurs interfaces propres.
+
+---
+
+## Structure du Design System
+
+```
+@tdgs/core
+├── tokens/          — Variables de design (couleurs, typo, spacing…)
+│   ├── *.ts         — TypeScript (avec types inférés)
+│   ├── *.json       — JSON (intégrations Style Dictionary)
+│   └── *.css        — CSS custom properties
+└── components/      — Tokens de composants
+    ├── button/
+    └── input/
+```
+
+---
+
+## Prochaine étape
+
+<CardGrid>
+  <Card title="Installer TDGS" icon="down-caret">
+    Ajoutez `@tdgs/core` à votre projet en 2 minutes.
+    [Voir l'installation →](/getting-started/installation)
+  </Card>
+  <Card title="Démarrage rapide" icon="rocket">
+    Construisez votre première interface en 5 minutes.
+    [Voir le quick start →](/getting-started/quick-start)
+  </Card>
+</CardGrid>

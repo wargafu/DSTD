@@ -1,0 +1,90 @@
+---
+title: Badge
+description: Composant Badge TDGS — étiquettes de statut, tags et indicateurs visuels.
+sidebar:
+  order: 4
+---
+
+# Badge
+
+Les badges indiquent un statut, une catégorie ou un compteur. Ils sont toujours accompagnés
+d'un texte visible ou d'un `aria-label` pour l'accessibilité.
+
+## Importation
+
+```css
+@import "@tdgs/core/components/badge/badge.css";
+```
+
+---
+
+## Variantes
+
+<div class="tdgs-preview">
+  <div class="tdgs-preview__stage" style="flex-wrap:wrap;gap:0.5rem;">
+    <span class="tdgs-badge tdgs-badge--default">Par défaut</span>
+    <span class="tdgs-badge tdgs-badge--info">Information</span>
+    <span class="tdgs-badge tdgs-badge--success">Approuvé</span>
+    <span class="tdgs-badge tdgs-badge--warning">En attente</span>
+    <span class="tdgs-badge tdgs-badge--danger">Rejeté</span>
+  </div>
+  <div class="tdgs-preview__label">5 variantes</div>
+</div>
+
+```html
+<span class="tdgs-badge tdgs-badge--default">Par défaut</span>
+<span class="tdgs-badge tdgs-badge--info">Information</span>
+<span class="tdgs-badge tdgs-badge--success">Approuvé</span>
+<span class="tdgs-badge tdgs-badge--warning">En attente</span>
+<span class="tdgs-badge tdgs-badge--danger">Rejeté</span>
+```
+
+---
+
+## Avec point de statut
+
+```html
+<span class="tdgs-badge tdgs-badge--success">
+  <span class="tdgs-badge__dot" aria-hidden="true"></span>
+  En ligne
+</span>
+
+<span class="tdgs-badge tdgs-badge--danger">
+  <span class="tdgs-badge__dot" aria-hidden="true"></span>
+  Hors ligne
+</span>
+```
+
+---
+
+## Forme rectangulaire
+
+```html
+<!-- Modificateur --square pour les catégories et tags -->
+<span class="tdgs-badge tdgs-badge--info tdgs-badge--square">Document</span>
+<span class="tdgs-badge tdgs-badge--default tdgs-badge--square">Formulaire</span>
+```
+
+---
+
+## Usage gouvernemental
+
+```html
+<!-- Statut d'un dossier -->
+<table class="tdgs-table">
+  <tbody>
+    <tr>
+      <td>Demande de CNI</td>
+      <td><span class="tdgs-badge tdgs-badge--warning">En cours</span></td>
+    </tr>
+    <tr>
+      <td>Certificat de résidence</td>
+      <td><span class="tdgs-badge tdgs-badge--success">Prêt</span></td>
+    </tr>
+    <tr>
+      <td>Passeport</td>
+      <td><span class="tdgs-badge tdgs-badge--danger">Rejeté</span></td>
+    </tr>
+  </tbody>
+</table>
+```
