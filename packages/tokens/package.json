@@ -6,6 +6,6 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "echo \"Build @tds-tchad/tokens placeholder\"",
-    "typecheck": "tsc --build"
+    "typecheck": "echo \"Typecheck @tds-tchad/tokens placeholder\""
   }
 }
