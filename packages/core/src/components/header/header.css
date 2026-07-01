@@ -1,0 +1,96 @@
+/* TDS Header component */
+:root {
+  --tds-header-bg: var(--tds-neutral-0);
+  --tds-header-border: var(--tds-neutral-200);
+  --tds-header-min-height: 4rem;
+  --tds-header-min-height-compact: 3rem;
+  --tds-header-padding: var(--tds-spacing-4);
+  --tds-header-brand-gap: var(--tds-spacing-3);
+  --tds-header-title-color: var(--tds-neutral-900);
+  --tds-header-tagline-color: var(--tds-neutral-600);
+  --tds-header-stripe-height: 4px;
+  --tds-header-focus-outline: 2px solid var(--tds-color-blue-500);
+  --tds-header-focus-outline-offset: 2px;
+}
+
+.tds-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--tds-spacing-4);
+  min-height: var(--tds-header-min-height);
+  padding-inline: var(--tds-header-padding);
+  background: var(--tds-header-bg);
+  border-bottom: 1px solid var(--tds-header-border);
+}
+
+.tds-header--compact {
+  min-height: var(--tds-header-min-height-compact);
+}
+
+.tds-header__stripe {
+  display: flex;
+  height: var(--tds-header-stripe-height);
+  width: 100%;
+}
+
+.tds-header__stripe span {
+  flex: 1;
+}
+
+.tds-header__stripe span:nth-child(1) { background: var(--tds-color-blue-500); }
+.tds-header__stripe span:nth-child(2) { background: var(--tds-color-yellow-500); }
+.tds-header__stripe span:nth-child(3) { background: var(--tds-color-red-500); }
+
+.tds-header__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--tds-header-brand-gap);
+  min-width: 0;
+  text-decoration: none;
+  color: inherit;
+}
+
+.tds-header__brand:focus-visible {
+  outline: var(--tds-header-focus-outline);
+  outline-offset: var(--tds-header-focus-outline-offset);
+  border-radius: var(--tds-radius-xs);
+}
+
+.tds-header__logo {
+  flex-shrink: 0;
+  height: 2rem;
+  width: auto;
+}
+
+.tds-header__titles {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.tds-header__title {
+  font-size: var(--tds-font-size-lg);
+  font-weight: var(--tds-font-weight-semibold);
+  line-height: var(--tds-line-height-lg);
+  color: var(--tds-header-title-color);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tds-header__tagline {
+  font-size: var(--tds-font-size-sm);
+  line-height: var(--tds-line-height-sm);
+  color: var(--tds-header-tagline-color);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tds-header__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--tds-spacing-3);
+  flex-shrink: 0;
+}

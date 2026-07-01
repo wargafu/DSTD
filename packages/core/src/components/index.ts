@@ -5,3 +5,8 @@ export * from './badge/badge.tokens';
 export * from './card/card.tokens';
 export * from './link/link.tokens';
 export * from './table/table.tokens';
+export * from './header/header.tokens';
+export * from './nav/nav.tokens';
+export * from './breadcrumb/breadcrumb.tokens';
+export * from './pagination/pagination.tokens';
+export * from './modal/modal.tokens';

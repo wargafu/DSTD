@@ -51,6 +51,11 @@ const COMPONENTS = [
   { name: 'card',   tokenFile: 'card.tokens',   cssFile: 'card'   },
   { name: 'link',   tokenFile: 'link.tokens',   cssFile: 'link'   },
   { name: 'table',  tokenFile: 'table.tokens',  cssFile: 'table'  },
+  { name: 'header',     tokenFile: 'header.tokens',     cssFile: 'header'     },
+  { name: 'nav',         tokenFile: 'nav.tokens',         cssFile: 'nav'         },
+  { name: 'breadcrumb', tokenFile: 'breadcrumb.tokens', cssFile: 'breadcrumb' },
+  { name: 'pagination', tokenFile: 'pagination.tokens', cssFile: 'pagination' },
+  { name: 'modal',       tokenFile: 'modal.tokens',       cssFile: 'modal'       },
 ];
 
 process.stdout.write('\n[validate-tokens] Component tokens...\n\n');

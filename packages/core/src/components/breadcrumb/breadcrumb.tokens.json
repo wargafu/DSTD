@@ -1,0 +1,16 @@
+{
+  "defaults": {
+    "gap": "var(--tds-breadcrumb-gap)",
+    "fontSize": "var(--tds-font-size-sm)",
+    "linkColor": "var(--tds-breadcrumb-link-color)",
+    "linkHoverColor": "var(--tds-breadcrumb-link-hover-color)",
+    "currentColor": "var(--tds-breadcrumb-current-color)",
+    "separatorColor": "var(--tds-breadcrumb-separator-color)"
+  },
+  "states": {
+    "focusVisible": {
+      "outline": "var(--tds-breadcrumb-focus-outline)",
+      "outlineOffset": "var(--tds-breadcrumb-focus-outline-offset)"
+    }
+  }
+}

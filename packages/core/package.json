@@ -76,6 +76,31 @@
       "types": "./dist/components/table/index.d.ts"
     },
     "./components/table/table.css": "./dist/components/table/table.css",
+    "./components/header": {
+      "import": "./dist/components/header/index.js",
+      "types": "./dist/components/header/index.d.ts"
+    },
+    "./components/header/header.css": "./dist/components/header/header.css",
+    "./components/nav": {
+      "import": "./dist/components/nav/index.js",
+      "types": "./dist/components/nav/index.d.ts"
+    },
+    "./components/nav/nav.css": "./dist/components/nav/nav.css",
+    "./components/breadcrumb": {
+      "import": "./dist/components/breadcrumb/index.js",
+      "types": "./dist/components/breadcrumb/index.d.ts"
+    },
+    "./components/breadcrumb/breadcrumb.css": "./dist/components/breadcrumb/breadcrumb.css",
+    "./components/pagination": {
+      "import": "./dist/components/pagination/index.js",
+      "types": "./dist/components/pagination/index.d.ts"
+    },
+    "./components/pagination/pagination.css": "./dist/components/pagination/pagination.css",
+    "./components/modal": {
+      "import": "./dist/components/modal/index.js",
+      "types": "./dist/components/modal/index.d.ts"
+    },
+    "./components/modal/modal.css": "./dist/components/modal/modal.css",
     "./tokens/color.css": "./dist/tokens/color.css",
     "./tokens/typography.css": "./dist/tokens/typography.css",
     "./tokens/spacing.css": "./dist/tokens/spacing.css",

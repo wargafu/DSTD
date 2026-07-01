@@ -1,0 +1,27 @@
+{
+  "defaults": {
+    "background": "var(--tds-modal-bg)",
+    "radius": "var(--tds-modal-radius)",
+    "padding": "var(--tds-modal-padding)",
+    "shadow": "var(--tds-modal-shadow)",
+    "backdropBackground": "var(--tds-modal-backdrop-bg)",
+    "gap": "var(--tds-modal-gap)"
+  },
+  "sizes": {
+    "sm": {
+      "maxWidth": "var(--tds-modal-max-width-sm)"
+    },
+    "md": {
+      "maxWidth": "var(--tds-modal-max-width-md)"
+    },
+    "lg": {
+      "maxWidth": "var(--tds-modal-max-width-lg)"
+    }
+  },
+  "states": {
+    "focusVisible": {
+      "outline": "var(--tds-modal-focus-outline)",
+      "outlineOffset": "var(--tds-modal-focus-outline-offset)"
+    }
+  }
+}

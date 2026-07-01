@@ -1,0 +1,21 @@
+{
+  "defaults": {
+    "background": "var(--tds-nav-bg)",
+    "borderColor": "var(--tds-nav-border)",
+    "gap": "var(--tds-nav-gap)",
+    "itemPadding": "var(--tds-nav-item-padding)",
+    "itemColor": "var(--tds-nav-item-color)",
+    "itemHoverColor": "var(--tds-nav-item-hover-color)",
+    "itemHoverBackground": "var(--tds-nav-item-hover-bg)"
+  },
+  "current": {
+    "color": "var(--tds-nav-current-color)",
+    "borderColor": "var(--tds-nav-current-border)"
+  },
+  "states": {
+    "focusVisible": {
+      "outline": "var(--tds-nav-focus-outline)",
+      "outlineOffset": "var(--tds-nav-focus-outline-offset)"
+    }
+  }
+}
