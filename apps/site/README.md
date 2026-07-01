@@ -1,6 +1,6 @@
-# DSTD Documentation Site
+# TDS Documentation Site
 
-Cette application statique présente la documentation typographique DSTD.
+Cette application statique présente la documentation typographique TDS.
 
 ## Voir la page
 
