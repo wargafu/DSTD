@@ -1,0 +1,76 @@
+---
+title: Breadcrumb
+description: Composant Breadcrumb TDS — fil d'Ariane, séparateurs générés en CSS.
+sidebar:
+  order: 10
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+# Breadcrumb
+
+Le fil d'Ariane situe l'utilisateur dans l'arborescence du site. Les séparateurs sont générés en
+CSS (`::before`), pas insérés dans le HTML — le contenu lu par un lecteur d'écran reste propre.
+
+---
+
+## Importation
+
+```css
+@import "@tds-tchad/core/components/breadcrumb/breadcrumb.css";
+```
+
+```typescript
+import { breadcrumb } from '@tds-tchad/core/components/breadcrumb';
+```
+
+---
+
+## Exemple
+
+```html
+<nav class="tds-breadcrumb" aria-label="Fil d'Ariane">
+  <ol class="tds-breadcrumb__list">
+    <li class="tds-breadcrumb__item">
+      <a href="/" class="tds-breadcrumb__link">Accueil</a>
+    </li>
+    <li class="tds-breadcrumb__item">
+      <a href="/demarches" class="tds-breadcrumb__link">Démarches</a>
+    </li>
+    <li class="tds-breadcrumb__item">
+      <span class="tds-breadcrumb__current" aria-current="page">Renouvellement de carte</span>
+    </li>
+  </ol>
+</nav>
+```
+
+---
+
+## Accessibilité
+
+<Aside type="tip" title="Règles critiques">
+  - Utiliser une liste ordonnée `<ol>` — l'ordre est sémantiquement significatif
+  - Le dernier élément (page courante) est un texte simple avec `aria-current="page"`, **pas un lien**
+  - Le `<nav>` doit avoir un `aria-label="Fil d'Ariane"` (ou équivalent) pour se distinguer de la navigation principale
+</Aside>
+
+---
+
+## Do / Don't
+
+<div class="tds-do-dont">
+  <div class="tds-do-dont__card tds-do-dont__card--do">
+    <div class="tds-do-dont__heading">✓ Faire</div>
+    <ul>
+      <li>Toujours commencer par « Accueil »</li>
+      <li>Garder les libellés courts et fidèles aux titres de page réels</li>
+    </ul>
+  </div>
+  <div class="tds-do-dont__card tds-do-dont__card--dont">
+    <div class="tds-do-dont__heading">✗ Éviter</div>
+    <ul>
+      <li>Transformer le dernier élément (page courante) en lien cliquable</li>
+      <li>Utiliser le fil d'Ariane comme seule navigation d'une page profonde — il complète, ne remplace pas le menu principal</li>
+    </ul>
+  </div>
+</div>

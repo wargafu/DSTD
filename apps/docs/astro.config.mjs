@@ -56,6 +56,11 @@ export default defineConfig({
             { label: 'Card', slug: 'components/card' },
             { label: 'Link', slug: 'components/link' },
             { label: 'Table', slug: 'components/table' },
+            { label: 'Header', slug: 'components/header' },
+            { label: 'Navigation', slug: 'components/nav' },
+            { label: 'Breadcrumb', slug: 'components/breadcrumb' },
+            { label: 'Pagination', slug: 'components/pagination' },
+            { label: 'Modal', slug: 'components/modal' },
           ],
         },
         {

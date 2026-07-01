@@ -1,0 +1,94 @@
+---
+title: Header
+description: Composant Header TDS — en-tête institutionnel, marque, bandeau tricolore.
+sidebar:
+  order: 8
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+# Header
+
+L'en-tête institutionnel identifie le service public : logo/marque, titre, tagline, et une zone
+d'actions libre (connexion, navigation, recherche). Purement CSS, sans dépendance JavaScript.
+
+---
+
+## Importation
+
+```css
+@import "@tds-tchad/core/components/header/header.css";
+```
+
+```typescript
+import { header } from '@tds-tchad/core/components/header';
+import type { HeaderVariant } from '@tds-tchad/core/components/header';
+```
+
+---
+
+## Exemple
+
+```html
+<header class="tds-header">
+  <a href="/" class="tds-header__brand">
+    <img src="/brand/tds-logo-official.png" alt="Tchad Design System" class="tds-header__logo" />
+    <div class="tds-header__titles">
+      <span class="tds-header__title">République du Tchad</span>
+      <span class="tds-header__tagline">Ministère du Numérique</span>
+    </div>
+  </a>
+  <div class="tds-header__actions">
+    <a href="/connexion" class="tds-link">Se connecter</a>
+  </div>
+</header>
+```
+
+## Variantes
+
+| Variante | Classe | Usage |
+|---|---|---|
+| Par défaut | `tds-header` | En-tête pleine hauteur (4rem min) |
+| Compacte | `tds-header tds-header--compact` | Pages secondaires, formulaires longs |
+
+## Bandeau tricolore
+
+Un bandeau optionnel aux couleurs institutionnelles peut être ajouté au-dessus de l'en-tête :
+
+```html
+<div class="tds-header__stripe">
+  <span></span><span></span><span></span>
+</div>
+<header class="tds-header">…</header>
+```
+
+---
+
+## Accessibilité
+
+<Aside type="tip" title="Règles critiques">
+  - Le lien de marque (`tds-header__brand`) doit englober le logo ET le titre en un seul lien vers l'accueil, pas deux liens séparés
+  - Prévoir un lien d'évitement (« Aller au contenu principal ») juste avant le header dans l'ordre du DOM
+  - Le contraste du titre/tagline doit rester conforme AA même en variante compacte
+</Aside>
+
+---
+
+## Do / Don't
+
+<div class="tds-do-dont">
+  <div class="tds-do-dont__card tds-do-dont__card--do">
+    <div class="tds-do-dont__heading">✓ Faire</div>
+    <ul>
+      <li>Un seul en-tête par page, en tout premier élément du <code>&lt;body&gt;</code></li>
+      <li>Utiliser <code>tds-header--compact</code> sur les pages de formulaire pour gagner de l'espace vertical</li>
+    </ul>
+  </div>
+  <div class="tds-do-dont__card tds-do-dont__card--dont">
+    <div class="tds-do-dont__heading">✗ Éviter</div>
+    <ul>
+      <li>Empiler plusieurs bandeaux/en-têtes qui allongent inutilement le scroll avant le contenu</li>
+      <li>Mettre des liens de navigation critiques uniquement dans le header sans les dupliquer dans le footer</li>
+    </ul>
+  </div>
+</div>

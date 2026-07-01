@@ -1,0 +1,138 @@
+---
+title: Modal
+description: Composant Modal TDS — habille l'élément dialog natif, focus trap et Échap gérés nativement.
+sidebar:
+  order: 12
+---
+
+import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
+
+# Modal
+
+Contrairement aux autres composants TDS, le modal nécessite un minimum de JavaScript : l'élément
+`<dialog>` natif ne s'ouvre pas en pur CSS. En contrepartie, `<dialog>` gère **nativement** le
+piège à focus (focus trap), la fermeture avec Échap et le `::backdrop` — pas de librairie requise.
+
+---
+
+## Importation
+
+```css
+@import "@tds-tchad/core/components/modal/modal.css";
+```
+
+```typescript
+import { modal } from '@tds-tchad/core/components/modal';
+import type { ModalSize } from '@tds-tchad/core/components/modal';
+```
+
+---
+
+## Tailles
+
+| Taille | Classe | Max-width |
+|---|---|---|
+| `sm` | `tds-modal tds-modal--sm` | 24rem |
+| **`md`** (défaut) | **`tds-modal`** | **32rem** |
+| `lg` | `tds-modal tds-modal--lg` | 48rem |
+
+---
+
+## Exemples de code
+
+<Tabs>
+  <TabItem label="HTML + JS minimal">
+
+    ```html
+    <button type="button" class="tds-button tds-button--primary tds-button--md" onclick="document.getElementById('confirm-modal').showModal()">
+      Soumettre la demande
+    </button>
+
+    <dialog id="confirm-modal" class="tds-modal" aria-labelledby="confirm-modal-title">
+      <div class="tds-modal__header">
+        <h2 id="confirm-modal-title" class="tds-modal__title">Confirmer la soumission</h2>
+        <button type="button" class="tds-modal__close" aria-label="Fermer" onclick="this.closest('dialog').close()">✕</button>
+      </div>
+      <div class="tds-modal__body">
+        <p>Votre demande sera transmise au service concerné. Cette action est définitive.</p>
+      </div>
+      <div class="tds-modal__footer">
+        <button type="button" class="tds-button tds-button--tertiary tds-button--md" onclick="this.closest('dialog').close()">
+          Annuler
+        </button>
+        <button type="button" class="tds-button tds-button--primary tds-button--md">Confirmer</button>
+      </div>
+    </dialog>
+    ```
+
+  </TabItem>
+  <TabItem label="React">
+
+    ```tsx
+    import { useRef } from 'react';
+    import '@tds-tchad/core/components/modal/modal.css';
+    import type { ModalSize } from '@tds-tchad/core/components/modal';
+
+    interface ModalProps {
+      title: string;
+      size?: ModalSize;
+      children: React.ReactNode;
+    }
+
+    export function Modal({ title, size = 'md', children }: ModalProps) {
+      const ref = useRef<HTMLDialogElement>(null);
+
+      return (
+        <dialog
+          ref={ref}
+          className={`tds-modal ${size !== 'md' ? `tds-modal--${size}` : ''}`}
+          aria-labelledby="modal-title"
+        >
+          <div className="tds-modal__header">
+            <h2 id="modal-title" className="tds-modal__title">{title}</h2>
+            <button type="button" className="tds-modal__close" aria-label="Fermer" onClick={() => ref.current?.close()}>
+              ✕
+            </button>
+          </div>
+          <div className="tds-modal__body">{children}</div>
+        </dialog>
+      );
+    }
+
+    // Ouverture : dialogRef.current?.showModal()
+    ```
+
+  </TabItem>
+</Tabs>
+
+---
+
+## Accessibilité
+
+<Aside type="tip" title="Règles critiques">
+  - Ouvrir uniquement avec `dialog.showModal()` (jamais `.show()` ni l'attribut `open` statique) — `showModal()` seul active le piège à focus, le `::backdrop` et la fermeture Échap natifs
+  - Le titre du modal doit être référencé par `aria-labelledby` pointant vers l'élément `<h2>` du header
+  - Toujours fournir un bouton de fermeture explicite en plus d'Échap (utilisateurs qui n'utilisent pas le clavier)
+  - Le focus revient automatiquement à l'élément qui a ouvert le modal après `dialog.close()` — ne pas le gérer manuellement
+</Aside>
+
+---
+
+## Do / Don't
+
+<div class="tds-do-dont">
+  <div class="tds-do-dont__card tds-do-dont__card--do">
+    <div class="tds-do-dont__heading">✓ Faire</div>
+    <ul>
+      <li>Réserver le modal aux actions qui nécessitent une confirmation ou une interruption du flux</li>
+      <li>Garder le contenu court — un modal n'est pas une page</li>
+    </ul>
+  </div>
+  <div class="tds-do-dont__card tds-do-dont__card--dont">
+    <div class="tds-do-dont__heading">✗ Éviter</div>
+    <ul>
+      <li>Empiler plusieurs modals (modal ouvrant un modal)</li>
+      <li>Mettre un formulaire complet multi-étapes dans un modal — préférer une page dédiée</li>
+    </ul>
+  </div>
+</div>

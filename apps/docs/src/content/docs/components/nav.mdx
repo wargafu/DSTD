@@ -1,0 +1,85 @@
+---
+title: Navigation
+description: Composant Navigation TDS — menu principal, état courant, variante secondaire.
+sidebar:
+  order: 9
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+# Navigation
+
+Le menu de navigation principale se construit avec un `<nav>` sémantique et une liste de liens.
+La page courante se marque avec `aria-current="page"` — pas de classe dédiée, pour rester fiable
+même si le rendu est fait côté serveur sans logique JS.
+
+---
+
+## Importation
+
+```css
+@import "@tds-tchad/core/components/nav/nav.css";
+```
+
+```typescript
+import { nav } from '@tds-tchad/core/components/nav';
+```
+
+---
+
+## Exemple
+
+```html
+<nav class="tds-nav" aria-label="Navigation principale">
+  <ul class="tds-nav__list">
+    <li><a href="/" class="tds-nav__link" aria-current="page">Accueil</a></li>
+    <li><a href="/demarches" class="tds-nav__link">Démarches</a></li>
+    <li><a href="/services" class="tds-nav__link">Services</a></li>
+    <li><a href="/contact" class="tds-nav__link">Contact</a></li>
+  </ul>
+</nav>
+```
+
+## Variante secondaire (fond clair)
+
+Pour une navigation de sous-section (moins proéminente que le menu principal) :
+
+```html
+<nav class="tds-nav tds-nav--muted" aria-label="Navigation secondaire">
+  <ul class="tds-nav__list">
+    <li><a href="#" class="tds-nav__link">Sous-section A</a></li>
+    <li><a href="#" class="tds-nav__link" aria-current="page">Sous-section B</a></li>
+  </ul>
+</nav>
+```
+
+---
+
+## Accessibilité
+
+<Aside type="tip" title="Règles critiques">
+  - Toujours envelopper la liste dans un `<nav>` avec un `aria-label` explicite (« Navigation principale », « Navigation secondaire ») — plusieurs `<nav>` sur une page nécessitent des labels distincts
+  - Marquer la page active avec `aria-current="page"` sur le `<a>`, jamais uniquement une classe CSS (invisible aux lecteurs d'écran)
+  - Le menu doit rester utilisable au clavier (ordre de tabulation naturel de la liste) sans JavaScript
+</Aside>
+
+---
+
+## Do / Don't
+
+<div class="tds-do-dont">
+  <div class="tds-do-dont__card tds-do-dont__card--do">
+    <div class="tds-do-dont__heading">✓ Faire</div>
+    <ul>
+      <li>Limiter le menu principal à 5-7 entrées maximum</li>
+      <li>Utiliser <code>tds-nav--muted</code> pour les sous-navigations afin de garder une hiérarchie visuelle claire</li>
+    </ul>
+  </div>
+  <div class="tds-do-dont__card tds-do-dont__card--dont">
+    <div class="tds-do-dont__heading">✗ Éviter</div>
+    <ul>
+      <li>Marquer l'état courant uniquement par une couleur (sans <code>aria-current</code>)</li>
+      <li>Imbriquer des menus déroulants complexes sans les tester au clavier</li>
+    </ul>
+  </div>
+</div>
