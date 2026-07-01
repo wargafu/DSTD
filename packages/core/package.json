@@ -18,6 +18,7 @@
     "build": "node scripts/build.mjs",
     "generate:tokens": "node scripts/generate-tokens.mjs",
     "test": "vitest run",
+    "lint:css": "stylelint \"src/**/*.css\"",
     "clean": "node scripts/clean.mjs",
     "dev": "tsc --build tsconfig.json --watch",
     "typecheck": "tsc -p tsconfig.typecheck.json",
@@ -85,6 +86,7 @@
   },
   "devDependencies": {
     "postcss": "^8.5.16",
+    "stylelint": "^17.14.0",
     "typescript": "^6.0.3",
     "vitest": "^4.1.9"
   }
