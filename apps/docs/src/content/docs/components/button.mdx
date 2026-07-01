@@ -222,7 +222,7 @@ Cinq variantes couvrent tous les niveaux de hiérarchie d'action.
 
     ### Composant Button
     ```vue
-    <!-- components/TdgsButton.vue -->
+    <!-- components/DstdButton.vue -->
     <script setup lang="ts">
     import '@dstd/core/components/button/button.css';
     import type { ButtonVariant, ButtonSize } from '@dstd/core/components/button';
@@ -267,17 +267,17 @@ Cinq variantes couvrent tous les niveaux de hiérarchie d'action.
 
     ### Usage
     ```vue
-    <TdgsButton type="submit" variant="primary">
+    <DstdButton type="submit" variant="primary">
       Envoyer
-    </TdgsButton>
+    </DstdButton>
 
-    <TdgsButton variant="danger" @click="handleDelete">
+    <DstdButton variant="danger" @click="handleDelete">
       Supprimer
-    </TdgsButton>
+    </DstdButton>
 
-    <TdgsButton :loading="isSubmitting" variant="primary">
+    <DstdButton :loading="isSubmitting" variant="primary">
       {{ isSubmitting ? 'Envoi…' : 'Soumettre' }}
-    </TdgsButton>
+    </DstdButton>
     ```
 
   </TabItem>

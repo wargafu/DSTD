@@ -9,7 +9,7 @@
 ---
 
 <p align="center">
-  <img src="./apps/docs/public/brand/dstd-mark.png" width="280" alt="Symbole du DSTD aux couleurs du Tchad">
+  <img src="./apps/docs/public/brand/dstd-logo-official.png" width="760" alt="Tchad Design System — Le standard numérique de l’État">
 </p>
 
 > [!IMPORTANT]

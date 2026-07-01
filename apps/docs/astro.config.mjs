@@ -14,9 +14,9 @@ export default defineConfig({
         root: { label: 'Français', lang: 'fr' },
       },
       logo: {
-        light: './src/assets/dstd-logo-light.svg',
-        dark: './src/assets/dstd-logo-dark.svg',
-        replacesTitle: false,
+        light: './src/assets/dstd-logo-official.png',
+        dark: './src/assets/dstd-logo-official.png',
+        replacesTitle: true,
       },
       social: {
         github: 'https://github.com/wargafu/DSTD',

@@ -79,6 +79,24 @@ header.header .site-title *,
   color: #ffffff !important;
 }
 
+/* Le master officiel comprend de grandes marges : ce cadre n’affiche que
+   la zone centrale du logo sans modifier le fichier source. */
+header.header .site-title img {
+  width: 13rem;
+  height: 3.5rem;
+  max-height: none;
+  object-fit: cover;
+  object-position: 50% 46%;
+  border-radius: 0.25rem;
+}
+
+@media (max-width: 30rem) {
+  header.header .site-title img {
+    width: 9rem;
+    height: 3rem;
+  }
+}
+
 header.header starlight-theme-select button,
 header.header a[href*='github.com'],
 [data-theme='light'] header.header starlight-theme-select button,
