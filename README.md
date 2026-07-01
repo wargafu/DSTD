@@ -1,33 +1,33 @@
-# DSTD — Système de Design de l’État
+# TDS — Système de Design de l’État
 
 > Le système de design open source destiné aux services numériques publics du Tchad.
 
-[![CI](https://github.com/wargafu/DSTD/actions/workflows/ci.yml/badge.svg)](https://github.com/wargafu/DSTD/actions/workflows/ci.yml)
-[![npm version](https://img.shields.io/npm/v/@dstd/core.svg)](https://www.npmjs.com/package/@dstd/core)
+[![CI](https://github.com/wargafu/TDS/actions/workflows/ci.yml/badge.svg)](https://github.com/wargafu/TDS/actions/workflows/ci.yml)
+[![npm version](https://img.shields.io/npm/v/@tds-tchad/core.svg)](https://www.npmjs.com/package/@tds-tchad/core)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 ---
 
 <p align="center">
-  <img src="./apps/docs/public/brand/dstd-logo-official.png" width="760" alt="Tchad Design System — Le standard numérique de l’État">
+  <img src="./apps/docs/public/brand/tds-logo-official.png" width="760" alt="Tchad Design System — Le standard numérique de l’État">
 </p>
 
 > [!IMPORTANT]
-> DSTD est actuellement une initiative indépendante et communautaire. Le projet vise une
+> TDS est actuellement une initiative indépendante et communautaire. Le projet vise une
 > adoption par les institutions publiques tchadiennes, mais ne se présente pas encore comme
 > une norme officiellement homologuée par l'État.
 
-## Pourquoi DSTD ?
+## Pourquoi TDS ?
 
 Les services numériques gouvernementaux du Tchad manquent d'une identité visuelle cohérente. Chaque ministère, chaque plateforme citoyenne développe ses interfaces de manière indépendante — résultat : incohérence, inaccessibilité et perte de confiance des citoyens.
 
-**DSTD** propose une réponse systémique : une bibliothèque de tokens et de composants partagés, accessibles par défaut, conformes WCAG 2.1 AA, et prêts pour le français comme pour l'arabe.
+**TDS** propose une réponse systémique : une bibliothèque de tokens et de composants partagés, accessibles par défaut, conformes WCAG 2.1 AA, et prêts pour le français comme pour l'arabe.
 
 Inspiré de [GOV.UK Design System](https://design-system.service.gov.uk/), [DSFR](https://www.systeme-de-design.gouv.fr/) et [USWDS](https://designsystem.digital.gov/).
 
 ---
 
-## Ce que DSTD fournit
+## Ce que TDS fournit
 
 ### 🎨 Design Tokens
 | Système | Variables CSS | TypeScript | JSON |
@@ -40,30 +40,31 @@ Inspiré de [GOV.UK Design System](https://design-system.service.gov.uk/), [DSFR
 ### 🧩 Composants
 | Composant | Classes CSS | Types TS | Accessibilité |
 |---|---|---|---|
-| Button | `dstd-button` | `ButtonVariant`, `ButtonSize` | WCAG AA ✅ |
-| Input / Form | `dstd-input`, `dstd-field` | `InputVariant`, `InputSize` | WCAG AA ✅ |
-| Alert | `dstd-alert` | `AlertVariant` | `role=alert` ✅ |
-| Badge | `dstd-badge` | `BadgeVariant` | WCAG AA ✅ |
-| Card | `dstd-card` | `CardVariant` | ✅ |
-| Link | `dstd-link` | `LinkVariant` | Focus visible ✅ |
-| Table | `dstd-table` | — | `scope`, `caption` ✅ |
+| Button | `tds-button` | `ButtonVariant`, `ButtonSize` | WCAG AA ✅ |
+| Input / Form | `tds-input`, `tds-field` | `InputVariant`, `InputSize` | WCAG AA ✅ |
+| Alert | `tds-alert` | `AlertVariant` | `role=alert` ✅ |
+| Badge | `tds-badge` | `BadgeVariant` | WCAG AA ✅ |
+| Card | `tds-card` | `CardVariant` | ✅ |
+| Link | `tds-link` | `LinkVariant` | Focus visible ✅ |
+| Table | `tds-table` | — | `scope`, `caption` ✅ |
 
 ---
 
 ## Installation
 
-Le namespace npm `@dstd` et les classes CSS `dstd-*` sont conservés pendant la
-transition de marque afin d’éviter une rupture d’API.
+Le namespace npm `@tds-tchad` et les classes CSS `tds-*` constituent l'API stable
+du projet (le package n'étant pas encore publié, aucune compatibilité
+ascendante n'est requise avec l'ancien namespace `@dstd`).
 
 ```bash
 # pnpm (recommandé)
-pnpm add @dstd/core
+pnpm add @tds-tchad/core
 
 # npm
-npm install @dstd/core
+npm install @tds-tchad/core
 
 # yarn
-yarn add @dstd/core
+yarn add @tds-tchad/core
 ```
 
 **Node.js 18+ requis.** Le package est distribué en ESM (`"type": "module"`).
@@ -76,44 +77,44 @@ yarn add @dstd/core
 
 ```css
 /* Dans votre feuille de style principale */
-@import "@dstd/core/base.css";             /* Reset + styles HTML */
-@import "@dstd/core/tokens/color.css";
-@import "@dstd/core/tokens/typography.css";
-@import "@dstd/core/tokens/spacing.css";
-@import "@dstd/core/tokens/radius.css";
-@import "@dstd/core/tokens/shadow.css";
-@import "@dstd/core/tokens/motion.css";
-@import "@dstd/core/tokens/z-index.css";
+@import "@tds-tchad/core/base.css";             /* Reset + styles HTML */
+@import "@tds-tchad/core/tokens/color.css";
+@import "@tds-tchad/core/tokens/typography.css";
+@import "@tds-tchad/core/tokens/spacing.css";
+@import "@tds-tchad/core/tokens/radius.css";
+@import "@tds-tchad/core/tokens/shadow.css";
+@import "@tds-tchad/core/tokens/motion.css";
+@import "@tds-tchad/core/tokens/z-index.css";
 
 /* Composants selon vos besoins */
-@import "@dstd/core/components/button/button.css";
-@import "@dstd/core/components/input/input.css";
-@import "@dstd/core/components/alert/alert.css";
-@import "@dstd/core/components/badge/badge.css";
-@import "@dstd/core/components/card/card.css";
-@import "@dstd/core/components/link/link.css";
-@import "@dstd/core/components/table/table.css";
+@import "@tds-tchad/core/components/button/button.css";
+@import "@tds-tchad/core/components/input/input.css";
+@import "@tds-tchad/core/components/alert/alert.css";
+@import "@tds-tchad/core/components/badge/badge.css";
+@import "@tds-tchad/core/components/card/card.css";
+@import "@tds-tchad/core/components/link/link.css";
+@import "@tds-tchad/core/components/table/table.css";
 ```
 
 ### 2. Utiliser les composants en HTML
 
 ```html
 <!-- Bouton primary -->
-<button type="submit" class="dstd-button dstd-button--primary dstd-button--md">
+<button type="submit" class="tds-button tds-button--primary tds-button--md">
   Valider la demande
 </button>
 
 <!-- Champ de formulaire -->
-<div class="dstd-field">
-  <label class="dstd-field__label" for="nom">Nom complet</label>
-  <input id="nom" type="text" class="dstd-input dstd-input--md" required>
+<div class="tds-field">
+  <label class="tds-field__label" for="nom">Nom complet</label>
+  <input id="nom" type="text" class="tds-input tds-input--md" required>
 </div>
 
 <!-- Alerte succès -->
-<div class="dstd-alert dstd-alert--success" role="status">
-  <div class="dstd-alert__content">
-    <p class="dstd-alert__title">Dossier soumis</p>
-    <div class="dstd-alert__body">Référence : REF-2024-001234</div>
+<div class="tds-alert tds-alert--success" role="status">
+  <div class="tds-alert__content">
+    <p class="tds-alert__title">Dossier soumis</p>
+    <div class="tds-alert__body">Référence : REF-2024-001234</div>
   </div>
 </div>
 ```
@@ -121,8 +122,8 @@ yarn add @dstd/core
 ### 3. Utiliser les tokens TypeScript
 
 ```typescript
-import { color, spacing, typography } from '@dstd/core/tokens';
-import type { ButtonVariant } from '@dstd/core/components/button';
+import { color, spacing, typography } from '@tds-tchad/core/tokens';
+import type { ButtonVariant } from '@tds-tchad/core/components/button';
 
 const primary = color.blue[500];      // '#0033A0'
 const gap = spacing.scale[4];         // '1rem' (16px)
@@ -134,9 +135,9 @@ const body = typography.sizes.md;     // '1rem'
 ## Structure du monorepo
 
 ```
-DSTD/
+TDS/
 ├── packages/
-│   └── core/                  ← Package npm principal @dstd/core
+│   └── core/                  ← Package npm principal @tds-tchad/core
 │       ├── src/
 │       │   ├── base.css       ← Reset CSS + styles HTML de base
 │       │   ├── tokens/        ← Design tokens (TS + JSON + CSS)
@@ -164,8 +165,8 @@ DSTD/
 ### Installation
 
 ```bash
-git clone https://github.com/wargafu/DSTD.git
-cd DSTD
+git clone https://github.com/wargafu/TDS.git
+cd TDS
 pnpm install
 ```
 
@@ -183,10 +184,10 @@ pnpm build
 pnpm typecheck
 
 # Valider les tokens (53 checks)
-pnpm --filter @dstd/core validate:tokens
+pnpm --filter @tds-tchad/core validate:tokens
 
 # Valider les exports npm (après build)
-pnpm --filter @dstd/core validate:exports
+pnpm --filter @tds-tchad/core validate:exports
 
 # Lint
 pnpm lint
@@ -202,7 +203,7 @@ pnpm format
 git checkout -b feat/nom-du-composant
 
 # 2. Développer + valider
-pnpm --filter @dstd/core validate:tokens
+pnpm --filter @tds-tchad/core validate:tokens
 pnpm build
 pnpm typecheck
 
@@ -217,13 +218,13 @@ git push origin feat/nom-du-composant
 
 ## Contribuer
 
-**Toute contribution est bienvenue.** DSTD est un bien numérique commun pour le Tchad.
+**Toute contribution est bienvenue.** TDS est un bien numérique commun pour le Tchad.
 
 ### Avant d'ouvrir une PR
 
 - [ ] Les tokens ajoutés existent en `.ts`, `.json` ET `.css`
-- [ ] `pnpm --filter @dstd/core validate:tokens` passe à 0 erreur
-- [ ] `pnpm build && pnpm --filter @dstd/core validate:exports` réussit
+- [ ] `pnpm --filter @tds-tchad/core validate:tokens` passe à 0 erreur
+- [ ] `pnpm build && pnpm --filter @tds-tchad/core validate:exports` réussit
 - [ ] `pnpm typecheck` → zéro erreur TypeScript
 - [ ] Les composants respectent WCAG 2.1 AA (contraste, focus, ARIA)
 - [ ] La documentation est mise à jour dans `apps/docs/`
@@ -245,7 +246,7 @@ git push origin feat/nom-du-composant
 - Supprimer un export public
 - Renommer une classe CSS existante
 
-> DSTD suit le versionnement sémantique strict. Les tokens publiés sont **immuables**.
+> TDS suit le versionnement sémantique strict. Les tokens publiés sont **immuables**.
 
 ### Guide de contribution complet
 
@@ -277,7 +278,7 @@ git push origin feat/nom-du-composant
 - [ ] Dark mode complet
 - [ ] Système d'icônes SVG
 - [ ] Support arabe RTL complet et testé
-- [ ] Publication npm `@dstd/core`
+- [ ] Publication npm `@tds-tchad/core`
 
 ---
 
@@ -316,8 +317,8 @@ git push origin feat/nom-du-composant
 
 ## Contact
 
-- **Issues** : [github.com/wargafu/DSTD/issues](https://github.com/wargafu/DSTD/issues)
-- **Discussions** : [github.com/wargafu/DSTD/discussions](https://github.com/wargafu/DSTD/discussions)
+- **Issues** : [github.com/wargafu/TDS/issues](https://github.com/wargafu/TDS/issues)
+- **Discussions** : [github.com/wargafu/TDS/discussions](https://github.com/wargafu/TDS/discussions)
 - **Email** : design-system@gouv.td *(à configurer)*
 
 ---
