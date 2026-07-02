@@ -52,6 +52,11 @@ Inspiré de [GOV.UK Design System](https://design-system.service.gov.uk/), [DSFR
 | Breadcrumb | `tds-breadcrumb` | — | `aria-current="page"` ✅ |
 | Pagination | `tds-pagination` | — | `aria-label`, `aria-current` ✅ |
 | Modal | `tds-modal` | `ModalSize` | Focus trap natif (`<dialog>`) ✅ |
+| Skip Link | `tds-skip-link` | — | Premier élément focusable ✅ |
+| Footer | `tds-footer` | — | Lien déclaration d'accessibilité ✅ |
+| Accordion | `tds-accordion` | — | `<details>`/`<summary>` natif, zéro JS ✅ |
+| Tabs | `tds-tabs` | — | WAI-ARIA APG (roving tabindex) ✅ |
+| Tooltip | `tds-tooltip` | — | CSS pur, limitation tactile documentée ⚠️ |
 
 ---
 
@@ -99,6 +104,16 @@ yarn add @tds-tchad/core
 @import "@tds-tchad/core/components/card/card.css";
 @import "@tds-tchad/core/components/link/link.css";
 @import "@tds-tchad/core/components/table/table.css";
+@import "@tds-tchad/core/components/header/header.css";
+@import "@tds-tchad/core/components/nav/nav.css";
+@import "@tds-tchad/core/components/breadcrumb/breadcrumb.css";
+@import "@tds-tchad/core/components/pagination/pagination.css";
+@import "@tds-tchad/core/components/modal/modal.css";
+@import "@tds-tchad/core/components/skip-link/skip-link.css";
+@import "@tds-tchad/core/components/footer/footer.css";
+@import "@tds-tchad/core/components/accordion/accordion.css";
+@import "@tds-tchad/core/components/tabs/tabs.css";
+@import "@tds-tchad/core/components/tooltip/tooltip.css";
 ```
 
 ### 2. Utiliser les composants en HTML
@@ -188,7 +203,7 @@ pnpm build
 # Vérifier les types TypeScript
 pnpm typecheck
 
-# Valider les tokens (73 checks)
+# Valider les tokens (93 checks)
 pnpm --filter @tds-tchad/core validate:tokens
 
 # Valider les exports npm (après build)
@@ -264,7 +279,7 @@ git push origin feat/nom-du-composant
 
 ### v0.1 — Fondations ✅
 - [x] 7 systèmes de tokens (couleurs, typo, espacement, radius, shadow, motion, z-index)
-- [x] 7 composants (Button, Input, Alert, Badge, Card, Link, Table)
+- [x] 17 composants (Button, Input, Alert, Badge, Card, Link, Table, Header, Navigation, Breadcrumb, Pagination, Modal, Skip Link, Footer, Accordion, Tabs, Tooltip)
 - [x] Build system industriel + CI/CD
 - [x] Documentation Astro Starlight
 - [x] Pipeline de génération de tokens à source unique, tests automatisés, stylelint, vérifications a11y (axe-core)
