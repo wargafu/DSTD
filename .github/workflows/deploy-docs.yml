@@ -33,6 +33,17 @@ jobs:
           cache: 'npm'
           cache-dependency-path: apps/docs/package-lock.json
 
+      # ── @tds-tchad/core doit être buildé avant les docs : la page
+      #    playground.astro sert le CSS réel via public/tds/ (copié depuis
+      #    packages/core/dist par le script prebuild de apps/docs).
+      - name: Install core devDependencies
+        run: npm install --ignore-scripts
+        working-directory: packages/core
+
+      - name: Build core
+        run: node scripts/build.mjs
+        working-directory: packages/core
+
       - name: Install dependencies
         run: npm install
         working-directory: apps/docs
