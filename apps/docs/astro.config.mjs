@@ -27,11 +27,13 @@ export default defineConfig({
       customCss: ['./src/styles/custom.css'],
       components: {
         Footer: './src/components/Footer.astro',
+        Sidebar: './src/components/Sidebar.astro',
       },
       sidebar: [
         {
           label: 'Premiers pas',
           items: [
+            { label: 'Vue d\'ensemble', slug: 'premiers-pas' },
             { label: 'Introduction', slug: 'premiers-pas/introduction' },
             { label: 'Installation', slug: 'premiers-pas/installation' },
             { label: 'Démarrage rapide', slug: 'premiers-pas/quick-start' },
@@ -40,6 +42,7 @@ export default defineConfig({
         {
           label: 'Fondamentaux',
           items: [
+            { label: 'Vue d\'ensemble', slug: 'fondamentaux' },
             { label: 'Couleurs', slug: 'fondamentaux/colors' },
             { label: 'Typographie', slug: 'fondamentaux/typography' },
             { label: 'Espacement', slug: 'fondamentaux/spacing' },
@@ -58,6 +61,7 @@ export default defineConfig({
         {
           label: 'Composants',
           items: [
+            { label: 'Vue d\'ensemble', slug: 'components' },
             { label: 'Button', slug: 'components/button' },
             { label: 'Input', slug: 'components/input' },
             { label: 'Alert', slug: 'components/alert' },
@@ -80,6 +84,7 @@ export default defineConfig({
         {
           label: 'Modèles',
           items: [
+            { label: 'Vue d\'ensemble', slug: 'modeles' },
             { label: 'Aperçu', slug: 'modeles/overview' },
             { label: 'Formulaire de connexion', slug: 'modeles/login-form' },
             { label: 'Formulaire multi-étapes', slug: 'modeles/multi-step-form' },
@@ -89,22 +94,30 @@ export default defineConfig({
         },
         {
           label: 'Mesure d\'audience',
-          items: [{ label: 'Vue d\'ensemble', slug: 'mesure-audience/apercu' }],
+          items: [
+            { label: 'Vue d\'ensemble', slug: 'mesure-audience' },
+            { label: 'Principes', slug: 'mesure-audience/apercu' },
+          ],
         },
         {
           label: 'Communauté',
           items: [
+            { label: 'Vue d\'ensemble', slug: 'communaute' },
             { label: 'Contribution', slug: 'communaute/contribution' },
             { label: 'Roadmap', slug: 'communaute/roadmap' },
           ],
         },
         {
           label: 'Aide',
-          items: [{ label: 'FAQ', slug: 'aide/faq' }],
+          items: [
+            { label: 'Vue d\'ensemble', slug: 'aide' },
+            { label: 'FAQ', slug: 'aide/faq' },
+          ],
         },
         {
           label: 'À propos',
           items: [
+            { label: 'Vue d\'ensemble', slug: 'about' },
             { label: 'Mission', slug: 'about/mission' },
             { label: 'Versionnement', slug: 'about/versioning' },
           ],

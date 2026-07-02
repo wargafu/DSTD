@@ -1,0 +1,44 @@
+---
+title: Composants
+description: Les 17 composants TDS — variantes, tailles, états, accessibilité et exemples de code.
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+# Composants
+
+17 composants CSS-first, sans dépendance JavaScript (sauf Modal et Tabs, qui nécessitent un
+minimum d'interaction native). Chaque page suit la même structure : Présentation, Démo, Design,
+Code, Accessibilité.
+
+## Éléments de base
+
+<CardGrid>
+  <Card title="Button">Cinq variantes, trois tailles — [lire →](/components/button/)</Card>
+  <Card title="Input">Text, textarea, select, checkbox, radio, switch — [lire →](/components/input/)</Card>
+  <Card title="Alert">Messages contextuels accessibles — [lire →](/components/alert/)</Card>
+  <Card title="Badge">Étiquettes de statut — [lire →](/components/badge/)</Card>
+  <Card title="Card">Surfaces de contenu groupé — [lire →](/components/card/)</Card>
+  <Card title="Link">Styles de liens — [lire →](/components/link/)</Card>
+  <Card title="Table">Tableaux de données — [lire →](/components/table/)</Card>
+</CardGrid>
+
+## Navigation
+
+<CardGrid>
+  <Card title="Header">En-tête institutionnel — [lire →](/components/header/)</Card>
+  <Card title="Navigation">Menu principal — [lire →](/components/nav/)</Card>
+  <Card title="Breadcrumb">Fil d'Ariane — [lire →](/components/breadcrumb/)</Card>
+  <Card title="Pagination">Navigation entre pages — [lire →](/components/pagination/)</Card>
+  <Card title="Skip Link">Lien d'évitement — [lire →](/components/skip-link/)</Card>
+  <Card title="Footer">Pied de page institutionnel — [lire →](/components/footer/)</Card>
+</CardGrid>
+
+## Interaction
+
+<CardGrid>
+  <Card title="Modal">Boîte de dialogue native — [lire →](/components/modal/)</Card>
+  <Card title="Accordion">`<details>`/`<summary>` natif — [lire →](/components/accordion/)</Card>
+  <Card title="Tabs">Onglets WAI-ARIA APG — [lire →](/components/tabs/)</Card>
+  <Card title="Tooltip">Bulle contextuelle CSS pur — [lire →](/components/tooltip/)</Card>
+</CardGrid>
