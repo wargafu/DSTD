@@ -271,7 +271,7 @@ git push origin feat/nom-du-composant
 
 ### Guide de contribution complet
 
-→ [docs/guidelines/contributing](/apps/docs/src/content/docs/guidelines/contributing.mdx)
+→ [docs/communaute/contribution](/apps/docs/src/content/docs/communaute/contribution.mdx)
 
 ---
 

@@ -1,0 +1,51 @@
+---
+title: Vue d'ensemble
+description: Mesure d'audience TDS — principes de suivi respectueux du RGPD et du consentement pour les services publics numériques.
+sidebar:
+  order: 1
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+# Mesure d'audience
+
+Un service public numérique doit pouvoir mesurer son usage (fréquentation, taux de complétion
+des démarches, erreurs) **sans** compromettre la vie privée des citoyens. TDS ne fournit pas
+d'outil de mesure lui-même, mais formalise les principes à respecter lors de son intégration.
+
+---
+
+## Principes
+
+<Aside type="tip" title="Exemption de consentement">
+  Un outil de mesure d'audience configuré en **mode exempté** (données anonymisées, pas de
+  croisement avec d'autres traceurs, durée de conservation limitée, opt-out disponible) ne
+  nécessite pas de recueil de consentement préalable, conformément aux recommandations CNIL sur
+  les cookies et traceurs. C'est la configuration recommandée pour les sites de l'État tchadien.
+</Aside>
+
+- **Données agrégées uniquement** — jamais de suivi individuel nominatif d'un citoyen à travers ses démarches
+- **Pas de partage à des tiers commerciaux** — les données de mesure d'audience d'un service public ne doivent pas alimenter des régies publicitaires
+- **Transparence** — la présence d'un outil de mesure doit être mentionnée dans la politique de confidentialité du site
+- **Minimisation** — ne collecter que ce qui sert réellement le pilotage du service (pages vues, taux d'abandon de formulaire, erreurs), pas plus
+
+---
+
+## Si un consentement est nécessaire
+
+Dès qu'un outil de mesure ne respecte pas le mode exempté (ex. mesure publicitaire, croisement
+de données), un bandeau de consentement est requis avant tout dépôt de traceur. TDS ne fournit
+pas encore de composant bandeau cookies dédié — utiliser un `tds-modal` ou un bandeau custom en
+attendant, en respectant :
+
+- Un choix réellement équivalent entre "Accepter" et "Refuser" (même mise en avant visuelle)
+- Aucun traceur déposé avant le choix explicite de l'utilisateur
+- Un moyen simple de revenir sur son choix (lien permanent en pied de page)
+
+---
+
+## Recommandation d'outillage
+
+Privilégier des solutions auto-hébergées ou respectueuses de la vie privée par défaut plutôt que
+des outils tiers nécessitant systématiquement un consentement. Le choix de l'outil spécifique
+reste à la discrétion de chaque équipe produit — TDS documente les principes, pas l'implémentation.
