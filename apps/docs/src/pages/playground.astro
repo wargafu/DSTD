@@ -43,6 +43,11 @@ const paginationPages = [1, 2, 3, 4, 5];
   <link rel="stylesheet" href="/tds/components/breadcrumb/breadcrumb.css" />
   <link rel="stylesheet" href="/tds/components/pagination/pagination.css" />
   <link rel="stylesheet" href="/tds/components/modal/modal.css" />
+  <link rel="stylesheet" href="/tds/components/skip-link/skip-link.css" />
+  <link rel="stylesheet" href="/tds/components/footer/footer.css" />
+  <link rel="stylesheet" href="/tds/components/accordion/accordion.css" />
+  <link rel="stylesheet" href="/tds/components/tabs/tabs.css" />
+  <link rel="stylesheet" href="/tds/components/tooltip/tooltip.css" />
   <style>
     body { max-width: 72rem; margin: 0 auto; padding: var(--tds-spacing-8); font-family: var(--tds-font-family-primary); }
     section { margin-bottom: var(--tds-spacing-16); }
@@ -253,6 +258,88 @@ const paginationPages = [1, 2, 3, 4, 5];
         <button type="button" class="tds-button tds-button--primary tds-button--md">Confirmer</button>
       </div>
     </dialog>
+  </section>
+
+  <section id="skip-link" data-pagefind-ignore>
+    <h2>Skip Link</h2>
+    <p>Invisible par défaut, apparaît uniquement au focus clavier (Tab). Cliquez/tabulez dans le cadre ci-dessous pour le révéler.</p>
+    <div style="position: relative; height: 4.5rem; border: 1px dashed var(--tds-neutral-300); overflow: hidden;">
+      <a href="#skip-link" class="tds-skip-link">Aller au contenu principal</a>
+    </div>
+  </section>
+
+  <section id="footer" data-pagefind-ignore>
+    <h2>Footer</h2>
+    <footer class="tds-footer">
+      <div class="tds-footer__top">
+        <div class="tds-footer__brand">
+          <span style="color: var(--tds-neutral-0); font-weight: var(--tds-font-weight-semibold);">Tchad Design System</span>
+        </div>
+        <nav class="tds-footer__nav" aria-label="Liens du pied de page">
+          <div class="tds-footer__nav-group">
+            <div class="tds-footer__nav-title">Ressources</div>
+            <a href="#" class="tds-footer__link">Documentation</a>
+            <a href="#" class="tds-footer__link">GitHub</a>
+          </div>
+          <div class="tds-footer__nav-group">
+            <div class="tds-footer__nav-title">Légal</div>
+            <a href="#" class="tds-footer__link">Mentions légales</a>
+            <a href="#" class="tds-footer__link">Accessibilité</a>
+          </div>
+        </nav>
+      </div>
+      <div class="tds-footer__bottom">
+        <span>© 2026 République du Tchad</span>
+        <div class="tds-footer__legal">
+          <a href="#" class="tds-footer__link">Confidentialité</a>
+          <a href="#" class="tds-footer__link">Plan du site</a>
+        </div>
+      </div>
+    </footer>
+  </section>
+
+  <section id="accordion" data-pagefind-ignore>
+    <h2>Accordion</h2>
+    <div class="tds-accordion">
+      <details class="tds-accordion__item" open>
+        <summary class="tds-accordion__trigger">
+          Quels documents sont nécessaires ?
+          <svg class="tds-accordion__icon" aria-hidden="true" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6l4 4 4-4" /></svg>
+        </summary>
+        <div class="tds-accordion__content">Carte d'identité, justificatif de domicile de moins de 3 mois, et photo d'identité récente.</div>
+      </details>
+      <details class="tds-accordion__item">
+        <summary class="tds-accordion__trigger">
+          Quel est le délai de traitement ?
+          <svg class="tds-accordion__icon" aria-hidden="true" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6l4 4 4-4" /></svg>
+        </summary>
+        <div class="tds-accordion__content">Le traitement standard prend entre 5 et 10 jours ouvrés.</div>
+      </details>
+    </div>
+  </section>
+
+  <section id="tabs" data-pagefind-ignore>
+    <h2>Tabs</h2>
+    <div>
+      <div class="tds-tabs__list" role="tablist" aria-label="Exemple d'onglets">
+        <button type="button" class="tds-tabs__trigger" role="tab" aria-selected="true" aria-controls="panel-1" id="tab-1">Aperçu</button>
+        <button type="button" class="tds-tabs__trigger" role="tab" aria-selected="false" aria-controls="panel-2" id="tab-2" tabindex="-1">Documents</button>
+        <button type="button" class="tds-tabs__trigger" role="tab" aria-selected="false" aria-controls="panel-3" id="tab-3" tabindex="-1">Historique</button>
+      </div>
+      <div class="tds-tabs__panel" role="tabpanel" id="panel-1" aria-labelledby="tab-1">Contenu de l'onglet Aperçu.</div>
+      <div class="tds-tabs__panel" role="tabpanel" id="panel-2" aria-labelledby="tab-2" hidden>Contenu de l'onglet Documents.</div>
+      <div class="tds-tabs__panel" role="tabpanel" id="panel-3" aria-labelledby="tab-3" hidden>Contenu de l'onglet Historique.</div>
+    </div>
+  </section>
+
+  <section id="tooltip" data-pagefind-ignore>
+    <h2>Tooltip</h2>
+    <div class="row" style="padding-top: var(--tds-spacing-8); padding-bottom: var(--tds-spacing-4);">
+      <span class="tds-tooltip" tabindex="0" aria-describedby="tooltip-1">
+        Survoler ou tabuler ici
+        <span class="tds-tooltip__bubble" id="tooltip-1" role="tooltip">Information contextuelle complémentaire</span>
+      </span>
+    </div>
   </section>
 </main>
 </body>
