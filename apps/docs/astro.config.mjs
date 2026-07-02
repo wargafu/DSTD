@@ -25,6 +25,9 @@ export default defineConfig({
         baseUrl: 'https://github.com/wargafu/TDS/edit/main/apps/docs/',
       },
       customCss: ['./src/styles/custom.css'],
+      components: {
+        Footer: './src/components/Footer.astro',
+      },
       sidebar: [
         {
           label: 'Premiers pas',
