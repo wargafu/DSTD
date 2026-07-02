@@ -61,6 +61,11 @@ export default defineConfig({
             { label: 'Breadcrumb', slug: 'components/breadcrumb' },
             { label: 'Pagination', slug: 'components/pagination' },
             { label: 'Modal', slug: 'components/modal' },
+            { label: 'Skip Link', slug: 'components/skip-link' },
+            { label: 'Footer', slug: 'components/footer' },
+            { label: 'Accordion', slug: 'components/accordion' },
+            { label: 'Tabs', slug: 'components/tabs' },
+            { label: 'Tooltip', slug: 'components/tooltip' },
           ],
         },
         {

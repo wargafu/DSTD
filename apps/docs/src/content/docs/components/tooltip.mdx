@@ -1,0 +1,78 @@
+---
+title: Tooltip
+description: Composant Tooltip TDS — CSS pur au survol/focus, limitation tactile documentée.
+sidebar:
+  order: 17
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+# Tooltip
+
+Le tooltip TDS est CSS pur : la bulle s'affiche via `:hover` et `:focus-within`, sans
+JavaScript. Cette simplicité a une contrepartie assumée : sur écran tactile, il n'existe pas
+d'équivalent fiable au survol, donc l'information de la bulle ne doit **jamais** être la seule
+source d'une information essentielle.
+
+---
+
+## Importation
+
+```css
+@import "@tds-tchad/core/components/tooltip/tooltip.css";
+```
+
+```typescript
+import { tooltip } from '@tds-tchad/core/components/tooltip';
+```
+
+---
+
+## Exemple
+
+```html
+<span class="tds-tooltip" tabindex="0" aria-describedby="tooltip-numero">
+  Numéro de dossier
+  <span class="tds-tooltip__bubble" id="tooltip-numero" role="tooltip">
+    Identifiant unique attribué à la création de votre demande
+  </span>
+</span>
+```
+
+---
+
+## Accessibilité
+
+<Aside type="caution" title="Limitation connue — ne pas utiliser pour de l'information critique">
+  Ce tooltip CSS pur ne s'affiche pas au simple tap sur écran tactile (pas d'équivalent CSS au
+  `:hover`). Si l'information est indispensable à la compréhension ou à la complétion d'une
+  tâche, ne la mettez **pas uniquement** dans un tooltip — affichez-la en clair ou dans un texte
+  d'aide visible (`tds-helper-text`).
+</Aside>
+
+<Aside type="tip" title="Règles critiques">
+  - L'élément déclencheur doit être focusable (`tabindex="0"` s'il ne l'est pas déjà nativement, ex. un `<span>`) pour que `:focus-within` fonctionne au clavier
+  - La bulle a `role="tooltip"` et est référencée par `aria-describedby` sur le déclencheur
+  - Contenu de la bulle : bref, complémentaire — jamais une action ou un lien (un tooltip n'est pas interactif)
+</Aside>
+
+---
+
+## Do / Don't
+
+<div class="tds-do-dont">
+  <div class="tds-do-dont__card tds-do-dont__card--do">
+    <div class="tds-do-dont__heading">✓ Faire</div>
+    <ul>
+      <li>Utiliser pour du contexte additionnel non essentiel (définition d'un terme, précision)</li>
+      <li>Garder le texte court — une phrase maximum</li>
+    </ul>
+  </div>
+  <div class="tds-do-dont__card tds-do-dont__card--dont">
+    <div class="tds-do-dont__heading">✗ Éviter</div>
+    <ul>
+      <li>Mettre un message d'erreur de formulaire uniquement dans un tooltip</li>
+      <li>Mettre un lien ou un bouton à l'intérieur de la bulle</li>
+    </ul>
+  </div>
+</div>

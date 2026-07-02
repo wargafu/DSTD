@@ -1,0 +1,89 @@
+---
+title: Footer
+description: Composant Footer TDS — pied de page institutionnel, liens légaux et navigation.
+sidebar:
+  order: 14
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+# Footer
+
+Le pied de page institutionnel regroupe les liens légaux, les ressources et les mentions
+obligatoires (accessibilité, confidentialité, plan du site).
+
+---
+
+## Importation
+
+```css
+@import "@tds-tchad/core/components/footer/footer.css";
+```
+
+```typescript
+import { footer } from '@tds-tchad/core/components/footer';
+```
+
+---
+
+## Exemple
+
+```html
+<footer class="tds-footer">
+  <div class="tds-footer__top">
+    <div class="tds-footer__brand">
+      <img src="/brand/tds-logo-official.png" alt="Tchad Design System" class="tds-footer__logo" />
+    </div>
+    <nav class="tds-footer__nav" aria-label="Liens du pied de page">
+      <div class="tds-footer__nav-group">
+        <div class="tds-footer__nav-title">Ressources</div>
+        <a href="/docs" class="tds-footer__link">Documentation</a>
+        <a href="https://github.com/wargafu/TDS" class="tds-footer__link">GitHub</a>
+      </div>
+      <div class="tds-footer__nav-group">
+        <div class="tds-footer__nav-title">Légal</div>
+        <a href="/mentions-legales" class="tds-footer__link">Mentions légales</a>
+        <a href="/accessibilite" class="tds-footer__link">Déclaration d'accessibilité</a>
+      </div>
+    </nav>
+  </div>
+  <div class="tds-footer__bottom">
+    <span>© 2026 République du Tchad</span>
+    <div class="tds-footer__legal">
+      <a href="/confidentialite" class="tds-footer__link">Confidentialité</a>
+      <a href="/plan-du-site" class="tds-footer__link">Plan du site</a>
+    </div>
+  </div>
+</footer>
+```
+
+---
+
+## Accessibilité
+
+<Aside type="tip" title="Règles critiques">
+  - Un seul `<footer>` par page, en dernier élément du `<body>`
+  - Le groupe de liens de navigation doit avoir un `aria-label` (« Liens du pied de page ») pour se distinguer du menu principal
+  - Le lien vers la déclaration d'accessibilité est **obligatoire** pour tout service public numérique (RGAA / WCAG 2.1 AA)
+</Aside>
+
+---
+
+## Do / Don't
+
+<div class="tds-do-dont">
+  <div class="tds-do-dont__card tds-do-dont__card--do">
+    <div class="tds-do-dont__heading">✓ Faire</div>
+    <ul>
+      <li>Toujours inclure le lien vers la déclaration d'accessibilité</li>
+      <li>Dupliquer les liens critiques (contact, accessibilité) déjà présents dans le header</li>
+    </ul>
+  </div>
+  <div class="tds-do-dont__card tds-do-dont__card--dont">
+    <div class="tds-do-dont__heading">✗ Éviter</div>
+    <ul>
+      <li>Surcharger le footer avec des dizaines de liens peu utilisés</li>
+      <li>Utiliser le footer comme seule navigation vers des pages importantes</li>
+    </ul>
+  </div>
+</div>

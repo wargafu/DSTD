@@ -1,0 +1,109 @@
+---
+title: Tabs
+description: Composant Tabs TDS — onglets avec script de référence WAI-ARIA Authoring Practices.
+sidebar:
+  order: 16
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+# Tabs
+
+Comme le Modal, les onglets nécessitent un minimum de JavaScript : il n'existe pas de mécanisme
+HTML/CSS natif pour piloter `aria-selected`, `hidden` et la navigation au clavier entre onglets.
+Le script ci-dessous suit le pattern [WAI-ARIA APG Tabs](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/).
+
+---
+
+## Importation
+
+```css
+@import "@tds-tchad/core/components/tabs/tabs.css";
+```
+
+```typescript
+import { tabs } from '@tds-tchad/core/components/tabs';
+```
+
+---
+
+## Exemple
+
+```html
+<div class="tds-tabs__list" role="tablist" aria-label="Sections du dossier">
+  <button type="button" class="tds-tabs__trigger" role="tab" aria-selected="true" aria-controls="panel-apercu" id="tab-apercu">
+    Aperçu
+  </button>
+  <button type="button" class="tds-tabs__trigger" role="tab" aria-selected="false" aria-controls="panel-documents" id="tab-documents" tabindex="-1">
+    Documents
+  </button>
+</div>
+<div class="tds-tabs__panel" role="tabpanel" id="panel-apercu" aria-labelledby="tab-apercu">
+  Contenu de l'onglet Aperçu.
+</div>
+<div class="tds-tabs__panel" role="tabpanel" id="panel-documents" aria-labelledby="tab-documents" hidden>
+  Contenu de l'onglet Documents.
+</div>
+```
+
+### Script de référence
+
+```javascript
+document.querySelectorAll('[role="tablist"]').forEach((tablist) => {
+  const tabs = [...tablist.querySelectorAll('[role="tab"]')];
+
+  function selectTab(tab) {
+    tabs.forEach((t) => {
+      const selected = t === tab;
+      t.setAttribute('aria-selected', String(selected));
+      t.tabIndex = selected ? 0 : -1;
+      document.getElementById(t.getAttribute('aria-controls')).hidden = !selected;
+    });
+    tab.focus();
+  }
+
+  tablist.addEventListener('click', (e) => {
+    const tab = e.target.closest('[role="tab"]');
+    if (tab) selectTab(tab);
+  });
+
+  tablist.addEventListener('keydown', (e) => {
+    const i = tabs.indexOf(document.activeElement);
+    if (i === -1) return;
+    if (e.key === 'ArrowRight') selectTab(tabs[(i + 1) % tabs.length]);
+    if (e.key === 'ArrowLeft') selectTab(tabs[(i - 1 + tabs.length) % tabs.length]);
+  });
+});
+```
+
+---
+
+## Accessibilité
+
+<Aside type="tip" title="Règles critiques">
+  - `role="tablist"` sur le conteneur, `role="tab"` sur chaque déclencheur, `role="tabpanel"` sur chaque panneau
+  - Un seul onglet a `tabindex="0"` à la fois (roving tabindex) — les autres ont `tabindex="-1"`
+  - Navigation clavier : flèches gauche/droite pour changer d'onglet (pas Tab, qui doit sortir du groupe d'onglets)
+  - Chaque panneau est référencé par `aria-labelledby` vers son onglet, et chaque onglet par `aria-controls` vers son panneau
+</Aside>
+
+---
+
+## Do / Don't
+
+<div class="tds-do-dont">
+  <div class="tds-do-dont__card tds-do-dont__card--do">
+    <div class="tds-do-dont__heading">✓ Faire</div>
+    <ul>
+      <li>Utiliser pour basculer entre des vues alternatives d'un même contenu</li>
+      <li>Limiter à 5-6 onglets maximum visibles sans défilement</li>
+    </ul>
+  </div>
+  <div class="tds-do-dont__card tds-do-dont__card--dont">
+    <div class="tds-do-dont__heading">✗ Éviter</div>
+    <ul>
+      <li>Utiliser des onglets pour une séquence d'étapes (préférer un Stepper)</li>
+      <li>Mettre des champs de formulaire obligatoires dans un onglet non actif au chargement</li>
+    </ul>
+  </div>
+</div>

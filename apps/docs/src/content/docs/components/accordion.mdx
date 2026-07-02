@@ -1,0 +1,88 @@
+---
+title: Accordion
+description: Composant Accordion TDS — habille les éléments HTML natifs details/summary, zéro JavaScript.
+sidebar:
+  order: 15
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+# Accordion
+
+L'accordéon TDS habille les éléments HTML natifs `<details>`/`<summary>` — aucune ligne de
+JavaScript n'est nécessaire pour l'ouverture/fermeture, la sémantique et l'accessibilité de base
+(clavier, lecteurs d'écran) sont gérées nativement par le navigateur.
+
+---
+
+## Importation
+
+```css
+@import "@tds-tchad/core/components/accordion/accordion.css";
+```
+
+```typescript
+import { accordion } from '@tds-tchad/core/components/accordion';
+```
+
+---
+
+## Exemple
+
+```html
+<div class="tds-accordion">
+  <details class="tds-accordion__item" open>
+    <summary class="tds-accordion__trigger">
+      Quels documents sont nécessaires ?
+      <svg class="tds-accordion__icon" aria-hidden="true" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M4 6l4 4 4-4" />
+      </svg>
+    </summary>
+    <div class="tds-accordion__content">
+      Carte d'identité, justificatif de domicile de moins de 3 mois, et photo d'identité récente.
+    </div>
+  </details>
+  <details class="tds-accordion__item">
+    <summary class="tds-accordion__trigger">
+      Quel est le délai de traitement ?
+      <svg class="tds-accordion__icon" aria-hidden="true" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M4 6l4 4 4-4" />
+      </svg>
+    </summary>
+    <div class="tds-accordion__content">
+      Le traitement standard prend entre 5 et 10 jours ouvrés.
+    </div>
+  </details>
+</div>
+```
+
+---
+
+## Accessibilité
+
+<Aside type="tip" title="Règles critiques">
+  - `<summary>` est nativement focusable et actionnable au clavier (Entrée/Espace) — ne pas ajouter `tabindex` ni `role="button"`, ce serait redondant
+  - L'icône chevron doit avoir `aria-hidden="true"` — l'état ouvert/fermé est déjà annoncé nativement par le lecteur d'écran via `<details>`
+  - Utiliser l'attribut `open` sur `<details>` pour qu'un panneau soit ouvert par défaut, jamais du CSS pour forcer l'affichage
+</Aside>
+
+---
+
+## Do / Don't
+
+<div class="tds-do-dont">
+  <div class="tds-do-dont__card tds-do-dont__card--do">
+    <div class="tds-do-dont__heading">✓ Faire</div>
+    <ul>
+      <li>Utiliser pour des FAQ, des sections optionnelles de détail</li>
+      <li>Garder les titres de section (<code>&lt;summary&gt;</code>) courts et explicites</li>
+    </ul>
+  </div>
+  <div class="tds-do-dont__card tds-do-dont__card--dont">
+    <div class="tds-do-dont__heading">✗ Éviter</div>
+    <ul>
+      <li>Cacher des champs de formulaire obligatoires dans un accordéon fermé</li>
+      <li>Réimplémenter l'ouverture/fermeture en JavaScript — <code>&lt;details&gt;</code> le fait déjà nativement</li>
+    </ul>
+  </div>
+</div>

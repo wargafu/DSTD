@@ -1,0 +1,69 @@
+---
+title: Skip Link
+description: Composant Skip Link TDS — lien d'évitement, invisible sauf au focus clavier.
+sidebar:
+  order: 13
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+# Skip Link
+
+Le lien d'évitement permet à un utilisateur au clavier de sauter directement au contenu principal
+sans devoir tabuler à travers tout le header et la navigation à chaque page.
+
+---
+
+## Importation
+
+```css
+@import "@tds-tchad/core/components/skip-link/skip-link.css";
+```
+
+```typescript
+import { skipLink } from '@tds-tchad/core/components/skip-link';
+```
+
+---
+
+## Exemple
+
+```html
+<body>
+  <a href="#main-content" class="tds-skip-link">Aller au contenu principal</a>
+  <header class="tds-header">…</header>
+  <nav class="tds-nav">…</nav>
+  <main id="main-content">…</main>
+</body>
+```
+
+---
+
+## Accessibilité
+
+<Aside type="tip" title="Règles critiques">
+  - Doit être le **tout premier élément focusable** du `<body>` — avant le header
+  - La cible (`href="#main-content"`) doit correspondre à l'`id` de l'élément `<main>`
+  - Reste invisible visuellement jusqu'au focus clavier (`:focus` révèle le lien) — ne jamais utiliser `display: none` (le rendrait inaccessible même au focus)
+</Aside>
+
+---
+
+## Do / Don't
+
+<div class="tds-do-dont">
+  <div class="tds-do-dont__card tds-do-dont__card--do">
+    <div class="tds-do-dont__heading">✓ Faire</div>
+    <ul>
+      <li>Un seul lien d'évitement par page, vers le contenu principal</li>
+      <li>Tester au clavier (Tab dès le chargement de la page) que le lien apparaît</li>
+    </ul>
+  </div>
+  <div class="tds-do-dont__card tds-do-dont__card--dont">
+    <div class="tds-do-dont__heading">✗ Éviter</div>
+    <ul>
+      <li>Le masquer avec <code>display: none</code> ou <code>visibility: hidden</code></li>
+      <li>Le placer après le header dans l'ordre du DOM</li>
+    </ul>
+  </div>
+</div>
