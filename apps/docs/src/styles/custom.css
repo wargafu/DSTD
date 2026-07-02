@@ -210,6 +210,14 @@ body::before {
   color: #6b94ff;
 }
 
+/* Le bleu ci-dessus n'a pas un contraste suffisant sur les fonds colorés
+   des encadrés Aside (jaune/rouge/vert en mode sombre) — dans ce contexte,
+   hériter la couleur de texte de l'Aside (déjà conforme AA) plutôt que
+   forcer le bleu. */
+:root .starlight-aside__content code:not(pre code) {
+  color: inherit;
+}
+
 .sl-markdown-content code:not(pre code) {
   font-family: var(--sl-font-mono);
   font-size: 0.875em;

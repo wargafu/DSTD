@@ -5,17 +5,56 @@ sidebar:
   order: 16
 ---
 
-import { Aside } from '@astrojs/starlight/components';
+import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
 
 # Tabs
 
+<Tabs>
+<TabItem label="Présentation">
+
 Comme le Modal, les onglets nécessitent un minimum de JavaScript : il n'existe pas de mécanisme
 HTML/CSS natif pour piloter `aria-selected`, `hidden` et la navigation au clavier entre onglets.
-Le script ci-dessous suit le pattern [WAI-ARIA APG Tabs](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/).
+Le script fourni suit le pattern [WAI-ARIA APG Tabs](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/).
 
----
+## Do / Don't
 
-## Importation
+<div class="tds-do-dont">
+  <div class="tds-do-dont__card tds-do-dont__card--do">
+    <div class="tds-do-dont__heading">✓ Faire</div>
+    <ul>
+      <li>Utiliser pour basculer entre des vues alternatives d'un même contenu</li>
+      <li>Limiter à 5-6 onglets maximum visibles sans défilement</li>
+    </ul>
+  </div>
+  <div class="tds-do-dont__card tds-do-dont__card--dont">
+    <div class="tds-do-dont__heading">✗ Éviter</div>
+    <ul>
+      <li>Utiliser des onglets pour une séquence d'étapes (préférer un Stepper)</li>
+      <li>Mettre des champs de formulaire obligatoires dans un onglet non actif au chargement</li>
+    </ul>
+  </div>
+</div>
+
+</TabItem>
+<TabItem label="Démo">
+
+Rendu statique (`aria-selected`/`hidden` fixés dans le HTML) pour la QA visuelle — l'interaction
+réelle passe par le script de référence de l'onglet Code.
+
+<iframe src="/playground/#tabs" title="Démo interactive du composant Tabs" style="width:100%; height: 14rem; border: 1px solid var(--sl-color-gray-5); border-radius: 0.5rem;" loading="lazy"></iframe>
+
+[Ouvrir le terrain de jeu complet →](/playground/#tabs)
+
+</TabItem>
+<TabItem label="Design">
+
+Onglet actif : soulignement `tds-tabs-current-border` + texte en gras. Onglets inactifs en
+`tds-tabs-trigger-color` (gris neutre), s'assombrissent au survol.
+
+</TabItem>
+<TabItem label="Code">
+
+### Importation
 
 ```css
 @import "@tds-tchad/core/components/tabs/tabs.css";
@@ -25,9 +64,7 @@ Le script ci-dessous suit le pattern [WAI-ARIA APG Tabs](https://www.w3.org/WAI/
 import { tabs } from '@tds-tchad/core/components/tabs';
 ```
 
----
-
-## Exemple
+### Exemple
 
 ```html
 <div class="tds-tabs__list" role="tablist" aria-label="Sections du dossier">
@@ -76,9 +113,8 @@ document.querySelectorAll('[role="tablist"]').forEach((tablist) => {
 });
 ```
 
----
-
-## Accessibilité
+</TabItem>
+<TabItem label="Accessibilité">
 
 <Aside type="tip" title="Règles critiques">
   - `role="tablist"` sur le conteneur, `role="tab"` sur chaque déclencheur, `role="tabpanel"` sur chaque panneau
@@ -87,23 +123,5 @@ document.querySelectorAll('[role="tablist"]').forEach((tablist) => {
   - Chaque panneau est référencé par `aria-labelledby` vers son onglet, et chaque onglet par `aria-controls` vers son panneau
 </Aside>
 
----
-
-## Do / Don't
-
-<div class="tds-do-dont">
-  <div class="tds-do-dont__card tds-do-dont__card--do">
-    <div class="tds-do-dont__heading">✓ Faire</div>
-    <ul>
-      <li>Utiliser pour basculer entre des vues alternatives d'un même contenu</li>
-      <li>Limiter à 5-6 onglets maximum visibles sans défilement</li>
-    </ul>
-  </div>
-  <div class="tds-do-dont__card tds-do-dont__card--dont">
-    <div class="tds-do-dont__heading">✗ Éviter</div>
-    <ul>
-      <li>Utiliser des onglets pour une séquence d'étapes (préférer un Stepper)</li>
-      <li>Mettre des champs de formulaire obligatoires dans un onglet non actif au chargement</li>
-    </ul>
-  </div>
-</div>
+</TabItem>
+</Tabs>

@@ -5,74 +5,15 @@ sidebar:
   order: 8
 ---
 
-import { Aside } from '@astrojs/starlight/components';
+import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
 
 # Header
 
+<Tabs>
+<TabItem label="Présentation">
+
 L'en-tête institutionnel identifie le service public : logo/marque, titre, tagline, et une zone
 d'actions libre (connexion, navigation, recherche). Purement CSS, sans dépendance JavaScript.
-
----
-
-## Importation
-
-```css
-@import "@tds-tchad/core/components/header/header.css";
-```
-
-```typescript
-import { header } from '@tds-tchad/core/components/header';
-import type { HeaderVariant } from '@tds-tchad/core/components/header';
-```
-
----
-
-## Exemple
-
-```html
-<header class="tds-header">
-  <a href="/" class="tds-header__brand">
-    <img src="/brand/tds-logo-official.png" alt="Tchad Design System" class="tds-header__logo" />
-    <div class="tds-header__titles">
-      <span class="tds-header__title">République du Tchad</span>
-      <span class="tds-header__tagline">Ministère du Numérique</span>
-    </div>
-  </a>
-  <div class="tds-header__actions">
-    <a href="/connexion" class="tds-link">Se connecter</a>
-  </div>
-</header>
-```
-
-## Variantes
-
-| Variante | Classe | Usage |
-|---|---|---|
-| Par défaut | `tds-header` | En-tête pleine hauteur (4rem min) |
-| Compacte | `tds-header tds-header--compact` | Pages secondaires, formulaires longs |
-
-## Bandeau tricolore
-
-Un bandeau optionnel aux couleurs institutionnelles peut être ajouté au-dessus de l'en-tête :
-
-```html
-<div class="tds-header__stripe">
-  <span></span><span></span><span></span>
-</div>
-<header class="tds-header">…</header>
-```
-
----
-
-## Accessibilité
-
-<Aside type="tip" title="Règles critiques">
-  - Le lien de marque (`tds-header__brand`) doit englober le logo ET le titre en un seul lien vers l'accueil, pas deux liens séparés
-  - Prévoir un lien d'évitement (« Aller au contenu principal ») juste avant le header dans l'ordre du DOM
-  - Le contraste du titre/tagline doit rester conforme AA même en variante compacte
-</Aside>
-
----
 
 ## Do / Don't
 
@@ -92,3 +33,72 @@ Un bandeau optionnel aux couleurs institutionnelles peut être ajouté au-dessus
     </ul>
   </div>
 </div>
+
+</TabItem>
+<TabItem label="Démo">
+
+<iframe src="/playground/#header" title="Démo interactive du composant Header" style="width:100%; height: 16rem; border: 1px solid var(--sl-color-gray-5); border-radius: 0.5rem;" loading="lazy"></iframe>
+
+[Ouvrir le terrain de jeu complet →](/playground/#header)
+
+</TabItem>
+<TabItem label="Design">
+
+| Variante | Classe | Usage |
+|---|---|---|
+| Par défaut | `tds-header` | En-tête pleine hauteur (4rem min) |
+| Compacte | `tds-header tds-header--compact` | Pages secondaires, formulaires longs |
+
+</TabItem>
+<TabItem label="Code">
+
+### Importation
+
+```css
+@import "@tds-tchad/core/components/header/header.css";
+```
+
+```typescript
+import { header } from '@tds-tchad/core/components/header';
+import type { HeaderVariant } from '@tds-tchad/core/components/header';
+```
+
+### Exemple
+
+```html
+<header class="tds-header">
+  <a href="/" class="tds-header__brand">
+    <img src="/brand/tds-logo-official.png" alt="Tchad Design System" class="tds-header__logo" />
+    <div class="tds-header__titles">
+      <span class="tds-header__title">République du Tchad</span>
+      <span class="tds-header__tagline">Ministère du Numérique</span>
+    </div>
+  </a>
+  <div class="tds-header__actions">
+    <a href="/connexion" class="tds-link">Se connecter</a>
+  </div>
+</header>
+```
+
+### Bandeau tricolore
+
+Un bandeau optionnel aux couleurs institutionnelles peut être ajouté au-dessus de l'en-tête :
+
+```html
+<div class="tds-header__stripe">
+  <span></span><span></span><span></span>
+</div>
+<header class="tds-header">…</header>
+```
+
+</TabItem>
+<TabItem label="Accessibilité">
+
+<Aside type="tip" title="Règles critiques">
+  - Le lien de marque (`tds-header__brand`) doit englober le logo ET le titre en un seul lien vers l'accueil, pas deux liens séparés
+  - Prévoir un lien d'évitement (« Aller au contenu principal ») juste avant le header dans l'ordre du DOM
+  - Le contraste du titre/tagline doit rester conforme AA même en variante compacte
+</Aside>
+
+</TabItem>
+</Tabs>

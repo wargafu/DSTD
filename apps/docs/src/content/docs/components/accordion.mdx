@@ -5,17 +5,53 @@ sidebar:
   order: 15
 ---
 
-import { Aside } from '@astrojs/starlight/components';
+import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
 
 # Accordion
+
+<Tabs>
+<TabItem label="Présentation">
 
 L'accordéon TDS habille les éléments HTML natifs `<details>`/`<summary>` — aucune ligne de
 JavaScript n'est nécessaire pour l'ouverture/fermeture, la sémantique et l'accessibilité de base
 (clavier, lecteurs d'écran) sont gérées nativement par le navigateur.
 
----
+## Do / Don't
 
-## Importation
+<div class="tds-do-dont">
+  <div class="tds-do-dont__card tds-do-dont__card--do">
+    <div class="tds-do-dont__heading">✓ Faire</div>
+    <ul>
+      <li>Utiliser pour des FAQ, des sections optionnelles de détail</li>
+      <li>Garder les titres de section (<code>&lt;summary&gt;</code>) courts et explicites</li>
+    </ul>
+  </div>
+  <div class="tds-do-dont__card tds-do-dont__card--dont">
+    <div class="tds-do-dont__heading">✗ Éviter</div>
+    <ul>
+      <li>Cacher des champs de formulaire obligatoires dans un accordéon fermé</li>
+      <li>Réimplémenter l'ouverture/fermeture en JavaScript — <code>&lt;details&gt;</code> le fait déjà nativement</li>
+    </ul>
+  </div>
+</div>
+
+</TabItem>
+<TabItem label="Démo">
+
+<iframe src="/playground/#accordion" title="Démo interactive du composant Accordion" style="width:100%; height: 16rem; border: 1px solid var(--sl-color-gray-5); border-radius: 0.5rem;" loading="lazy"></iframe>
+
+[Ouvrir le terrain de jeu complet →](/playground/#accordion)
+
+</TabItem>
+<TabItem label="Design">
+
+Chevron `tds-accordion__icon` pivote à 180° à l'ouverture (`[open] .tds-accordion__icon`).
+Item ouvert par défaut via l'attribut HTML `open`, jamais forcé en CSS.
+
+</TabItem>
+<TabItem label="Code">
+
+### Importation
 
 ```css
 @import "@tds-tchad/core/components/accordion/accordion.css";
@@ -25,9 +61,7 @@ JavaScript n'est nécessaire pour l'ouverture/fermeture, la sémantique et l'acc
 import { accordion } from '@tds-tchad/core/components/accordion';
 ```
 
----
-
-## Exemple
+### Exemple
 
 ```html
 <div class="tds-accordion">
@@ -56,9 +90,8 @@ import { accordion } from '@tds-tchad/core/components/accordion';
 </div>
 ```
 
----
-
-## Accessibilité
+</TabItem>
+<TabItem label="Accessibilité">
 
 <Aside type="tip" title="Règles critiques">
   - `<summary>` est nativement focusable et actionnable au clavier (Entrée/Espace) — ne pas ajouter `tabindex` ni `role="button"`, ce serait redondant
@@ -66,23 +99,5 @@ import { accordion } from '@tds-tchad/core/components/accordion';
   - Utiliser l'attribut `open` sur `<details>` pour qu'un panneau soit ouvert par défaut, jamais du CSS pour forcer l'affichage
 </Aside>
 
----
-
-## Do / Don't
-
-<div class="tds-do-dont">
-  <div class="tds-do-dont__card tds-do-dont__card--do">
-    <div class="tds-do-dont__heading">✓ Faire</div>
-    <ul>
-      <li>Utiliser pour des FAQ, des sections optionnelles de détail</li>
-      <li>Garder les titres de section (<code>&lt;summary&gt;</code>) courts et explicites</li>
-    </ul>
-  </div>
-  <div class="tds-do-dont__card tds-do-dont__card--dont">
-    <div class="tds-do-dont__heading">✗ Éviter</div>
-    <ul>
-      <li>Cacher des champs de formulaire obligatoires dans un accordéon fermé</li>
-      <li>Réimplémenter l'ouverture/fermeture en JavaScript — <code>&lt;details&gt;</code> le fait déjà nativement</li>
-    </ul>
-  </div>
-</div>
+</TabItem>
+</Tabs>

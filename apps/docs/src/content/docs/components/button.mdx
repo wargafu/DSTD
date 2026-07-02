@@ -9,27 +9,11 @@ import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
 
 # Button
 
+<Tabs>
+<TabItem label="Présentation">
+
 Le bouton TDS est conçu pour les parcours administratifs : lisible, contrasté, accessible au clavier
 et utilisable sans JavaScript.
-
----
-
-## Importation
-
-```css
-/* CSS — requis pour les styles */
-@import "@tds-tchad/core/components/button/button.css";
-```
-
-```typescript
-/* TypeScript — tokens et types */
-import { button } from '@tds-tchad/core/components/button';
-import type { ButtonVariant, ButtonSize } from '@tds-tchad/core/components/button';
-```
-
----
-
-## Variantes
 
 Cinq variantes couvrent tous les niveaux de hiérarchie d'action.
 
@@ -40,6 +24,45 @@ Cinq variantes couvrent tous les niveaux de hiérarchie d'action.
 | `tertiary` | Action discrète | Voir plus, liens d'interface secondaires |
 | `danger` | Action destructive | Supprimer, révoquer, action irréversible |
 | `success` | Confirmation positive | Approuver, accepter, finaliser |
+
+---
+
+## Do / Don't
+
+<div class="tds-do-dont">
+  <div class="tds-do-dont__card tds-do-dont__card--do">
+    <div class="tds-do-dont__heading">✓ Faire</div>
+    <ul>
+      <li>Un seul bouton primary par section d'action</li>
+      <li>Label verbe-actif : "Valider", "Envoyer", "Confirmer"</li>
+      <li>Utiliser <code>danger</code> uniquement pour les actions irréversibles</li>
+      <li>Respecter la hiérarchie : primary → secondary → tertiary</li>
+    </ul>
+  </div>
+  <div class="tds-do-dont__card tds-do-dont__card--dont">
+    <div class="tds-do-dont__heading">✗ Éviter</div>
+    <ul>
+      <li>Deux boutons primary côte à côte</li>
+      <li>Labels ambigus : "OK", "Cliquer ici", "Continuer"</li>
+      <li>Créer de nouvelles variantes colorées hors de la palette</li>
+      <li>Utiliser <code>danger</code> pour une action non destructive</li>
+    </ul>
+  </div>
+</div>
+
+</TabItem>
+<TabItem label="Démo">
+
+Rendu avec le CSS réellement buildé de `@tds-tchad/core` — toutes les variantes, tailles et états.
+
+<iframe src="/playground/#button" title="Démo interactive du composant Button" style="width:100%; height: 26rem; border: 1px solid var(--sl-color-gray-5); border-radius: 0.5rem;" loading="lazy"></iframe>
+
+[Ouvrir le terrain de jeu complet →](/playground/#button)
+
+</TabItem>
+<TabItem label="Design">
+
+### Variantes
 
 <div class="tds-preview">
   <div class="tds-preview__stage">
@@ -52,9 +75,7 @@ Cinq variantes couvrent tous les niveaux de hiérarchie d'action.
   <div class="tds-preview__label">Aperçu des variantes (taille md)</div>
 </div>
 
----
-
-## Tailles
+### Tailles
 
 | Taille | Classe | Police | Padding | Min-height |
 |---|---|---|---|---|
@@ -62,9 +83,7 @@ Cinq variantes couvrent tous les niveaux de hiérarchie d'action.
 | **`md`** | **`tds-button--md`** | **16px** | **`0.75rem 1rem`** | **44px** |
 | `lg` | `tds-button--lg` | 18px | `0.875rem 1.25rem` | 44px |
 
----
-
-## États
+### États
 
 | État | Classe / Attribut | Description |
 |---|---|---|
@@ -75,9 +94,23 @@ Cinq variantes couvrent tous les niveaux de hiérarchie d'action.
 | Disabled | `disabled` + `aria-disabled="true"` | Bouton inactif |
 | Loading | `aria-busy="true"` + texte | Traitement en cours |
 
----
+</TabItem>
+<TabItem label="Code">
 
-## Exemples de code
+### Importation
+
+```css
+/* CSS — requis pour les styles */
+@import "@tds-tchad/core/components/button/button.css";
+```
+
+```typescript
+/* TypeScript — tokens et types */
+import { button } from '@tds-tchad/core/components/button';
+import type { ButtonVariant, ButtonSize } from '@tds-tchad/core/components/button';
+```
+
+### Exemples
 
 <Tabs>
   <TabItem label="HTML">
@@ -283,9 +316,8 @@ Cinq variantes couvrent tous les niveaux de hiérarchie d'action.
   </TabItem>
 </Tabs>
 
----
-
-## Accessibilité
+</TabItem>
+<TabItem label="Accessibilité">
 
 <Aside type="tip" title="Règles critiques">
   - Toujours utiliser `<button>` natif (jamais `<div role="button">` ou `<span>`)
@@ -305,27 +337,5 @@ Cinq variantes couvrent tous les niveaux de hiérarchie d'action.
 | danger | `red.500` (#DA291C) | blanc | 5.1:1 ✅ AA |
 | success | `green.500` (#006B3C) | blanc | 7.2:1 ✅ AA |
 
----
-
-## Do / Don't
-
-<div class="tds-do-dont">
-  <div class="tds-do-dont__card tds-do-dont__card--do">
-    <div class="tds-do-dont__heading">✓ Faire</div>
-    <ul>
-      <li>Un seul bouton primary par section d'action</li>
-      <li>Label verbe-actif : "Valider", "Envoyer", "Confirmer"</li>
-      <li>Utiliser <code>danger</code> uniquement pour les actions irréversibles</li>
-      <li>Respecter la hiérarchie : primary → secondary → tertiary</li>
-    </ul>
-  </div>
-  <div class="tds-do-dont__card tds-do-dont__card--dont">
-    <div class="tds-do-dont__heading">✗ Éviter</div>
-    <ul>
-      <li>Deux boutons primary côte à côte</li>
-      <li>Labels ambigus : "OK", "Cliquer ici", "Continuer"</li>
-      <li>Créer de nouvelles variantes colorées hors de la palette</li>
-      <li>Utiliser <code>danger</code> pour une action non destructive</li>
-    </ul>
-  </div>
-</div>
+</TabItem>
+</Tabs>

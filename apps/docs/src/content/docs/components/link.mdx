@@ -5,20 +5,54 @@ sidebar:
   order: 6
 ---
 
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
 # Link
+
+<Tabs>
+<TabItem label="Présentation">
 
 Les liens TDS sont accessibles, contrastés et cohérents avec la charte institutionnelle.
 La classe `.tds-link` s'applique aux liens de contenu ; les boutons de navigation utilisent `.tds-button--tertiary`.
 
-## Importation
+## Lien vs Bouton
+
+| Élément | Quand l'utiliser |
+|---|---|
+| `<a class="tds-link">` | Navigation vers une autre page ou ressource |
+| `<a class="tds-button">` | Navigation qui ressemble à une action |
+| `<button class="tds-button">` | Action qui modifie l'état (soumettre, supprimer) |
+| `<button class="tds-button--tertiary">` | Action secondaire discrète dans un formulaire |
+
+</TabItem>
+<TabItem label="Démo">
+
+<iframe src="/playground/#link" title="Démo interactive du composant Link" style="width:100%; height: 12rem; border: 1px solid var(--sl-color-gray-5); border-radius: 0.5rem;" loading="lazy"></iframe>
+
+[Ouvrir le terrain de jeu complet →](/playground/#link)
+
+</TabItem>
+<TabItem label="Design">
+
+| Variante | Classe | Usage |
+|---|---|---|
+| Standard | `tds-link` | Lien de contenu par défaut |
+| Muted | `tds-link--muted` | Liens secondaires (footer, mentions) |
+| Danger | `tds-link--danger` | Lien vers une action destructive |
+| External | `tds-link--external` | Lien sortant du site |
+| Nav | `tds-link--nav` | Lien de navigation (sans soulignement) |
+| Standalone | `tds-link--standalone` | Call-to-action avec flèche |
+
+</TabItem>
+<TabItem label="Code">
+
+### Importation
 
 ```css
 @import "@tds-tchad/core/components/link/link.css";
 ```
 
----
-
-## Variantes
+### Variantes
 
 ```html
 <!-- Lien standard -->
@@ -41,20 +75,8 @@ La classe `.tds-link` s'applique aux liens de contenu ; les boutons de navigatio
 </a>
 ```
 
----
-
-## Lien vs Bouton
-
-| Élément | Quand l'utiliser |
-|---|---|
-| `<a class="tds-link">` | Navigation vers une autre page ou ressource |
-| `<a class="tds-button">` | Navigation qui ressemble à une action |
-| `<button class="tds-button">` | Action qui modifie l'état (soumettre, supprimer) |
-| `<button class="tds-button--tertiary">` | Action secondaire discrète dans un formulaire |
-
----
-
-## Accessibilité
+</TabItem>
+<TabItem label="Accessibilité">
 
 ```html
 <!-- Lien externe — avertir l'utilisateur -->
@@ -70,3 +92,6 @@ La classe `.tds-link` s'applique aux liens de contenu ; les boutons de navigatio
   <span class="sr-only">le dossier REF-2024-001234</span>
 </a>
 ```
+
+</TabItem>
+</Tabs>

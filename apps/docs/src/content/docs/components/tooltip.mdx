@@ -5,58 +5,17 @@ sidebar:
   order: 17
 ---
 
-import { Aside } from '@astrojs/starlight/components';
+import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
 
 # Tooltip
+
+<Tabs>
+<TabItem label="Présentation">
 
 Le tooltip TDS est CSS pur : la bulle s'affiche via `:hover` et `:focus-within`, sans
 JavaScript. Cette simplicité a une contrepartie assumée : sur écran tactile, il n'existe pas
 d'équivalent fiable au survol, donc l'information de la bulle ne doit **jamais** être la seule
 source d'une information essentielle.
-
----
-
-## Importation
-
-```css
-@import "@tds-tchad/core/components/tooltip/tooltip.css";
-```
-
-```typescript
-import { tooltip } from '@tds-tchad/core/components/tooltip';
-```
-
----
-
-## Exemple
-
-```html
-<span class="tds-tooltip" tabindex="0" aria-describedby="tooltip-numero">
-  Numéro de dossier
-  <span class="tds-tooltip__bubble" id="tooltip-numero" role="tooltip">
-    Identifiant unique attribué à la création de votre demande
-  </span>
-</span>
-```
-
----
-
-## Accessibilité
-
-<Aside type="caution" title="Limitation connue — ne pas utiliser pour de l'information critique">
-  Ce tooltip CSS pur ne s'affiche pas au simple tap sur écran tactile (pas d'équivalent CSS au
-  `:hover`). Si l'information est indispensable à la compréhension ou à la complétion d'une
-  tâche, ne la mettez **pas uniquement** dans un tooltip — affichez-la en clair ou dans un texte
-  d'aide visible (`tds-helper-text`).
-</Aside>
-
-<Aside type="tip" title="Règles critiques">
-  - L'élément déclencheur doit être focusable (`tabindex="0"` s'il ne l'est pas déjà nativement, ex. un `<span>`) pour que `:focus-within` fonctionne au clavier
-  - La bulle a `role="tooltip"` et est référencée par `aria-describedby` sur le déclencheur
-  - Contenu de la bulle : bref, complémentaire — jamais une action ou un lien (un tooltip n'est pas interactif)
-</Aside>
-
----
 
 ## Do / Don't
 
@@ -76,3 +35,61 @@ import { tooltip } from '@tds-tchad/core/components/tooltip';
     </ul>
   </div>
 </div>
+
+</TabItem>
+<TabItem label="Démo">
+
+Survolez ou tabulez jusqu'à l'élément pour révéler la bulle.
+
+<iframe src="/playground/#tooltip" title="Démo interactive du composant Tooltip" style="width:100%; height: 12rem; border: 1px solid var(--sl-color-gray-5); border-radius: 0.5rem;" loading="lazy"></iframe>
+
+[Ouvrir le terrain de jeu complet →](/playground/#tooltip)
+
+</TabItem>
+<TabItem label="Design">
+
+Bulle sombre (`neutral.900`), texte blanc, positionnée au-dessus du déclencheur avec une petite
+flèche. Apparition en fondu + léger scale, désactivée si `prefers-reduced-motion`.
+
+</TabItem>
+<TabItem label="Code">
+
+### Importation
+
+```css
+@import "@tds-tchad/core/components/tooltip/tooltip.css";
+```
+
+```typescript
+import { tooltip } from '@tds-tchad/core/components/tooltip';
+```
+
+### Exemple
+
+```html
+<span class="tds-tooltip" tabindex="0" aria-describedby="tooltip-numero">
+  Numéro de dossier
+  <span class="tds-tooltip__bubble" id="tooltip-numero" role="tooltip">
+    Identifiant unique attribué à la création de votre demande
+  </span>
+</span>
+```
+
+</TabItem>
+<TabItem label="Accessibilité">
+
+<Aside type="caution" title="Limitation connue — ne pas utiliser pour de l'information critique">
+  Ce tooltip CSS pur ne s'affiche pas au simple tap sur écran tactile (pas d'équivalent CSS au
+  `:hover`). Si l'information est indispensable à la compréhension ou à la complétion d'une
+  tâche, ne la mettez **pas uniquement** dans un tooltip — affichez-la en clair ou dans un texte
+  d'aide visible (`tds-helper-text`).
+</Aside>
+
+<Aside type="tip" title="Règles critiques">
+  - L'élément déclencheur doit être focusable (`tabindex="0"` s'il ne l'est pas déjà nativement, ex. un `<span>`) pour que `:focus-within` fonctionne au clavier
+  - La bulle a `role="tooltip"` et est référencée par `aria-describedby` sur le déclencheur
+  - Contenu de la bulle : bref, complémentaire — jamais une action ou un lien (un tooltip n'est pas interactif)
+</Aside>
+
+</TabItem>
+</Tabs>

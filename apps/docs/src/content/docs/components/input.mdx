@@ -9,12 +9,70 @@ import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
 
 # Input
 
+<Tabs>
+<TabItem label="Présentation">
+
 Le système de champs TDS couvre tous les contrôles de formulaire : text, textarea, select,
 checkbox, radio, switch et file upload. La structure standard est toujours `label + champ + (message)`.
 
 ---
 
-## Importation
+## Do / Don't
+
+<div class="tds-do-dont">
+  <div class="tds-do-dont__card tds-do-dont__card--do">
+    <div class="tds-do-dont__heading">✓ Faire</div>
+    <ul>
+      <li>Label court et explicite au-dessus du champ</li>
+      <li>Message d'erreur en dessous du champ, jamais dans le placeholder</li>
+      <li>Placeholder = exemple de valeur, jamais le label</li>
+      <li>Utiliser <code>autocomplete</code> pour faciliter la saisie</li>
+    </ul>
+  </div>
+  <div class="tds-do-dont__card tds-do-dont__card--dont">
+    <div class="tds-do-dont__heading">✗ Éviter</div>
+    <ul>
+      <li>Supprimer le label et le remplacer par un placeholder</li>
+      <li>Valider le champ uniquement à la soumission (préférer <code>onBlur</code>)</li>
+      <li>Mettre les messages d'erreur dans une tooltip</li>
+      <li>Désactiver le copier-coller dans les champs mot de passe</li>
+    </ul>
+  </div>
+</div>
+
+</TabItem>
+<TabItem label="Démo">
+
+Rendu avec le CSS réellement buildé de `@tds-tchad/core` — toutes les tailles, variantes et états.
+
+<iframe src="/playground/#input" title="Démo interactive du composant Input" style="width:100%; height: 26rem; border: 1px solid var(--sl-color-gray-5); border-radius: 0.5rem;" loading="lazy"></iframe>
+
+[Ouvrir le terrain de jeu complet →](/playground/#input)
+
+</TabItem>
+<TabItem label="Design">
+
+### Variantes
+
+| Variante | Classe | Usage |
+|---|---|---|
+| `default` | `tds-input--default` (ou aucune) | Saisie normale |
+| `error` | `tds-input--error` | Validation échouée, champ requis vide |
+| `success` | `tds-input--success` | Champ validé avec succès |
+| `disabled` | attribut `disabled` | Champ inactif, non modifiable |
+
+### Tailles
+
+| Taille | Classe | Police | Padding | Min-height |
+|---|---|---|---|---|
+| `sm` | `tds-input--sm` | 14px | `0.5rem 0.75rem` | 44px |
+| **`md`** | **`tds-input--md`** | **16px** | **`0.75rem 1rem`** | **44px** |
+| `lg` | `tds-input--lg` | 18px | `0.875rem 1.25rem` | 52px |
+
+</TabItem>
+<TabItem label="Code">
+
+### Importation
 
 ```css
 @import "@tds-tchad/core/components/input/input.css";
@@ -24,9 +82,7 @@ checkbox, radio, switch et file upload. La structure standard est toujours `labe
 import type { InputVariant, InputSize, InputState } from '@tds-tchad/core/components/input';
 ```
 
----
-
-## Structure de champ standard
+### Structure de champ standard
 
 ```html
 <div class="tds-field">
@@ -64,9 +120,7 @@ import type { InputVariant, InputSize, InputState } from '@tds-tchad/core/compon
   ne peuvent pas annoncer le label lors de la mise au focus.
 </Aside>
 
----
-
-## Groupe de champs avec fieldset
+### Groupe de champs avec fieldset
 
 Pour plusieurs champs liés, utilisez un `<fieldset>` nommé. Chaque contrôle est placé dans
 un élément distinct et le groupe de messages est relié avec `aria-describedby`.
@@ -121,32 +175,9 @@ Lorsqu’un titre doit être visible, préférez un `<legend class="tds-fieldset
 à `aria-label`. Le groupe de messages peut recevoir des éléments
 `tds-helper-text`, `tds-error-text` ou `tds-success-text`.
 
----
+### Types de contrôles
 
-## Variantes
-
-| Variante | Classe | Usage |
-|---|---|---|
-| `default` | `tds-input--default` (ou aucune) | Saisie normale |
-| `error` | `tds-input--error` | Validation échouée, champ requis vide |
-| `success` | `tds-input--success` | Champ validé avec succès |
-| `disabled` | attribut `disabled` | Champ inactif, non modifiable |
-
----
-
-## Tailles
-
-| Taille | Classe | Police | Padding | Min-height |
-|---|---|---|---|---|
-| `sm` | `tds-input--sm` | 14px | `0.5rem 0.75rem` | 44px |
-| **`md`** | **`tds-input--md`** | **16px** | **`0.75rem 1rem`** | **44px** |
-| `lg` | `tds-input--lg` | 18px | `0.875rem 1.25rem` | 52px |
-
----
-
-## Types de contrôles
-
-### Text Input
+#### Text Input
 
 <Tabs>
   <TabItem label="HTML">
@@ -340,9 +371,7 @@ Lorsqu’un titre doit être visible, préférez un `<legend class="tds-fieldset
   </TabItem>
 </Tabs>
 
----
-
-### Textarea
+#### Textarea
 
 ```html
 <div class="tds-field">
@@ -364,9 +393,7 @@ Lorsqu’un titre doit être visible, préférez un `<legend class="tds-fieldset
 </div>
 ```
 
----
-
-### Select
+#### Select
 
 ```html
 <div class="tds-field">
@@ -390,9 +417,7 @@ Lorsqu’un titre doit être visible, préférez un `<legend class="tds-fieldset
 </div>
 ```
 
----
-
-### Checkbox
+#### Checkbox
 
 ```html
 <!-- Checkbox unique — consentement -->
@@ -422,9 +447,7 @@ Lorsqu’un titre doit être visible, préférez un `<legend class="tds-fieldset
 </fieldset>
 ```
 
----
-
-### Radio
+#### Radio
 
 ```html
 <fieldset>
@@ -446,9 +469,7 @@ Lorsqu’un titre doit être visible, préférez un `<legend class="tds-fieldset
   Sans cela, les lecteurs d'écran ne peuvent pas rattacher les options au groupe auquel elles appartiennent.
 </Aside>
 
----
-
-### Switch
+#### Switch
 
 ```html
 <!-- Switch simple -->
@@ -468,9 +489,8 @@ Lorsqu’un titre doit être visible, préférez un `<legend class="tds-fieldset
   Pour les préférences d'un formulaire, préférez une checkbox standard.
 </Aside>
 
----
-
-## Accessibilité des formulaires
+</TabItem>
+<TabItem label="Accessibilité">
 
 ### Check-list obligatoire
 
@@ -483,27 +503,5 @@ Lorsqu’un titre doit être visible, préférez un `<legend class="tds-fieldset
 - ✅ Le focus visible est maintenu (`:focus-visible`)
 - ✅ Les champs disabled portent aussi `aria-disabled="true"`
 
----
-
-## Do / Don't
-
-<div class="tds-do-dont">
-  <div class="tds-do-dont__card tds-do-dont__card--do">
-    <div class="tds-do-dont__heading">✓ Faire</div>
-    <ul>
-      <li>Label court et explicite au-dessus du champ</li>
-      <li>Message d'erreur en dessous du champ, jamais dans le placeholder</li>
-      <li>Placeholder = exemple de valeur, jamais le label</li>
-      <li>Utiliser <code>autocomplete</code> pour faciliter la saisie</li>
-    </ul>
-  </div>
-  <div class="tds-do-dont__card tds-do-dont__card--dont">
-    <div class="tds-do-dont__heading">✗ Éviter</div>
-    <ul>
-      <li>Supprimer le label et le remplacer par un placeholder</li>
-      <li>Valider le champ uniquement à la soumission (préférer <code>onBlur</code>)</li>
-      <li>Mettre les messages d'erreur dans une tooltip</li>
-      <li>Désactiver le copier-coller dans les champs mot de passe</li>
-    </ul>
-  </div>
-</div>
+</TabItem>
+</Tabs>

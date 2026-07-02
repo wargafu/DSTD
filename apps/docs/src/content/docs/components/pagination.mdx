@@ -5,59 +5,15 @@ sidebar:
   order: 11
 ---
 
-import { Aside } from '@astrojs/starlight/components';
+import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
 
 # Pagination
 
+<Tabs>
+<TabItem label="Présentation">
+
 Navigation entre pages de résultats. Les liens précédent/suivant en bordure de liste utilisent
 `aria-disabled="true"` plutôt que d'être supprimés, pour garder une structure de liste stable.
-
----
-
-## Importation
-
-```css
-@import "@tds-tchad/core/components/pagination/pagination.css";
-```
-
-```typescript
-import { pagination } from '@tds-tchad/core/components/pagination';
-```
-
----
-
-## Exemple
-
-```html
-<nav aria-label="Pagination">
-  <ul class="tds-pagination__list">
-    <li>
-      <a href="?page=1" class="tds-pagination__link" aria-disabled="true" aria-label="Page précédente">‹</a>
-    </li>
-    <li><a href="?page=1" class="tds-pagination__link" aria-current="page" aria-label="Page 1">1</a></li>
-    <li><a href="?page=2" class="tds-pagination__link" aria-label="Page 2">2</a></li>
-    <li><a href="?page=3" class="tds-pagination__link" aria-label="Page 3">3</a></li>
-    <li><span class="tds-pagination__ellipsis">…</span></li>
-    <li><a href="?page=12" class="tds-pagination__link" aria-label="Page 12">12</a></li>
-    <li>
-      <a href="?page=2" class="tds-pagination__link" aria-label="Page suivante">›</a>
-    </li>
-  </ul>
-</nav>
-```
-
----
-
-## Accessibilité
-
-<Aside type="tip" title="Règles critiques">
-  - Envelopper dans un `<nav aria-label="Pagination">`
-  - Chaque lien de page a un `aria-label="Page N"` explicite (le chiffre visuel seul ne suffit pas au contexte)
-  - La page courante utilise `aria-current="page"`, jamais uniquement une couleur de fond
-  - Précédent/suivant désactivés (première/dernière page) gardent `aria-disabled="true"` — ne pas retirer le `href` ni l'élément, pour ne pas casser la structure de liste annoncée par le lecteur d'écran
-</Aside>
-
----
 
 ## Do / Don't
 
@@ -77,3 +33,63 @@ import { pagination } from '@tds-tchad/core/components/pagination';
     </ul>
   </div>
 </div>
+
+</TabItem>
+<TabItem label="Démo">
+
+<iframe src="/playground/#pagination" title="Démo interactive du composant Pagination" style="width:100%; height: 10rem; border: 1px solid var(--sl-color-gray-5); border-radius: 0.5rem;" loading="lazy"></iframe>
+
+[Ouvrir le terrain de jeu complet →](/playground/#pagination)
+
+</TabItem>
+<TabItem label="Design">
+
+Structure : `<nav aria-label="Pagination">` > `<ul class="tds-pagination__list">` d'items
+`tds-pagination__link`, page courante marquée `aria-current="page"`, bornes désactivées via
+`aria-disabled="true"`, troncature via `tds-pagination__ellipsis`.
+
+</TabItem>
+<TabItem label="Code">
+
+### Importation
+
+```css
+@import "@tds-tchad/core/components/pagination/pagination.css";
+```
+
+```typescript
+import { pagination } from '@tds-tchad/core/components/pagination';
+```
+
+### Exemple
+
+```html
+<nav aria-label="Pagination">
+  <ul class="tds-pagination__list">
+    <li>
+      <a href="?page=1" class="tds-pagination__link" aria-disabled="true" aria-label="Page précédente">‹</a>
+    </li>
+    <li><a href="?page=1" class="tds-pagination__link" aria-current="page" aria-label="Page 1">1</a></li>
+    <li><a href="?page=2" class="tds-pagination__link" aria-label="Page 2">2</a></li>
+    <li><a href="?page=3" class="tds-pagination__link" aria-label="Page 3">3</a></li>
+    <li><span class="tds-pagination__ellipsis">…</span></li>
+    <li><a href="?page=12" class="tds-pagination__link" aria-label="Page 12">12</a></li>
+    <li>
+      <a href="?page=2" class="tds-pagination__link" aria-label="Page suivante">›</a>
+    </li>
+  </ul>
+</nav>
+```
+
+</TabItem>
+<TabItem label="Accessibilité">
+
+<Aside type="tip" title="Règles critiques">
+  - Envelopper dans un `<nav aria-label="Pagination">`
+  - Chaque lien de page a un `aria-label="Page N"` explicite (le chiffre visuel seul ne suffit pas au contexte)
+  - La page courante utilise `aria-current="page"`, jamais uniquement une couleur de fond
+  - Précédent/suivant désactivés (première/dernière page) gardent `aria-disabled="true"` — ne pas retirer le `href` ni l'élément, pour ne pas casser la structure de liste annoncée par le lecteur d'écran
+</Aside>
+
+</TabItem>
+</Tabs>

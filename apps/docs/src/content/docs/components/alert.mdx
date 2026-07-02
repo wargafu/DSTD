@@ -5,26 +5,32 @@ sidebar:
   order: 3
 ---
 
-import { Aside } from '@astrojs/starlight/components';
+import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
 
 # Alert
+
+<Tabs>
+<TabItem label="Présentation">
 
 Les alertes communiquent des messages contextuels importants sans interrompre le flux utilisateur.
 Elles existent en 4 variantes sémantiques alignées sur les couleurs du drapeau tchadien.
 
-## Importation
+| Variante | Classe | `role` ARIA | Usage |
+|---|---|---|---|
+| `info` | `tds-alert--info` | `status` | Information neutre, aide contextuelle |
+| `success` | `tds-alert--success` | `status` | Confirmation, action réussie |
+| `warning` | `tds-alert--warning` | `status` | Attention requise, non bloquant |
+| `danger` | `tds-alert--danger` | `alert` | Erreur bloquante, action critique |
 
-```css
-@import "@tds-tchad/core/components/alert/alert.css";
-```
+</TabItem>
+<TabItem label="Démo">
 
-```typescript
-import type { AlertVariant } from '@tds-tchad/core/components/alert';
-```
+<iframe src="/playground/#alert" title="Démo interactive du composant Alert" style="width:100%; height: 20rem; border: 1px solid var(--sl-color-gray-5); border-radius: 0.5rem;" loading="lazy"></iframe>
 
----
+[Ouvrir le terrain de jeu complet →](/playground/#alert)
 
-## Variantes
+</TabItem>
+<TabItem label="Design">
 
 <div class="tds-preview">
   <div class="tds-preview__stage" style="flex-direction:column;gap:0.75rem;">
@@ -56,16 +62,20 @@ import type { AlertVariant } from '@tds-tchad/core/components/alert';
   <div class="tds-preview__label">4 variantes sémantiques</div>
 </div>
 
-| Variante | Classe | `role` ARIA | Usage |
-|---|---|---|---|
-| `info` | `tds-alert--info` | `status` | Information neutre, aide contextuelle |
-| `success` | `tds-alert--success` | `status` | Confirmation, action réussie |
-| `warning` | `tds-alert--warning` | `status` | Attention requise, non bloquant |
-| `danger` | `tds-alert--danger` | `alert` | Erreur bloquante, action critique |
+</TabItem>
+<TabItem label="Code">
 
----
+## Importation
 
-## Structure HTML complète
+```css
+@import "@tds-tchad/core/components/alert/alert.css";
+```
+
+```typescript
+import type { AlertVariant } from '@tds-tchad/core/components/alert';
+```
+
+### Structure HTML complète
 
 ```html
 <div class="tds-alert tds-alert--info" role="status" aria-labelledby="alert-title">
@@ -91,16 +101,6 @@ import type { AlertVariant } from '@tds-tchad/core/components/alert';
 </div>
 ```
 
----
-
-## Accessibilité
-
-<Aside type="tip" title="role alert vs status">
-  - `role="alert"` + `aria-live="assertive"` — pour les erreurs critiques. Annoncé immédiatement.
-  - `role="status"` + `aria-live="polite"` — pour les confirmations et infos. Annoncé au moment opportun.
-  - N'utilisez `role="alert"` que pour les erreurs bloquantes — sinon les lecteurs d'écran interrompent constamment l'utilisateur.
-</Aside>
-
 ```html
 <!-- Erreur bloquante — annonce immédiate -->
 <div class="tds-alert tds-alert--danger" role="alert" aria-live="assertive">
@@ -112,3 +112,15 @@ import type { AlertVariant } from '@tds-tchad/core/components/alert';
   ...
 </div>
 ```
+
+</TabItem>
+<TabItem label="Accessibilité">
+
+<Aside type="tip" title="role alert vs status">
+  - `role="alert"` + `aria-live="assertive"` — pour les erreurs critiques. Annoncé immédiatement.
+  - `role="status"` + `aria-live="polite"` — pour les confirmations et infos. Annoncé au moment opportun.
+  - N'utilisez `role="alert"` que pour les erreurs bloquantes — sinon les lecteurs d'écran interrompent constamment l'utilisateur.
+</Aside>
+
+</TabItem>
+</Tabs>

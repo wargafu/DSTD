@@ -5,16 +5,52 @@ sidebar:
   order: 14
 ---
 
-import { Aside } from '@astrojs/starlight/components';
+import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
 
 # Footer
+
+<Tabs>
+<TabItem label="Présentation">
 
 Le pied de page institutionnel regroupe les liens légaux, les ressources et les mentions
 obligatoires (accessibilité, confidentialité, plan du site).
 
----
+## Do / Don't
 
-## Importation
+<div class="tds-do-dont">
+  <div class="tds-do-dont__card tds-do-dont__card--do">
+    <div class="tds-do-dont__heading">✓ Faire</div>
+    <ul>
+      <li>Toujours inclure le lien vers la déclaration d'accessibilité</li>
+      <li>Dupliquer les liens critiques (contact, accessibilité) déjà présents dans le header</li>
+    </ul>
+  </div>
+  <div class="tds-do-dont__card tds-do-dont__card--dont">
+    <div class="tds-do-dont__heading">✗ Éviter</div>
+    <ul>
+      <li>Surcharger le footer avec des dizaines de liens peu utilisés</li>
+      <li>Utiliser le footer comme seule navigation vers des pages importantes</li>
+    </ul>
+  </div>
+</div>
+
+</TabItem>
+<TabItem label="Démo">
+
+<iframe src="/playground/#footer" title="Démo interactive du composant Footer" style="width:100%; height: 20rem; border: 1px solid var(--sl-color-gray-5); border-radius: 0.5rem;" loading="lazy"></iframe>
+
+[Ouvrir le terrain de jeu complet →](/playground/#footer)
+
+</TabItem>
+<TabItem label="Design">
+
+Structure : `tds-footer__top` (marque + groupes de liens) séparé par une bordure de
+`tds-footer__bottom` (copyright + liens légaux). Fond `neutral.900`, texte clair.
+
+</TabItem>
+<TabItem label="Code">
+
+### Importation
 
 ```css
 @import "@tds-tchad/core/components/footer/footer.css";
@@ -24,9 +60,7 @@ obligatoires (accessibilité, confidentialité, plan du site).
 import { footer } from '@tds-tchad/core/components/footer';
 ```
 
----
-
-## Exemple
+### Exemple
 
 ```html
 <footer class="tds-footer">
@@ -57,9 +91,8 @@ import { footer } from '@tds-tchad/core/components/footer';
 </footer>
 ```
 
----
-
-## Accessibilité
+</TabItem>
+<TabItem label="Accessibilité">
 
 <Aside type="tip" title="Règles critiques">
   - Un seul `<footer>` par page, en dernier élément du `<body>`
@@ -67,23 +100,5 @@ import { footer } from '@tds-tchad/core/components/footer';
   - Le lien vers la déclaration d'accessibilité est **obligatoire** pour tout service public numérique (RGAA / WCAG 2.1 AA)
 </Aside>
 
----
-
-## Do / Don't
-
-<div class="tds-do-dont">
-  <div class="tds-do-dont__card tds-do-dont__card--do">
-    <div class="tds-do-dont__heading">✓ Faire</div>
-    <ul>
-      <li>Toujours inclure le lien vers la déclaration d'accessibilité</li>
-      <li>Dupliquer les liens critiques (contact, accessibilité) déjà présents dans le header</li>
-    </ul>
-  </div>
-  <div class="tds-do-dont__card tds-do-dont__card--dont">
-    <div class="tds-do-dont__heading">✗ Éviter</div>
-    <ul>
-      <li>Surcharger le footer avec des dizaines de liens peu utilisés</li>
-      <li>Utiliser le footer comme seule navigation vers des pages importantes</li>
-    </ul>
-  </div>
-</div>
+</TabItem>
+</Tabs>

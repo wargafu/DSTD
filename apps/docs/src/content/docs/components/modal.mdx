@@ -9,13 +9,56 @@ import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
 
 # Modal
 
+<Tabs>
+<TabItem label="Présentation">
+
 Contrairement aux autres composants TDS, le modal nécessite un minimum de JavaScript : l'élément
 `<dialog>` natif ne s'ouvre pas en pur CSS. En contrepartie, `<dialog>` gère **nativement** le
 piège à focus (focus trap), la fermeture avec Échap et le `::backdrop` — pas de librairie requise.
 
----
+## Do / Don't
 
-## Importation
+<div class="tds-do-dont">
+  <div class="tds-do-dont__card tds-do-dont__card--do">
+    <div class="tds-do-dont__heading">✓ Faire</div>
+    <ul>
+      <li>Réserver le modal aux actions qui nécessitent une confirmation ou une interruption du flux</li>
+      <li>Garder le contenu court — un modal n'est pas une page</li>
+    </ul>
+  </div>
+  <div class="tds-do-dont__card tds-do-dont__card--dont">
+    <div class="tds-do-dont__heading">✗ Éviter</div>
+    <ul>
+      <li>Empiler plusieurs modals (modal ouvrant un modal)</li>
+      <li>Mettre un formulaire complet multi-étapes dans un modal — préférer une page dédiée</li>
+    </ul>
+  </div>
+</div>
+
+</TabItem>
+<TabItem label="Démo">
+
+Rendu statique (attribut `open`) pour la QA visuelle — l'ouverture réelle passe par `dialog.showModal()`.
+
+<iframe src="/playground/#modal" title="Démo interactive du composant Modal" style="width:100%; height: 26rem; border: 1px solid var(--sl-color-gray-5); border-radius: 0.5rem;" loading="lazy"></iframe>
+
+[Ouvrir le terrain de jeu complet →](/playground/#modal)
+
+</TabItem>
+<TabItem label="Design">
+
+### Tailles
+
+| Taille | Classe | Max-width |
+|---|---|---|
+| `sm` | `tds-modal tds-modal--sm` | 24rem |
+| **`md`** (défaut) | **`tds-modal`** | **32rem** |
+| `lg` | `tds-modal tds-modal--lg` | 48rem |
+
+</TabItem>
+<TabItem label="Code">
+
+### Importation
 
 ```css
 @import "@tds-tchad/core/components/modal/modal.css";
@@ -26,19 +69,7 @@ import { modal } from '@tds-tchad/core/components/modal';
 import type { ModalSize } from '@tds-tchad/core/components/modal';
 ```
 
----
-
-## Tailles
-
-| Taille | Classe | Max-width |
-|---|---|---|
-| `sm` | `tds-modal tds-modal--sm` | 24rem |
-| **`md`** (défaut) | **`tds-modal`** | **32rem** |
-| `lg` | `tds-modal tds-modal--lg` | 48rem |
-
----
-
-## Exemples de code
+### Exemples
 
 <Tabs>
   <TabItem label="HTML + JS minimal">
@@ -105,9 +136,8 @@ import type { ModalSize } from '@tds-tchad/core/components/modal';
   </TabItem>
 </Tabs>
 
----
-
-## Accessibilité
+</TabItem>
+<TabItem label="Accessibilité">
 
 <Aside type="tip" title="Règles critiques">
   - Ouvrir uniquement avec `dialog.showModal()` (jamais `.show()` ni l'attribut `open` statique) — `showModal()` seul active le piège à focus, le `::backdrop` et la fermeture Échap natifs
@@ -116,23 +146,5 @@ import type { ModalSize } from '@tds-tchad/core/components/modal';
   - Le focus revient automatiquement à l'élément qui a ouvert le modal après `dialog.close()` — ne pas le gérer manuellement
 </Aside>
 
----
-
-## Do / Don't
-
-<div class="tds-do-dont">
-  <div class="tds-do-dont__card tds-do-dont__card--do">
-    <div class="tds-do-dont__heading">✓ Faire</div>
-    <ul>
-      <li>Réserver le modal aux actions qui nécessitent une confirmation ou une interruption du flux</li>
-      <li>Garder le contenu court — un modal n'est pas une page</li>
-    </ul>
-  </div>
-  <div class="tds-do-dont__card tds-do-dont__card--dont">
-    <div class="tds-do-dont__heading">✗ Éviter</div>
-    <ul>
-      <li>Empiler plusieurs modals (modal ouvrant un modal)</li>
-      <li>Mettre un formulaire complet multi-étapes dans un modal — préférer une page dédiée</li>
-    </ul>
-  </div>
-</div>
+</TabItem>
+</Tabs>

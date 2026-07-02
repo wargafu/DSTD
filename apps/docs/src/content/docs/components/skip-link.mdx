@@ -5,49 +5,15 @@ sidebar:
   order: 13
 ---
 
-import { Aside } from '@astrojs/starlight/components';
+import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
 
 # Skip Link
 
+<Tabs>
+<TabItem label="Présentation">
+
 Le lien d'évitement permet à un utilisateur au clavier de sauter directement au contenu principal
 sans devoir tabuler à travers tout le header et la navigation à chaque page.
-
----
-
-## Importation
-
-```css
-@import "@tds-tchad/core/components/skip-link/skip-link.css";
-```
-
-```typescript
-import { skipLink } from '@tds-tchad/core/components/skip-link';
-```
-
----
-
-## Exemple
-
-```html
-<body>
-  <a href="#main-content" class="tds-skip-link">Aller au contenu principal</a>
-  <header class="tds-header">…</header>
-  <nav class="tds-nav">…</nav>
-  <main id="main-content">…</main>
-</body>
-```
-
----
-
-## Accessibilité
-
-<Aside type="tip" title="Règles critiques">
-  - Doit être le **tout premier élément focusable** du `<body>` — avant le header
-  - La cible (`href="#main-content"`) doit correspondre à l'`id` de l'élément `<main>`
-  - Reste invisible visuellement jusqu'au focus clavier (`:focus` révèle le lien) — ne jamais utiliser `display: none` (le rendrait inaccessible même au focus)
-</Aside>
-
----
 
 ## Do / Don't
 
@@ -67,3 +33,54 @@ import { skipLink } from '@tds-tchad/core/components/skip-link';
     </ul>
   </div>
 </div>
+
+</TabItem>
+<TabItem label="Démo">
+
+Tabulez dans le cadre pour révéler le lien (invisible par défaut).
+
+<iframe src="/playground/#skip-link" title="Démo interactive du composant Skip Link" style="width:100%; height: 10rem; border: 1px solid var(--sl-color-gray-5); border-radius: 0.5rem;" loading="lazy"></iframe>
+
+[Ouvrir le terrain de jeu complet →](/playground/#skip-link)
+
+</TabItem>
+<TabItem label="Design">
+
+Invisible par défaut (translaté hors écran), révélé en haut à gauche au `:focus` avec fond bleu
+institutionnel et texte blanc — contraste maximal pour une visibilité immédiate.
+
+</TabItem>
+<TabItem label="Code">
+
+### Importation
+
+```css
+@import "@tds-tchad/core/components/skip-link/skip-link.css";
+```
+
+```typescript
+import { skipLink } from '@tds-tchad/core/components/skip-link';
+```
+
+### Exemple
+
+```html
+<body>
+  <a href="#main-content" class="tds-skip-link">Aller au contenu principal</a>
+  <header class="tds-header">…</header>
+  <nav class="tds-nav">…</nav>
+  <main id="main-content">…</main>
+</body>
+```
+
+</TabItem>
+<TabItem label="Accessibilité">
+
+<Aside type="tip" title="Règles critiques">
+  - Doit être le **tout premier élément focusable** du `<body>` — avant le header
+  - La cible (`href="#main-content"`) doit correspondre à l'`id` de l'élément `<main>`
+  - Reste invisible visuellement jusqu'au focus clavier (`:focus` révèle le lien) — ne jamais utiliser `display: none` (le rendrait inaccessible même au focus)
+</Aside>
+
+</TabItem>
+</Tabs>

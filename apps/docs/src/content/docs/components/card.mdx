@@ -5,10 +5,45 @@ sidebar:
   order: 5
 ---
 
+import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
+
 # Card
+
+<Tabs>
+<TabItem label="Présentation">
 
 Les cards regroupent du contenu lié dans une surface visuellement délimitée.
 Elles structurent les portails citoyens, tableaux de bord et listes de services.
+
+| Variante | Classe | Usage |
+|---|---|---|
+| `flat` (défaut) | `tds-card--flat` | Liste dense, faible hiérarchie visuelle |
+| `elevated` | `tds-card--elevated` | Mise en avant, grille de services |
+| `outlined` | `tds-card--outlined` | Contexte à fond déjà chargé (évite l'ombre) |
+
+</TabItem>
+<TabItem label="Démo">
+
+<iframe src="/playground/#card" title="Démo interactive du composant Card" style="width:100%; height: 20rem; border: 1px solid var(--sl-color-gray-5); border-radius: 0.5rem;" loading="lazy"></iframe>
+
+[Ouvrir le terrain de jeu complet →](/playground/#card)
+
+</TabItem>
+<TabItem label="Design">
+
+```html
+<!-- Plate (défaut) -->
+<div class="tds-card tds-card--flat">...</div>
+
+<!-- Avec ombre -->
+<div class="tds-card tds-card--elevated">...</div>
+
+<!-- Avec bordure renforcée -->
+<div class="tds-card tds-card--outlined">...</div>
+```
+
+</TabItem>
+<TabItem label="Code">
 
 ## Importation
 
@@ -16,9 +51,7 @@ Elles structurent les portails citoyens, tableaux de bord et listes de services.
 @import "@tds-tchad/core/components/card/card.css";
 ```
 
----
-
-## Structure de base
+### Structure de base
 
 ```html
 <div class="tds-card">
@@ -38,24 +71,7 @@ Elles structurent les portails citoyens, tableaux de bord et listes de services.
 </div>
 ```
 
----
-
-## Variantes
-
-```html
-<!-- Plate (défaut) -->
-<div class="tds-card tds-card--flat">...</div>
-
-<!-- Avec ombre -->
-<div class="tds-card tds-card--elevated">...</div>
-
-<!-- Avec bordure renforcée -->
-<div class="tds-card tds-card--outlined">...</div>
-```
-
----
-
-## Card interactive (lien)
+### Card interactive (lien)
 
 ```html
 <a href="/service/cni" class="tds-card tds-card--elevated">
@@ -71,9 +87,7 @@ Elles structurent les portails citoyens, tableaux de bord et listes de services.
 </a>
 ```
 
----
-
-## Grille de cards
+### Grille de cards
 
 ```html
 <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:var(--tds-spacing-5);">
@@ -97,3 +111,15 @@ Elles structurent les portails citoyens, tableaux de bord et listes de services.
   </div>
 </div>
 ```
+
+</TabItem>
+<TabItem label="Accessibilité">
+
+<Aside type="tip" title="Règles critiques">
+  - Une card interactive entière (`<a class="tds-card">`) doit avoir un contenu de lien clair — évitez "Voir plus" isolé sans contexte dans le texte du lien environnant
+  - Le titre de card (`tds-card__title`) doit utiliser un niveau de titre cohérent avec la hiérarchie de la page (`h2`/`h3`), jamais choisi uniquement pour son style visuel
+  - Une grille de cards doit rester navigable au clavier dans un ordre logique (ordre du DOM = ordre visuel)
+</Aside>
+
+</TabItem>
+</Tabs>
